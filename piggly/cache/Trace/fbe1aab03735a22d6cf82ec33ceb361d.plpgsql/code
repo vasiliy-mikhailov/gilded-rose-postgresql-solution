@@ -1,7 +1,7 @@
 DECLARE
     cmd text;
 BEGIN
-    perform public.piggly_branch($PIGGLY$f81020de57379b88$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$5b72bd74cdb35b42$PIGGLY$);
     SELECT
       CASE pp.polcmd WHEN 'r' THEN 'SELECT'
                      WHEN 'a' THEN 'INSERT'
@@ -17,5 +17,5 @@ BEGIN
        AND pn.nspname NOT IN ('pg_catalog', 'information_schema')
       INTO cmd;
 
-    perform public.piggly_branch($PIGGLY$ef179768f590590c$PIGGLY$);RETURN is( cmd, upper($3), $4 );
+    perform public.piggly_branch($PIGGLY$41a70ceaee0e3432$PIGGLY$);RETURN is( cmd, upper($3), $4 );
 END;

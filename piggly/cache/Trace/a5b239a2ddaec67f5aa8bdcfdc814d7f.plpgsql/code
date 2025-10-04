@@ -2,7 +2,7 @@ DECLARE
     tab  name;
     cols name[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$6615a2c2b3128a1b$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$9eb7820200653c42$PIGGLY$);
     SELECT pk_table_name, pk_columns
       FROM pg_all_foreign_keys
      WHERE fk_table_name = $1
@@ -10,7 +10,7 @@ BEGIN
        AND pg_catalog.pg_table_is_visible(fk_table_oid)
       INTO tab, cols;
 
-    perform public.piggly_branch($PIGGLY$b16284138fc4397a$PIGGLY$);RETURN is(
+    perform public.piggly_branch($PIGGLY$0152b023d21b3533$PIGGLY$);RETURN is(
         -- have
         $1 || '(' || _ident_array_to_string( $2, ', ' )
         || ') REFERENCES ' || COALESCE( tab || '(' || _ident_array_to_string( cols, ', ' ) || ')', 'NOTHING'),

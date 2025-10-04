@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_rel_owner($1, $2);
 BEGIN
     -- Make sure the relation exists.
-    perform public.piggly_branch($PIGGLY$cf62a2bb6f955834$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$4e2dd724c0ed11df$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$f6e4ca18acf6e581$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$88b064f2ed45cdd5$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$3c9f3e61450da73e$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$950c8dbb1999303e$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$691f40b13939127e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$40275d7169eb2064$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             E'    Relation ' || quote_ident($1) || '.' || quote_ident($2) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$506aca3e92c20ed9$PIGGLY$);RETURN is(owner, $3, $4);
+    perform public.piggly_branch($PIGGLY$42c9ee206152959c$PIGGLY$);RETURN is(owner, $3, $4);
 END;

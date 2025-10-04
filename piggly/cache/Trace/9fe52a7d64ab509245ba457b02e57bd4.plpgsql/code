@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_index_owner($1, $2);
 BEGIN
     -- Make sure the index exists.
-    perform public.piggly_branch($PIGGLY$f152a1704e5e5622$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$973cdb56e053d8fd$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$dd4eaf041dab60f5$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$9cc108594d05d19e$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$05e4ae5edb42d4c5$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$81d8f0303e9951ea$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$c000e468a481dffd$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$c52bd98b9395dffc$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             E'    Index ' || quote_ident($2) || ' ON ' || quote_ident($1) || ' not found'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$92bc5900ad1f1290$PIGGLY$);RETURN is(owner, $3, $4);
+    perform public.piggly_branch($PIGGLY$31aa0c82557ec678$PIGGLY$);RETURN is(owner, $3, $4);
 END;

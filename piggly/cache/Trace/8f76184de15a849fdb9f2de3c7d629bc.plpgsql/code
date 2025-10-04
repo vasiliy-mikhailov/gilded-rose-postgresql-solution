@@ -1,7 +1,7 @@
 DECLARE
     res boolean;
 BEGIN
-    perform public.piggly_branch($PIGGLY$822edccfc8d32a1d$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$05241d0575d05602$PIGGLY$);
     SELECT x.indisprimary
       FROM pg_catalog.pg_index x
       JOIN pg_catalog.pg_class ct    ON ct.oid = x.indrelid
@@ -12,5 +12,5 @@ BEGIN
        AND n.nspname  = $1
       INTO res;
 
-      perform public.piggly_branch($PIGGLY$1afdb9792c4e7f5b$PIGGLY$);RETURN ok( COALESCE(res, false), $4 );
+      perform public.piggly_branch($PIGGLY$ea1b44c2f1bb8340$PIGGLY$);RETURN ok( COALESCE(res, false), $4 );
 END;

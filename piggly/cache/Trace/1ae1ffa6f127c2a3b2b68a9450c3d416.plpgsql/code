@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_rel_owner('c'::char, $1, $2);
 BEGIN
     -- Make sure the composite exists.
-    perform public.piggly_branch($PIGGLY$9cc4cc97301b4e2b$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$4994cf919a5aa446$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$97005fe9056e50cc$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$31b6d015698fefd6$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$46b1f22a618dede0$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$b3775a21a32db63c$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$4bb2ce0b0c166970$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$c4548ae2fd77d69f$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             E'    Composite type ' || quote_ident($1) || '.' || quote_ident($2) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$4a66ed503c8adca5$PIGGLY$);RETURN is(owner, $3, $4);
+    perform public.piggly_branch($PIGGLY$c50482c060901585$PIGGLY$);RETURN is(owner, $3, $4);
 END;

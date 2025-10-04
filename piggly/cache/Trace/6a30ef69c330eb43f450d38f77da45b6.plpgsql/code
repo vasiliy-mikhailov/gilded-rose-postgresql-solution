@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_rel_owner('S'::char, $1, $2);
 BEGIN
     -- Make sure the sequence exists.
-    perform public.piggly_branch($PIGGLY$9b1f1c10fdba4e4b$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$1dd0329313ffffb5$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$c9b74ef937cb8a71$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$9736e2f8aed25ffa$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$06ad70f9c8e9ddf7$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$769c0737d776f0f0$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$6a06be624063ae51$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$548b2b69c7563000$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             E'    Sequence ' || quote_ident($1) || '.' || quote_ident($2) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$cd84cb23f940025e$PIGGLY$);RETURN is(owner, $3, $4);
+    perform public.piggly_branch($PIGGLY$e63d66c4273788d1$PIGGLY$);RETURN is(owner, $3, $4);
 END;

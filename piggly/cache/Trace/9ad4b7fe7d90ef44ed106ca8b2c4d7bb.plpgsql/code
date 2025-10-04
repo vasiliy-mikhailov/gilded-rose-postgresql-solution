@@ -6,17 +6,17 @@ DECLARE
     msg     TEXT    := '';
     res     BOOLEAN := TRUE;
 BEGIN
-    perform public.piggly_branch($PIGGLY$cac2f18c2c870529$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$a7c703704249ebed$PIGGLY$, (extras[1] IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$a49d376be182f52c$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$36a9792254191ecb$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$e34f104f664b8393$PIGGLY$, (extras[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$6ba4a69c13a230b1$PIGGLY$);
         res = FALSE;
         msg := E'\n' || diag(
             '    Extra ' || what || E':\n        '
             ||  _ident_array_to_sorted_string( extras, E'\n        ' )
         );
     END IF;
-    IF public.piggly_cond($PIGGLY$10099b9c6188f91c$PIGGLY$, (missing[1] IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$c5f2c45b6a6c097a$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$5f8868626f7283a5$PIGGLY$, (missing[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$40abc8150833cdee$PIGGLY$);
         res = FALSE;
         msg := msg || E'\n' || diag(
             '    Missing ' || what || E':\n        '
@@ -24,5 +24,5 @@ BEGIN
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$eb2b27a0dfa78043$PIGGLY$);RETURN ok(res, descr) || msg;
+    perform public.piggly_branch($PIGGLY$e0828766307e5bfc$PIGGLY$);RETURN ok(res, descr) || msg;
 END;

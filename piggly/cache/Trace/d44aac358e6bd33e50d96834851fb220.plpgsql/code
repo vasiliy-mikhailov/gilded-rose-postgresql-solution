@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_tablespace_owner($1);
 BEGIN
     -- Make sure the tablespace exists.
-    perform public.piggly_branch($PIGGLY$800fa6c0cf19fe08$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$a3e4cfc5a05e4ac1$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$fbc80ce3724a6abe$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$84480e3719432b40$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$f59bc7f0f89866be$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$46add2c3c371fc14$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$7a35ec0841310918$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$7f81f06ce4919dd5$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
             E'    Tablespace ' || quote_ident($1) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$79d339575f155d28$PIGGLY$);RETURN is(owner, $2, $3);
+    perform public.piggly_branch($PIGGLY$463d88025b38c0e8$PIGGLY$);RETURN is(owner, $2, $3);
 END;

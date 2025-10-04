@@ -1,17 +1,17 @@
 DECLARE
     grants TEXT[] := _get_lang_privs( $2, quote_ident($1) );
 BEGIN
-    perform public.piggly_branch($PIGGLY$699e214dc6195525$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$ca25349c9fbb10b2$PIGGLY$, (grants[1] = 'undefined_language')) THEN
-        perform public.piggly_branch($PIGGLY$f3e812b3a5bc6168$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$58fafc5fdcfda3e9$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$379e4869e11c162b$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$494e10bb42b92f5b$PIGGLY$, (grants[1] = 'undefined_language')) THEN
+        perform public.piggly_branch($PIGGLY$0cdb5a2cebf69942$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$e167fcedd0f382c8$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Language ' || quote_ident($1) || ' does not exist'
         );
-    ELSIF public.piggly_cond($PIGGLY$c7a88e9c582a1749$PIGGLY$, (grants[1] = 'undefined_role')) THEN
-        perform public.piggly_branch($PIGGLY$dba70c17328e6ec7$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$01add1e929cadb63$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    ELSIF public.piggly_cond($PIGGLY$4cffe512162a7c91$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$efc29b0760a5d4a2$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$c0c42faf5f7e1b47$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Role ' || quote_ident($2) || ' does not exist'
         );
     END IF;
-    perform public.piggly_branch($PIGGLY$4404aba810a0252f$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+    perform public.piggly_branch($PIGGLY$4a6b82e31ec4b508$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
 END;

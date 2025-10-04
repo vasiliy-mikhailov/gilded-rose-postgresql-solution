@@ -1,3 +1,3 @@
-BEGIN perform public.piggly_branch($PIGGLY$120f67da1ec6e9be$PIGGLY$);perform public.piggly_branch($PIGGLY$9e9638a7116d1d97$PIGGLY$);RETURN $1::REGTYPE;
-EXCEPTION WHEN undefined_object THEN perform public.piggly_branch($PIGGLY$9026db29c1e10852$PIGGLY$);perform public.piggly_branch($PIGGLY$ff230d80e2d4c8da$PIGGLY$);RETURN $1;
+BEGIN perform public.piggly_branch($PIGGLY$a87f69e66ddc866f$PIGGLY$);perform public.piggly_branch($PIGGLY$be18a244ec205ff4$PIGGLY$);RETURN $1::REGTYPE;
+EXCEPTION WHEN undefined_object THEN perform public.piggly_branch($PIGGLY$99c2666a7d5d2417$PIGGLY$);perform public.piggly_branch($PIGGLY$5e515abc8d0fc5ee$PIGGLY$);RETURN $1;
 END;

@@ -5,19 +5,19 @@ DECLARE
     rec     RECORD;
 BEGIN
     -- Find extra records.
-    perform public.piggly_branch($PIGGLY$e7d7f0eb5e029fa8$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$97f21106a8f4f949$PIGGLY$);
     FOR rec in EXECUTE _query($1) LOOP
-        perform public.piggly_cond($PIGGLY$943a28ed5a475ec5$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$727780e420d12426$PIGGLY$);
+        perform public.piggly_cond($PIGGLY$940764e581b961fe$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$f64ac6c8e86c067a$PIGGLY$);
         extras := extras || rec::text;
     
-        perform public.piggly_signal($PIGGLY$943a28ed5a475ec5$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$940764e581b961fe$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$943a28ed5a475ec5$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$940764e581b961fe$PIGGLY$, false);
 
     -- What extra records do we have?
-    IF public.piggly_cond($PIGGLY$a2fce1eefe3381e1$PIGGLY$, (extras[1] IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$7a745f34d301a159$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$7d87b88b631768bf$PIGGLY$, (extras[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$9d6983764c0bd98c$PIGGLY$);
         res := FALSE;
         msg := E'\n' || diag(
             E'    Unexpected records:\n        '
@@ -25,5 +25,5 @@ perform public.piggly_cond($PIGGLY$943a28ed5a475ec5$PIGGLY$, false);
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$a8e0104602836f20$PIGGLY$);RETURN ok(res, $2) || msg;
+    perform public.piggly_branch($PIGGLY$f74ce777f3cd1d90$PIGGLY$);RETURN ok(res, $2) || msg;
 END;

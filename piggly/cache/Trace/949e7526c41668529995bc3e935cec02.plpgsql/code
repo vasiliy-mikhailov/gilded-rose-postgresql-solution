@@ -1,31 +1,17 @@
 DECLARE
   l_new_quality numeric := p_quality;
   l_new_sell_in numeric := p_sell_in - 1;
-  l_mult integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
+  l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
+  l_extra integer := 0;
 BEGIN
-  perform public.piggly_branch($PIGGLY$9b9700592326c3a0$PIGGLY$);
-  IF public.piggly_cond($PIGGLY$785906d87e4cf7a9$PIGGLY$, (l_new_quality < 50)) THEN
-    perform public.piggly_branch($PIGGLY$bffde45aef5309f2$PIGGLY$);
-    l_new_quality := l_new_quality + l_mult;
-    IF public.piggly_cond($PIGGLY$52eafd3d8a68a0e3$PIGGLY$, (p_sell_in < 11)) THEN
-      perform public.piggly_branch($PIGGLY$bb73098ebb9d5a5d$PIGGLY$);
-      IF public.piggly_cond($PIGGLY$3550b9d12074683d$PIGGLY$, (l_new_quality < 50)) THEN
-        perform public.piggly_branch($PIGGLY$ac1ffeb1865cb129$PIGGLY$);
-        l_new_quality := l_new_quality + l_mult;
-      END IF;
-    END IF;
-    IF public.piggly_cond($PIGGLY$b656bb171eafd678$PIGGLY$, (p_sell_in < 6)) THEN
-      perform public.piggly_branch($PIGGLY$80d1d5832e5f9c15$PIGGLY$);
-      IF public.piggly_cond($PIGGLY$43c3d27a9a75973e$PIGGLY$, (l_new_quality < 50)) THEN
-        perform public.piggly_branch($PIGGLY$2ed438c990a4cff8$PIGGLY$);
-        l_new_quality := l_new_quality + l_mult;
-      END IF;
-    END IF;
-  END IF;
-  IF public.piggly_cond($PIGGLY$32d8f6615042a73b$PIGGLY$, (l_new_sell_in < 0)) THEN
-    perform public.piggly_branch($PIGGLY$c8533cad736637a5$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$6405ca409117c0ca$PIGGLY$);
+  l_new_quality := increase_quality(l_new_quality, l_delta);
+  IF public.piggly_cond($PIGGLY$f267d3892138c65a$PIGGLY$, (p_sell_in < 11)) THEN perform public.piggly_branch($PIGGLY$0348a8609d73092d$PIGGLY$);l_extra := l_extra + l_delta; END IF;
+  IF public.piggly_cond($PIGGLY$bf47d7786b6e09ff$PIGGLY$, (p_sell_in < 6)) THEN perform public.piggly_branch($PIGGLY$ae7f934f82d48f85$PIGGLY$);l_extra := l_extra + l_delta; END IF;
+  l_new_quality := increase_quality(l_new_quality, l_extra);
+  IF public.piggly_cond($PIGGLY$d45ba725d272ae99$PIGGLY$, (l_new_sell_in < 0)) THEN
+    perform public.piggly_branch($PIGGLY$9d3350f93d5ca4c8$PIGGLY$);
     l_new_quality := 0;
   END IF;
-  l_new_quality := clamp_quality(l_new_quality);
-  perform public.piggly_branch($PIGGLY$024328bc707ba68b$PIGGLY$);RETURN QUERY SELECT l_new_quality, l_new_sell_in;
+  perform public.piggly_branch($PIGGLY$b324779ddbd97621$PIGGLY$);RETURN QUERY SELECT l_new_quality, l_new_sell_in;
 END;

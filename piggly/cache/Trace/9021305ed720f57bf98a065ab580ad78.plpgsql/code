@@ -1,7 +1,7 @@
 DECLARE
     res boolean;
 BEGIN
-    perform public.piggly_branch($PIGGLY$e14541c1e247e120$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$67c3a8669e21eae1$PIGGLY$);
     SELECT x.indisunique
       FROM pg_catalog.pg_index x
       JOIN pg_catalog.pg_class ct ON ct.oid = x.indrelid
@@ -11,7 +11,7 @@ BEGIN
        AND pg_catalog.pg_table_is_visible(ct.oid)
       INTO res;
 
-      perform public.piggly_branch($PIGGLY$a70a8aabfa5ad04d$PIGGLY$);RETURN ok(
+      perform public.piggly_branch($PIGGLY$32a77efbccbbe697$PIGGLY$);RETURN ok(
           COALESCE(res, false),
           'Index ' || quote_ident($2) || ' should be unique'
       );

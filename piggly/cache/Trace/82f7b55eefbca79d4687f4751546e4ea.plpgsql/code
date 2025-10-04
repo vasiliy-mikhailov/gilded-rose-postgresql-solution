@@ -1,7 +1,7 @@
 DECLARE
     setof TEXT := substring($1 FROM '^setof[[:space:]]+');
 BEGIN
-    perform public.piggly_branch($PIGGLY$4ca579df4e249895$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$926718c0ead77b53$PIGGLY$, (setof IS NULL)) THEN perform public.piggly_branch($PIGGLY$e16782f5c9225cce$PIGGLY$);perform public.piggly_branch($PIGGLY$a4b4dcc6f6875e1f$PIGGLY$);RETURN _typename($1); END IF;
-    perform public.piggly_branch($PIGGLY$c5628c2f22ae4881$PIGGLY$);RETURN setof || _typename(substring($1 FROM char_length(setof)+1));
+    perform public.piggly_branch($PIGGLY$772ddfbd9f691636$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$f71755c1baef740d$PIGGLY$, (setof IS NULL)) THEN perform public.piggly_branch($PIGGLY$77e6217cc5e8c850$PIGGLY$);perform public.piggly_branch($PIGGLY$00908ed7f992d9f1$PIGGLY$);RETURN _typename($1); END IF;
+    perform public.piggly_branch($PIGGLY$9af1ab8ccb2188c4$PIGGLY$);RETURN setof || _typename(substring($1 FROM char_length(setof)+1));
 END;

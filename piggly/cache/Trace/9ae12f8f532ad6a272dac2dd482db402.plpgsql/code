@@ -1,20 +1,8 @@
 DECLARE
-  l_new_quality numeric := p_quality;
   l_new_sell_in numeric := p_sell_in - 1;
-  l_mult integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
+  l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
+  l_total_delta integer := l_delta + (CASE WHEN l_new_sell_in < 0 THEN l_delta ELSE 0 END);
 BEGIN
-  perform public.piggly_branch($PIGGLY$70f535012fef2cbf$PIGGLY$);
-  IF public.piggly_cond($PIGGLY$1307b8f5b487b47a$PIGGLY$, (l_new_quality > 0)) THEN
-    perform public.piggly_branch($PIGGLY$990981546cc08cfc$PIGGLY$);
-    l_new_quality := l_new_quality - l_mult;
-  END IF;
-  IF public.piggly_cond($PIGGLY$97d646887a41f2ca$PIGGLY$, (l_new_sell_in < 0)) THEN
-    perform public.piggly_branch($PIGGLY$9ec1910b167af12d$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$86749bd0d5ed477a$PIGGLY$, (l_new_quality > 0)) THEN
-      perform public.piggly_branch($PIGGLY$ad698c1b849fac7b$PIGGLY$);
-      l_new_quality := l_new_quality - l_mult;
-    END IF;
-  END IF;
-  l_new_quality := clamp_quality(l_new_quality);
-  perform public.piggly_branch($PIGGLY$607e49b5c924dd28$PIGGLY$);RETURN QUERY SELECT l_new_quality, l_new_sell_in;
+  perform public.piggly_branch($PIGGLY$4e41d3654868d757$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$11c20e9d42abbf67$PIGGLY$);RETURN QUERY SELECT decrease_quality(p_quality, l_total_delta), l_new_sell_in;
 END;

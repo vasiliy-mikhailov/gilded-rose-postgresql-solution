@@ -1,9 +1,9 @@
 DECLARE
     rcount INTEGER;
 BEGIN
-    perform public.piggly_branch($PIGGLY$8cae5a42961f8db5$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$b700a392ff2f3eaa$PIGGLY$);
     BEGIN
-        perform public.piggly_branch($PIGGLY$6acb141a6b5bd982$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$56973453175c6a90$PIGGLY$);
         EXECUTE '
             CREATE TEMP SEQUENCE __tcache___id_seq;
             CREATE TEMP TABLE __tcache__ (
@@ -22,17 +22,17 @@ BEGIN
 
     EXCEPTION WHEN duplicate_table THEN
         -- Raise an exception if there's already a plan.
-        perform public.piggly_branch($PIGGLY$9dcabda3024bb622$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$0915dde92957e60b$PIGGLY$);
         EXECUTE 'SELECT TRUE FROM __tcache__ WHERE label = ''plan''';
       GET DIAGNOSTICS rcount = ROW_COUNT;
-        IF public.piggly_cond($PIGGLY$4c8d6cbce9ce073d$PIGGLY$, (rcount > 0)) THEN
-           perform public.piggly_branch($PIGGLY$563541799173b296$PIGGLY$);
-           perform public.piggly_branch($PIGGLY$066488ac9d0ad297$PIGGLY$);RAISE EXCEPTION 'You tried to plan twice!';
+        IF public.piggly_cond($PIGGLY$3dea51e6cc522106$PIGGLY$, (rcount > 0)) THEN
+           perform public.piggly_branch($PIGGLY$22ace06e54aae582$PIGGLY$);
+           perform public.piggly_branch($PIGGLY$4c9e7c2f527cfac2$PIGGLY$);RAISE EXCEPTION 'You tried to plan twice!';
         END IF;
     END;
 
     -- Save the plan and return.
     PERFORM _set('plan', $1 );
     PERFORM _set('failed', 0 );
-    perform public.piggly_branch($PIGGLY$10df164951341c67$PIGGLY$);RETURN '1..' || $1;
+    perform public.piggly_branch($PIGGLY$b88bc138873870dc$PIGGLY$);RETURN '1..' || $1;
 END;

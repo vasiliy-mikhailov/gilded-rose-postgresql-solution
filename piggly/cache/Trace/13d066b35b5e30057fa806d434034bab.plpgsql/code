@@ -3,11 +3,11 @@ DECLARE
     want REFCURSOR;
     res  TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$4341667f9db06957$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$fe33ec859bab1400$PIGGLY$);
     OPEN have FOR EXECUTE _query($1);
     OPEN want FOR EXECUTE _query($2);
     res := results_eq(have, want, $3);
     CLOSE have;
     CLOSE want;
-    perform public.piggly_branch($PIGGLY$d3fe7fdeb0d80347$PIGGLY$);RETURN res;
+    perform public.piggly_branch($PIGGLY$c354939c3ff24e66$PIGGLY$);RETURN res;
 END;

@@ -10,12 +10,12 @@ DECLARE
     chkname text;
     typname text;
 BEGIN
-    perform public.piggly_branch($PIGGLY$bcaa6dba4a6a8c90$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$b62eb97b84c2441e$PIGGLY$);
     EXECUTE code;
-    perform public.piggly_branch($PIGGLY$5841ebedad07cdc6$PIGGLY$);RETURN ok( TRUE, descr );
+    perform public.piggly_branch($PIGGLY$ec9e946fa2a19a11$PIGGLY$);RETURN ok( TRUE, descr );
 EXCEPTION WHEN OTHERS OR ASSERT_FAILURE THEN
     -- There should have been no exception.
-    perform public.piggly_branch($PIGGLY$4dd0361147f26620$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$e4c3c46fc7a81455$PIGGLY$);
     GET STACKED DIAGNOSTICS
         detail  = PG_EXCEPTION_DETAIL,
         hint    = PG_EXCEPTION_HINT,
@@ -25,7 +25,7 @@ EXCEPTION WHEN OTHERS OR ASSERT_FAILURE THEN
         colname = COLUMN_NAME,
         chkname = CONSTRAINT_NAME,
         typname = PG_DATATYPE_NAME;
-    perform public.piggly_branch($PIGGLY$51bd06e589bfb785$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$a98236854d7cf7fe$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
            '    died: ' || _error_diag(SQLSTATE, SQLERRM, detail, hint, context, schname, tabname, colname, chkname, typname)
     );
 END;

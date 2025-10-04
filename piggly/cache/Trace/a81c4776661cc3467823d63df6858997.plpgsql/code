@@ -1,17 +1,17 @@
 DECLARE
     grants TEXT[] := _get_tablespaceprivs( $2, $1::TEXT );
 BEGIN
-    perform public.piggly_branch($PIGGLY$afc8c48d4deff4e5$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$fb349590e761a431$PIGGLY$, (grants[1] = 'undefined_tablespace')) THEN
-        perform public.piggly_branch($PIGGLY$a4a4fabd8e1461f0$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$e9dada598cc9a495$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$bbddd101fddeb81e$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$2e0c79b2767872a6$PIGGLY$, (grants[1] = 'undefined_tablespace')) THEN
+        perform public.piggly_branch($PIGGLY$097e9e055f51f8a7$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$dad8b013f6205ff8$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Tablespace ' || quote_ident($1) || ' does not exist'
         );
-    ELSIF public.piggly_cond($PIGGLY$b2fef577f121fa46$PIGGLY$, (grants[1] = 'undefined_role')) THEN
-        perform public.piggly_branch($PIGGLY$27afcfe49d48ec8b$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$b5e929d6f1ae27c7$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    ELSIF public.piggly_cond($PIGGLY$52d2c1bb901d5b21$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$0f063c1950ae7a15$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$8be28c610fda3d0b$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Role ' || quote_ident($2) || ' does not exist'
         );
     END IF;
-    perform public.piggly_branch($PIGGLY$f6d718e7c2f5bc79$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+    perform public.piggly_branch($PIGGLY$2364b7c695888f1d$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
 END;

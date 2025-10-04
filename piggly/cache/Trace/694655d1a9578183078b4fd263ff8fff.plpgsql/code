@@ -2,13 +2,13 @@ DECLARE
     want char = substring(LOWER($3) FROM 1 FOR 1);
     have char := _get_context($1, $2);
 BEGIN
-    perform public.piggly_branch($PIGGLY$7d190b02972013ef$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$ce10e85f1f1e2ef8$PIGGLY$, (have IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$3fa561477a571949$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$2ed858a2f9ef1f9e$PIGGLY$);RETURN is( _expand_context(have), _expand_context(want), $4 );
+    perform public.piggly_branch($PIGGLY$c537bfa0150a828a$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$79232253602f6f3b$PIGGLY$, (have IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$f64fe7c0ad8b651d$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$797539b742afa7b0$PIGGLY$);RETURN is( _expand_context(have), _expand_context(want), $4 );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$63df96af3304cee3$PIGGLY$);RETURN ok( false, $4 ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$208a848dc14a0746$PIGGLY$);RETURN ok( false, $4 ) || E'\n' || diag(
        '    Cast (' || quote_ident($1) || ' AS ' || quote_ident($2)
       || ') does not exist'
     );

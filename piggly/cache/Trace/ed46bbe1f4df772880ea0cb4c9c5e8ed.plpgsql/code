@@ -1,7 +1,7 @@
 DECLARE
     missing text[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$7d123d8968c7722d$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$eb6a64a6ae855633$PIGGLY$);
     SELECT ARRAY(
         SELECT quote_ident($2[i])
           FROM generate_series(1, array_upper($2, 1)) s(i)
@@ -10,11 +10,11 @@ BEGIN
          GROUP BY $2[i], s.i
          ORDER BY MIN(s.i)
     ) INTO missing;
-    IF public.piggly_cond($PIGGLY$f0887477e84c7337$PIGGLY$, (missing[1] IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$7184b8f25ee347ee$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$bfaced7a8afa1e29$PIGGLY$);RETURN ok( true, $3 );
+    IF public.piggly_cond($PIGGLY$83f40a1e804c222b$PIGGLY$, (missing[1] IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$278d3babe97a5d5c$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$95c1bb3aaf212010$PIGGLY$);RETURN ok( true, $3 );
     END IF;
-    perform public.piggly_branch($PIGGLY$1565cbe9b4e655e8$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$1953ecb6fb61924d$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
         '    ' || quote_ident($1) || '.' ||
         array_to_string( missing, E'() missing\n    ' || quote_ident($1) || '.') ||
         '() missing'

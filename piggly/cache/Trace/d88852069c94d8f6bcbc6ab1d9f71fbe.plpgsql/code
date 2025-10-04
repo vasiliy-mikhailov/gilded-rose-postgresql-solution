@@ -1,17 +1,17 @@
 DECLARE
     grants TEXT[] := _get_server_privs( $2, $1::TEXT );
 BEGIN
-    perform public.piggly_branch($PIGGLY$e6cb5543adc7959a$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$f8423f40afc1e262$PIGGLY$, (grants[1] = 'undefined_server')) THEN
-        perform public.piggly_branch($PIGGLY$f1faf5c68b8cc653$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$799963f9a71e9abb$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$1a53cf328692dca5$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$64191aaa32ccdfda$PIGGLY$, (grants[1] = 'undefined_server')) THEN
+        perform public.piggly_branch($PIGGLY$71d4d236becc3d42$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$f26d5ce480700f31$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Server ' || quote_ident($1) || ' does not exist'
         );
-    ELSIF public.piggly_cond($PIGGLY$9dec128577575781$PIGGLY$, (grants[1] = 'undefined_role')) THEN
-        perform public.piggly_branch($PIGGLY$0093cf72cb515ece$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$028045cfbde283f1$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    ELSIF public.piggly_cond($PIGGLY$7411cd8fcd350439$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$c094d583f520cc1a$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$38c4761b0a26c9de$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Role ' || quote_ident($2) || ' does not exist'
         );
     END IF;
-    perform public.piggly_branch($PIGGLY$d717a2e5b99ef095$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+    perform public.piggly_branch($PIGGLY$cb83e85efb8837ff$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
 END;

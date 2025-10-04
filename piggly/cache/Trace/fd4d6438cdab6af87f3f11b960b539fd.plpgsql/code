@@ -2,10 +2,10 @@ DECLARE
     result BOOLEAN;
     output TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$b244981acb8f6708$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$f0675b7e8ba35cf1$PIGGLY$);
     result := $1 IS DISTINCT FROM $2;
     output := ok( result, $3 );
-    perform public.piggly_branch($PIGGLY$a3ecde89175d3bd0$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$b8ba3a36b79f17f1$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
            '        have: ' || COALESCE( $1::text, 'NULL' ) ||
         E'\n        want: anything else'
     ) END;

@@ -1,3 +1,0 @@
-BEGIN
-  RETURN GREATEST(LEAST(p_quality, 50), 0);
-END;

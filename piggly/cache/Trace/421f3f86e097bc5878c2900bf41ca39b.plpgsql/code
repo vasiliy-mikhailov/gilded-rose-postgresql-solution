@@ -1,0 +1,4 @@
+BEGIN
+  perform public.piggly_branch($PIGGLY$a52ca17023d0bc2d$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$126e008b64294f31$PIGGLY$);RETURN LEAST(p_quality + p_delta, 50);
+END;

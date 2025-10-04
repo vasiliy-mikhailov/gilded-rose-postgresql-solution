@@ -1,13 +1,13 @@
 DECLARE
     actual_type TEXT := _get_dtype($1);
 BEGIN
-    perform public.piggly_branch($PIGGLY$12b6223738748fa0$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$c17c2cf335eac6f1$PIGGLY$, (actual_type IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$01a3195da2a78460$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$ab6ccdeba0589e1d$PIGGLY$);RETURN fail( $3 ) || E'\n' || diag (
+    perform public.piggly_branch($PIGGLY$f6f869c7e6bf08e7$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$027bf523f247d199$PIGGLY$, (actual_type IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$99a00e483602efa7$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$aa395a7ea01d3385$PIGGLY$);RETURN fail( $3 ) || E'\n' || diag (
             '   Domain ' ||  $1 || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$e70636f99408165f$PIGGLY$);RETURN is( actual_type, _typename($2), $3 );
+    perform public.piggly_branch($PIGGLY$bac4ce7996f46003$PIGGLY$);RETURN is( actual_type, _typename($2), $3 );
 END;

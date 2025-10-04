@@ -1,7 +1,7 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$79720d88a01cb730$PIGGLY$);
-    perform public.piggly_branch($PIGGLY$3d890c82a7e40e53$PIGGLY$);RETURN array_to_string($1::regtype[], ',');
+    perform public.piggly_branch($PIGGLY$7d4eba1f6d3d0ffc$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$d624f4eef7777cf7$PIGGLY$);RETURN array_to_string($1::regtype[], ',');
 EXCEPTION WHEN undefined_object THEN
-    perform public.piggly_branch($PIGGLY$36d0697773629d90$PIGGLY$);
-    perform public.piggly_branch($PIGGLY$dde97dbd3f1808e3$PIGGLY$);RETURN array_to_string($1, ',');
+    perform public.piggly_branch($PIGGLY$b43fb0fedcf6eb4a$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$574507102a8552b0$PIGGLY$);RETURN array_to_string($1, ',');
 END;

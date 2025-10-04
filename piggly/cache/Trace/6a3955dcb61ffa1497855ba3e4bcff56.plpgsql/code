@@ -11,18 +11,18 @@ DECLARE
     a_time	     _time_trial_type;
 BEGIN
     -- Execute the query over and over
-    perform public.piggly_branch($PIGGLY$388170471aaa56ec$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$cbe217a63cb8a4f4$PIGGLY$);
     FOR i IN 1..iterations LOOP
-        perform public.piggly_cond($PIGGLY$4d5c28a4907290e9$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$029bacf69edf67c2$PIGGLY$);
+        perform public.piggly_cond($PIGGLY$9b25a0b7dcb9f9d7$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$9a7f8ec1c991b74f$PIGGLY$);
         start_time := timeofday();
         EXECUTE query;
         -- Store the execution time for the run in an array of times
         times[i] := extract(millisecond from timeofday()::timestamptz - start_time::timestamptz);
     
-        perform public.piggly_signal($PIGGLY$4d5c28a4907290e9$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$9b25a0b7dcb9f9d7$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$4d5c28a4907290e9$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$9b25a0b7dcb9f9d7$PIGGLY$, false);
     offset_percent := (1.0 - return_percent) / 2.0;
     -- Ensure that offset skips the bottom X% of runs, or set it to 0
     SELECT GREATEST((offset_percent * iterations)::int, 0) INTO offset_it;
@@ -34,11 +34,11 @@ perform public.piggly_cond($PIGGLY$4d5c28a4907290e9$PIGGLY$, false);
                   ORDER BY 1
                   OFFSET offset_it
                   LIMIT limit_it LOOP
-	perform public.piggly_cond($PIGGLY$f28754fa2547ee34$PIGGLY$, true);
-	perform public.piggly_branch($PIGGLY$75d497617855cef9$PIGGLY$);
-	perform public.piggly_branch($PIGGLY$1329dcc9a515565d$PIGGLY$);RETURN NEXT a_time;
+	perform public.piggly_cond($PIGGLY$6e8f855ffe2ffd28$PIGGLY$, true);
+	perform public.piggly_branch($PIGGLY$1ba68a6484eed920$PIGGLY$);
+	perform public.piggly_branch($PIGGLY$bf03f48e083db391$PIGGLY$);RETURN NEXT a_time;
     
-	perform public.piggly_signal($PIGGLY$f28754fa2547ee34$PIGGLY$, $PIGGLY$@$PIGGLY$);
+	perform public.piggly_signal($PIGGLY$6e8f855ffe2ffd28$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$f28754fa2547ee34$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$6e8f855ffe2ffd28$PIGGLY$, false);
 END;

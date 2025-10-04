@@ -1,10 +1,10 @@
 DECLARE
     extra text[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$b208ea099ca30516$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$1eca120e415581f0$PIGGLY$, (NOT _has_role($1))) THEN
-        perform public.piggly_branch($PIGGLY$a7cc095d74e05e0e$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$5b7597350ef4e973$PIGGLY$);RETURN fail( $3 ) || E'\n' || diag (
+    perform public.piggly_branch($PIGGLY$bfe30ad7861ec402$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$5629d0f0a1c0528a$PIGGLY$, (NOT _has_role($1))) THEN
+        perform public.piggly_branch($PIGGLY$0019203d818c9a71$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$9aed373ae436ac4d$PIGGLY$);RETURN fail( $3 ) || E'\n' || diag (
             '    Role ' || quote_ident($1) || ' does not exist'
         );
     END IF;
@@ -16,11 +16,11 @@ BEGIN
          WHERE r.oid = ANY ( _grolist($1) )
          ORDER BY s.i
     ) INTO extra;
-    IF public.piggly_cond($PIGGLY$63117cda72a72d6f$PIGGLY$, (extra[1] IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$7f79867ddffd3333$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$4c831fe237f52d08$PIGGLY$);RETURN ok( true, $3 );
+    IF public.piggly_cond($PIGGLY$b8e9ec069054fadd$PIGGLY$, (extra[1] IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$b91afa7fec3046f5$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$57c4a4da2438a95d$PIGGLY$);RETURN ok( true, $3 );
     END IF;
-    perform public.piggly_branch($PIGGLY$ea51d8211b5dec36$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$2e1c9da45dd6280d$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
         '    Members, who should not be in ' || quote_ident($1) || E' role:\n        ' ||
         array_to_string( extra, E'\n        ')
     );

@@ -6722,16 +6722,25 @@
 - !ruby/object:Piggly::Dumper::SkeletonProcedure
   arg_defaults:
   -
+  -
   arg_types:
   - !ruby/object:Piggly::Dumper::QualifiedType
     schema:
     name: numeric
     array: ''
+  - !ruby/object:Piggly::Dumper::QualifiedType
+    schema:
+    name: integer
+    array: ''
   arg_names:
   - !ruby/object:Piggly::Dumper::QualifiedName
     schema:
     name: p_quality
+  - !ruby/object:Piggly::Dumper::QualifiedName
+    schema:
+    name: p_delta
   arg_modes:
+  - in
   - in
   setof: false
   volatility: volatile
@@ -6743,9 +6752,45 @@
   strict: false
   name: !ruby/object:Piggly::Dumper::QualifiedName
     schema: public
-    name: clamp_quality
+    name: decrease_quality
   oid: '17482'
-  identifier: 128384b11fee48e50d0cdafb4735b80c
+  identifier: 24244fcab08054cf4b082735be37b547
+- !ruby/object:Piggly::Dumper::SkeletonProcedure
+  arg_defaults:
+  -
+  -
+  arg_types:
+  - !ruby/object:Piggly::Dumper::QualifiedType
+    schema:
+    name: numeric
+    array: ''
+  - !ruby/object:Piggly::Dumper::QualifiedType
+    schema:
+    name: integer
+    array: ''
+  arg_names:
+  - !ruby/object:Piggly::Dumper::QualifiedName
+    schema:
+    name: p_quality
+  - !ruby/object:Piggly::Dumper::QualifiedName
+    schema:
+    name: p_delta
+  arg_modes:
+  - in
+  - in
+  setof: false
+  volatility: volatile
+  type: !ruby/object:Piggly::Dumper::QualifiedType
+    schema: pg_catalog
+    name: numeric
+    array: ''
+  secdef: false
+  strict: false
+  name: !ruby/object:Piggly::Dumper::QualifiedName
+    schema: public
+    name: increase_quality
+  oid: '17483'
+  identifier: 421f3f86e097bc5878c2900bf41ca39b
 - !ruby/object:Piggly::Dumper::SkeletonProcedure
   arg_defaults:
   -
@@ -6806,7 +6851,7 @@
   name: !ruby/object:Piggly::Dumper::QualifiedName
     schema: public
     name: update_normal
-  oid: '17483'
+  oid: '17484'
   identifier: 9ae12f8f532ad6a272dac2dd482db402
 - !ruby/object:Piggly::Dumper::SkeletonProcedure
   arg_defaults:
@@ -6868,7 +6913,7 @@
   name: !ruby/object:Piggly::Dumper::QualifiedName
     schema: public
     name: update_aged_brie
-  oid: '17484'
+  oid: '17485'
   identifier: 83069936b216a4ecb54b60a57c4ac758
 - !ruby/object:Piggly::Dumper::SkeletonProcedure
   arg_defaults:
@@ -6930,7 +6975,7 @@
   name: !ruby/object:Piggly::Dumper::QualifiedName
     schema: public
     name: update_backstage_passes
-  oid: '17485'
+  oid: '17486'
   identifier: 949e7526c41668529995bc3e935cec02
 - !ruby/object:Piggly::Dumper::SkeletonProcedure
   arg_defaults:
@@ -6992,7 +7037,7 @@
   name: !ruby/object:Piggly::Dumper::QualifiedName
     schema: public
     name: update_sulfuras
-  oid: '17486'
+  oid: '17487'
   identifier: dd6797b11afce77ab4b34a323faf1ea0
 - !ruby/object:Piggly::Dumper::SkeletonProcedure
   arg_defaults: []
@@ -7010,5 +7055,5 @@
   name: !ruby/object:Piggly::Dumper::QualifiedName
     schema: public
     name: update_quality
-  oid: '17487'
+  oid: '17488'
   identifier: 5807913bfb0f6041fde9d2ebb3a32efa

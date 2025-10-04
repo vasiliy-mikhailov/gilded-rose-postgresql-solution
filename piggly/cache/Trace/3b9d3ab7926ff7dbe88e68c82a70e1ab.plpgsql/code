@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_rel_owner('{r,p}'::char[], $1);
 BEGIN
     -- Make sure the table exists.
-    perform public.piggly_branch($PIGGLY$29b455b2fcfa6164$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$c31bfc33b0acd3ae$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$4220ff9f38906b37$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$5002f85470df7219$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$d36069e2a8560310$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$33a93ba2e6d89530$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$e61cde1bb4241dd8$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$05caaa9fe8279476$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
             E'    Table ' || quote_ident($1) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$e959bcd610453351$PIGGLY$);RETURN is(owner, $2, $3);
+    perform public.piggly_branch($PIGGLY$9ab4eb77418657fd$PIGGLY$);RETURN is(owner, $2, $3);
 END;

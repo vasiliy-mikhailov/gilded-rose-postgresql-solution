@@ -2,22 +2,22 @@ DECLARE
     privs  TEXT[] := ARRAY['CREATE', 'USAGE'];
     grants TEXT[] := '{}';
 BEGIN
-    perform public.piggly_branch($PIGGLY$516d49d23cdf6e55$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$e45791f1665b54a8$PIGGLY$);
     FOR i IN 1..array_upper(privs, 1) LOOP
-        perform public.piggly_cond($PIGGLY$ced3e8c04ff86f5a$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$6e05373ada5967f8$PIGGLY$);
-        IF public.piggly_cond($PIGGLY$740d0931312512c7$PIGGLY$, (pg_catalog.has_schema_privilege($1, $2, privs[i]))) THEN
-            perform public.piggly_branch($PIGGLY$29fb67983334816e$PIGGLY$);
+        perform public.piggly_cond($PIGGLY$956ae05952079ba1$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$8f1c3ca598017cf4$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$cf5d29181b3d8606$PIGGLY$, (pg_catalog.has_schema_privilege($1, $2, privs[i]))) THEN
+            perform public.piggly_branch($PIGGLY$fb26276bef97b579$PIGGLY$);
             grants := grants || privs[i];
         END IF;
     
-        perform public.piggly_signal($PIGGLY$ced3e8c04ff86f5a$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$956ae05952079ba1$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$ced3e8c04ff86f5a$PIGGLY$, false);
-    perform public.piggly_branch($PIGGLY$3f9b138cb873e990$PIGGLY$);RETURN grants;
+perform public.piggly_cond($PIGGLY$956ae05952079ba1$PIGGLY$, false);
+    perform public.piggly_branch($PIGGLY$f783577ad0ff5589$PIGGLY$);RETURN grants;
 EXCEPTION
     -- Not a valid schema name.
-    WHEN invalid_schema_name THEN perform public.piggly_branch($PIGGLY$8f7913e3bb279d49$PIGGLY$);perform public.piggly_branch($PIGGLY$15c0b0a7e2956d00$PIGGLY$);RETURN '{invalid_schema_name}';
+    WHEN invalid_schema_name THEN perform public.piggly_branch($PIGGLY$86f25d5b1c05d6e2$PIGGLY$);perform public.piggly_branch($PIGGLY$2912786ee04da135$PIGGLY$);RETURN '{invalid_schema_name}';
     -- Not a valid role.
-    WHEN undefined_object   THEN perform public.piggly_branch($PIGGLY$09d942fc106dc73d$PIGGLY$);perform public.piggly_branch($PIGGLY$3fe08b86f5607ccd$PIGGLY$);RETURN '{undefined_role}';
+    WHEN undefined_object   THEN perform public.piggly_branch($PIGGLY$cb67fd015b45738e$PIGGLY$);perform public.piggly_branch($PIGGLY$96c7b43f2a08163f$PIGGLY$);RETURN '{undefined_role}';
 END;

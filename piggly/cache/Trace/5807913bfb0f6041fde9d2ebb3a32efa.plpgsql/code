@@ -8,42 +8,22 @@ DECLARE
   l_new_quality numeric;
   l_new_sell_in numeric;
 BEGIN
-  perform public.piggly_branch($PIGGLY$4ab8709ce7d313b8$PIGGLY$);
-  FOR l_item IN
-    SELECT name, sell_in, quality, ctid FROM item FOR UPDATE
-  LOOP
-    perform public.piggly_cond($PIGGLY$aaf0bde63065a181$PIGGLY$, true);
-    perform public.piggly_branch($PIGGLY$7f4ff316e517810e$PIGGLY$);
-    l_name    := l_item.name;
-    l_sell_in := l_item.sell_in;
-    l_quality := l_item.quality;
-
+  perform public.piggly_branch($PIGGLY$7ca266a866aeef64$PIGGLY$);
+  FOR l_item IN SELECT name, sell_in, quality, ctid FROM item FOR UPDATE LOOP
+    perform public.piggly_cond($PIGGLY$e925329fa64b7cf0$PIGGLY$, true);
+    perform public.piggly_branch($PIGGLY$280baf22f2525b38$PIGGLY$);
+    l_name := l_item.name; l_sell_in := l_item.sell_in; l_quality := l_item.quality;
     l_is_conjured := LEFT(l_name, 9) = 'Conjured ';
     l_base_name := CASE WHEN l_is_conjured THEN SUBSTRING(l_name FROM 10) ELSE l_name END;
-
     CASE
-      WHEN public.piggly_cond($PIGGLY$fd39abf55608375a$PIGGLY$, (l_base_name = 'Sulfuras, Hand of Ragnaros')) THEN
-        perform public.piggly_branch($PIGGLY$90d41b2bea21bbef$PIGGLY$);
-        SELECT * FROM update_sulfuras(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
-      WHEN public.piggly_cond($PIGGLY$1fe9f48f61c45b4e$PIGGLY$, (l_base_name = 'Aged Brie')) THEN
-        perform public.piggly_branch($PIGGLY$24de667b509a2094$PIGGLY$);
-        SELECT * FROM update_aged_brie(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
-      WHEN public.piggly_cond($PIGGLY$bded41b6011b35c3$PIGGLY$, (l_base_name = 'Backstage passes to a TAFKAL80ETC concert')) THEN
-        perform public.piggly_branch($PIGGLY$a99ba0832c0540a2$PIGGLY$);
-        SELECT * FROM update_backstage_passes(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
-      ELSE
-        perform public.piggly_branch($PIGGLY$877267290fb6c48c$PIGGLY$);
-        SELECT * FROM update_normal(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
+      WHEN public.piggly_cond($PIGGLY$bd1de2c0211d19f5$PIGGLY$, (l_base_name = 'Sulfuras, Hand of Ragnaros')) THEN perform public.piggly_branch($PIGGLY$503e32f5aff1e413$PIGGLY$);SELECT * FROM update_sulfuras(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
+      WHEN public.piggly_cond($PIGGLY$3fc1f963c91ee995$PIGGLY$, (l_base_name = 'Aged Brie')) THEN perform public.piggly_branch($PIGGLY$ecbfeacfc55ca593$PIGGLY$);SELECT * FROM update_aged_brie(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
+      WHEN public.piggly_cond($PIGGLY$e0d40d4cc580a7a5$PIGGLY$, (l_base_name = 'Backstage passes to a TAFKAL80ETC concert')) THEN perform public.piggly_branch($PIGGLY$a122155c53ac3ca8$PIGGLY$);SELECT * FROM update_backstage_passes(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
+      ELSE perform public.piggly_branch($PIGGLY$ded9616951563760$PIGGLY$);SELECT * FROM update_normal(l_quality, l_sell_in, l_is_conjured) INTO l_new_quality, l_new_sell_in;
     END CASE;
-
-    l_quality := l_new_quality;
-    l_sell_in := l_new_sell_in;
-
-    UPDATE item
-      SET name = l_name, sell_in = l_sell_in, quality = l_quality
-      WHERE ctid = l_item.ctid;
+    UPDATE item SET name = l_name, sell_in = l_new_sell_in, quality = l_new_quality WHERE ctid = l_item.ctid;
   
-    perform public.piggly_signal($PIGGLY$aaf0bde63065a181$PIGGLY$, $PIGGLY$@$PIGGLY$);
+    perform public.piggly_signal($PIGGLY$e925329fa64b7cf0$PIGGLY$, $PIGGLY$@$PIGGLY$);
   END LOOP;
-perform public.piggly_cond($PIGGLY$aaf0bde63065a181$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$e925329fa64b7cf0$PIGGLY$, false);
 END;

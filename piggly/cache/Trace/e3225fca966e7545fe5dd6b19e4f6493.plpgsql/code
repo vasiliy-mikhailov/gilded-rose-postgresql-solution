@@ -1,17 +1,17 @@
 DECLARE
     grants TEXT[] := _get_fdw_privs( $2, $1::TEXT );
 BEGIN
-    perform public.piggly_branch($PIGGLY$e988ba8137efd6d3$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$33b3f9bc929b0083$PIGGLY$, (grants[1] = 'undefined_fdw')) THEN
-        perform public.piggly_branch($PIGGLY$1e8ce423b2cd3173$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$4fa236bd0716a630$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$b6c8af40379b0443$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$4200499b3b6eca20$PIGGLY$, (grants[1] = 'undefined_fdw')) THEN
+        perform public.piggly_branch($PIGGLY$a7003879c6d74a21$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$6d9a8e24b9ec5f90$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    FDW ' || quote_ident($1) || ' does not exist'
         );
-    ELSIF public.piggly_cond($PIGGLY$8783b70bee3b9817$PIGGLY$, (grants[1] = 'undefined_role')) THEN
-        perform public.piggly_branch($PIGGLY$600e55c236b18cff$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$55543fe47356a96a$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    ELSIF public.piggly_cond($PIGGLY$e0b635f2532f1f2d$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$6d015b73b345eead$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$7377446e09ed71bc$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Role ' || quote_ident($2) || ' does not exist'
         );
     END IF;
-    perform public.piggly_branch($PIGGLY$634d52e422c7ed9a$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+    perform public.piggly_branch($PIGGLY$816d525c6a801994$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
 END;

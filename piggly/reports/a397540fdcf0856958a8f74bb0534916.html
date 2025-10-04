@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Code Coverage: public._get_schema_privs</title><meta charset="utf-8"/><link rel="stylesheet" type="text/css" href="piggly.css"/><script type="text/javascript" src="highlight.js"><!-- --></script></head><body><div class="header"><p class="summary">public._get_schema_privs</p><table class="summary sortable"><tr><th>Blocks</th><th>Loops</th><th>Branches</th><th>Block Coverage</th><th>Loop Coverage</th><th>Branch Coverage</th></tr><tr class="even"><td class="count">8</td><td class="count">1</td><td class="count">1</td><td class="pct"><table align="center"><tr><td class="num">0.00%&nbsp;</td><td class="graph"><table align="right" class="graph low"><tr><td class="covered" width="0"/><td class="uncovered" width="50"/></tr></table></td></tr></table></td><td class="pct"><table align="center"><tr><td class="num">0.00%&nbsp;</td><td class="graph"><table align="right" class="graph low"><tr><td class="covered" width="0"/><td class="uncovered" width="50"/></tr></table></td></tr></table></td><td class="pct"><table align="center"><tr><td class="num">0.00%&nbsp;</td><td class="graph"><table align="right" class="graph low"><tr><td class="covered" width="0"/><td class="uncovered" width="50"/></tr></table></td></tr></table></td></tr></table></div><div class="container"><div class="listing"><table><tr><td class="signature">&nbsp;</td><td class="signature"><span class='tK'>CREATE FUNCTION</span> <b><span class='tI'>public._get_schema_privs</span></b> ( <span class='tK'>IN</span> <span class='tD'>name</span>, <span class='tK'>IN</span> <span class='tD'>text</span> )
+<span class='tK'>RETURNS</span> <span class='tD'>text[]</span>
+  <span class='tK'>VOLATILE</span></td></tr><tr><td class="lines"><a href="#L1" id="L1">1</a>
+<a href="#L2" id="L2">2</a>
+<a href="#L3" id="L3">3</a>
+<a href="#L4" id="L4">4</a>
+<a href="#L5" id="L5">5</a>
+<a href="#L6" id="L6">6</a>
+<a href="#L7" id="L7">7</a>
+<a href="#L8" id="L8">8</a>
+<a href="#L9" id="L9">9</a>
+<a href="#L10" id="L10">10</a>
+<a href="#L11" id="L11">11</a>
+<a href="#L12" id="L12">12</a>
+<a href="#L13" id="L13">13</a>
+<a href="#L14" id="L14">14</a>
+<a href="#L15" id="L15">15</a>
+<a href="#L16" id="L16">16</a></td><td class="code"><span class="tK">DECLARE</span>
+    <span class="tI">privs</span>  <span class="tD">TEXT[]</span> <span class="tK">:=</span> ARRAY[<span class="tS">'CREATE'</span>, <span class="tS">'USAGE'</span>];
+    <span class="tI">grants</span> <span class="tD">TEXT[]</span> <span class="tK">:=</span> <span class="tS">'{}'</span>;
+<span class="tK">BEGIN</span>
+    <span class="c0" id="Te45791f1665b54a8" title="never evaluated"><span class="tK">FOR</span> <span class="tI">i</span> <span class="tK">IN</span> <span class="l[0, 0, 0, 0]" id="T956ae05952079ba1" title="never evaluated">1..array_upper(privs, 1) </span><span class="tK">LOOP</span>
+        <span class="c0" id="T8f1c3ca598017cf4" title="never evaluated"><span class="tK">IF</span> <span class="b00" id="Tcf5d29181b3d8606" title="never evaluated">pg_catalog.has_schema_privilege($1, $2, privs[i]) </span><span class="tK">THEN</span>
+            <span class="c0" id="Tfb26276bef97b579" title="never evaluated"><span class="tI">grants</span> <span class="tK">:=</span> grants || privs[i];
+        </span><span class="tK">END</span> <span class="tK">IF</span>;
+    </span><span class="tK">END</span> <span class="tK">LOOP</span>;
+    <span class="c0" id="Tf783577ad0ff5589" title="never evaluated"><span class="tK">RETURN</span> grants</span>;
+</span><span class="tK">EXCEPTION</span>
+    <span class="tC">-- Not a valid schema name.
+</span>    <span class="tK">WHEN</span> invalid_schema_name <span class="tK">THEN</span> <span class="c0" id="T86f25d5b1c05d6e2" title="never evaluated"><span class="c0" id="T2912786ee04da135" title="never evaluated"><span class="tK">RETURN</span> <span class="tS">'{invalid_schema_name}'</span></span>;
+    <span class="tC">-- Not a valid role.
+</span>    </span><span class="tK">WHEN</span> undefined_object   <span class="tK">THEN</span> <span class="c0" id="Tcb67fd015b45738e" title="never evaluated"><span class="c0" id="T96c7b43f2a08163f" title="never evaluated"><span class="tK">RETURN</span> <span class="tS">'{undefined_role}'</span></span>;
+</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Te45791f1665b54a8" onMouseOver="highlight('Te45791f1665b54a8')">never evaluated</a></li><li class="block"><a href="#T8f1c3ca598017cf4" onMouseOver="highlight('T8f1c3ca598017cf4')">never evaluated</a></li><li class="loop"><a href="#T956ae05952079ba1" onMouseOver="highlight('T956ae05952079ba1')">never evaluated</a></li><li class="branch"><a href="#Tcf5d29181b3d8606" onMouseOver="highlight('Tcf5d29181b3d8606')">never evaluated</a></li><li class="block"><a href="#Tfb26276bef97b579" onMouseOver="highlight('Tfb26276bef97b579')">never evaluated</a></li><li class="block"><a href="#Tf783577ad0ff5589" onMouseOver="highlight('Tf783577ad0ff5589')">never evaluated</a></li><li class="block"><a href="#T86f25d5b1c05d6e2" onMouseOver="highlight('T86f25d5b1c05d6e2')">never evaluated</a></li><li class="block"><a href="#T2912786ee04da135" onMouseOver="highlight('T2912786ee04da135')">never evaluated</a></li><li class="block"><a href="#Tcb67fd015b45738e" onMouseOver="highlight('Tcb67fd015b45738e')">never evaluated</a></li><li class="block"><a href="#T96c7b43f2a08163f" onMouseOver="highlight('T96c7b43f2a08163f')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 04, 2025 16:15 UTC</div><a href="index.html" class="return">Return to index</a></body></html>

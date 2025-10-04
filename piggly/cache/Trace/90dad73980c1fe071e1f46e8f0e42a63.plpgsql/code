@@ -1,7 +1,7 @@
 DECLARE
     res boolean;
 BEGIN
-    perform public.piggly_branch($PIGGLY$34ccd54ee9caaf5c$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$006edc3947d38ff9$PIGGLY$);
     SELECT x.indisprimary
       FROM pg_catalog.pg_index x
       JOIN pg_catalog.pg_class ct ON ct.oid = x.indrelid
@@ -11,7 +11,7 @@ BEGIN
        AND pg_catalog.pg_table_is_visible(ct.oid)
      INTO res;
 
-      perform public.piggly_branch($PIGGLY$624b2ab7e9b938d8$PIGGLY$);RETURN ok(
+      perform public.piggly_branch($PIGGLY$4df0b7ea6e6b2861$PIGGLY$);RETURN ok(
           COALESCE(res, false),
           'Index ' || quote_ident($2) || ' should be on a primary key'
       );

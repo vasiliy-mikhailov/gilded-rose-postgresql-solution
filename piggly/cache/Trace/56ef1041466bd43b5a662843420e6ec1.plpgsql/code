@@ -1,8 +1,8 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$adf21ade516f7583$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$06ff74a792775feb$PIGGLY$, (pg_version_num() >= 90200)) THEN
-        perform public.piggly_branch($PIGGLY$45a61d1ad4c2e53b$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$03a1a3b6bb06ffe6$PIGGLY$);RETURN ok(
+    perform public.piggly_branch($PIGGLY$63392550eda40259$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$e1195c4ea7d5e243$PIGGLY$, (pg_version_num() >= 90200)) THEN
+        perform public.piggly_branch($PIGGLY$f7f383b671d02d4c$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$a290e21d6ebb2579$PIGGLY$);RETURN ok(
             EXISTS(
                 SELECT true
                   FROM pg_catalog.pg_tablespace
@@ -11,8 +11,8 @@ BEGIN
             ), $3
         );
     ELSE
-        perform public.piggly_branch($PIGGLY$a9824adfc228687f$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$cca19bea7ca3ad57$PIGGLY$);RETURN ok(
+        perform public.piggly_branch($PIGGLY$b4f82e6042d445de$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$c7fb343cbbc0d68e$PIGGLY$);RETURN ok(
             EXISTS(
                 SELECT true
                   FROM pg_catalog.pg_tablespace

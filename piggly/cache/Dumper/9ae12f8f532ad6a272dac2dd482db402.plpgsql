@@ -1,16 +1,7 @@
 DECLARE
-  l_new_quality numeric := p_quality;
   l_new_sell_in numeric := p_sell_in - 1;
-  l_mult integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
+  l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
+  l_total_delta integer := l_delta + (CASE WHEN l_new_sell_in < 0 THEN l_delta ELSE 0 END);
 BEGIN
-  IF l_new_quality > 0 THEN
-    l_new_quality := l_new_quality - l_mult;
-  END IF;
-  IF l_new_sell_in < 0 THEN
-    IF l_new_quality > 0 THEN
-      l_new_quality := l_new_quality - l_mult;
-    END IF;
-  END IF;
-  l_new_quality := clamp_quality(l_new_quality);
-  RETURN QUERY SELECT l_new_quality, l_new_sell_in;
+  RETURN QUERY SELECT decrease_quality(p_quality, l_total_delta), l_new_sell_in;
 END;

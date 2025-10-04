@@ -1,7 +1,7 @@
 DECLARE
     res boolean;
 BEGIN
-    perform public.piggly_branch($PIGGLY$2af11f064a982ac1$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$54180af5e55e5948$PIGGLY$);
     SELECT x.indisclustered
       FROM pg_catalog.pg_index x
       JOIN pg_catalog.pg_class ct ON ct.oid = x.indrelid
@@ -10,7 +10,7 @@ BEGIN
        AND ci.relname = $2
       INTO res;
 
-      perform public.piggly_branch($PIGGLY$0ac09b0498e0d97d$PIGGLY$);RETURN ok(
+      perform public.piggly_branch($PIGGLY$c8ed800e2cc804fc$PIGGLY$);RETURN ok(
           COALESCE(res, false),
           'Table ' || quote_ident($1) || ' should be clustered on index ' || quote_ident($2)
       );

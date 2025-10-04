@@ -1,8 +1,8 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$1120f7959f23d07d$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$130909bffdafde3a$PIGGLY$);
     EXECUTE _query($1);
-    perform public.piggly_branch($PIGGLY$ca0d799aa0506aa1$PIGGLY$);RETURN ok( FALSE, $3 ) || E'\n' || diag( '    no exception thrown' );
+    perform public.piggly_branch($PIGGLY$6f3bc63694a07e95$PIGGLY$);RETURN ok( FALSE, $3 ) || E'\n' || diag( '    no exception thrown' );
 EXCEPTION WHEN OTHERS THEN
-    perform public.piggly_branch($PIGGLY$0d99c47ccad076a3$PIGGLY$);
-    perform public.piggly_branch($PIGGLY$3ebd5a051bce3491$PIGGLY$);return _tlike( SQLERRM ~~ $2, SQLERRM, $2, $3 );
+    perform public.piggly_branch($PIGGLY$7be86647f1a40eee$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$ddd42b01e0fab4f4$PIGGLY$);return _tlike( SQLERRM ~~ $2, SQLERRM, $2, $3 );
 END;
