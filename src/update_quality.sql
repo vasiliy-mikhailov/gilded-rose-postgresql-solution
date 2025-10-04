@@ -25,13 +25,9 @@ DECLARE
   l_new_sell_in numeric := p_sell_in - 1;
   l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
 BEGIN
-  IF l_new_quality > 0 THEN
-    l_new_quality := decrease_quality(l_new_quality, l_delta);
-  END IF;
+  l_new_quality := decrease_quality(l_new_quality, l_delta);
   IF l_new_sell_in < 0 THEN
-    IF l_new_quality > 0 THEN
-      l_new_quality := decrease_quality(l_new_quality, l_delta);
-    END IF;
+    l_new_quality := decrease_quality(l_new_quality, l_delta);
   END IF;
   RETURN QUERY SELECT l_new_quality, l_new_sell_in;
 END;
@@ -46,15 +42,10 @@ DECLARE
   l_new_sell_in numeric := p_sell_in - 1;
   l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
 BEGIN
-  IF l_new_quality < 50 THEN
+  l_new_quality := increase_quality(l_new_quality, l_delta);
+  IF l_new_sell_in < 0 THEN
     l_new_quality := increase_quality(l_new_quality, l_delta);
   END IF;
-  IF l_new_sell_in < 0 THEN
-    IF l_new_quality < 50 THEN
-      l_new_quality := increase_quality(l_new_quality, l_delta);
-    END IF;
-  END IF;
-  l_new_quality := GREATEST(l_new_quality, 0);
   RETURN QUERY SELECT l_new_quality, l_new_sell_in;
 END;
 $$;
@@ -68,23 +59,16 @@ DECLARE
   l_new_sell_in numeric := p_sell_in - 1;
   l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
 BEGIN
-  IF l_new_quality < 50 THEN
+  l_new_quality := increase_quality(l_new_quality, l_delta);
+  IF p_sell_in < 11 THEN
     l_new_quality := increase_quality(l_new_quality, l_delta);
-    IF p_sell_in < 11 THEN
-      IF l_new_quality < 50 THEN
-        l_new_quality := increase_quality(l_new_quality, l_delta);
-      END IF;
-    END IF;
-    IF p_sell_in < 6 THEN
-      IF l_new_quality < 50 THEN
-        l_new_quality := increase_quality(l_new_quality, l_delta);
-      END IF;
-    END IF;
+  END IF;
+  IF p_sell_in < 6 THEN
+    l_new_quality := increase_quality(l_new_quality, l_delta);
   END IF;
   IF l_new_sell_in < 0 THEN
     l_new_quality := 0;
   END IF;
-  l_new_quality := GREATEST(l_new_quality, 0);
   RETURN QUERY SELECT l_new_quality, l_new_sell_in;
 END;
 $$;
