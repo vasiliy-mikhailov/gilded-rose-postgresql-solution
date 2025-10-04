@@ -1,0 +1,23 @@
+DECLARE
+    missing text[];
+BEGIN
+    perform public.piggly_branch($PIGGLY$2ed40aa7194d5f9b$PIGGLY$);
+    SELECT ARRAY(
+        SELECT quote_ident($1[i])
+          FROM generate_series(1, array_upper($1, 1)) s(i)
+          LEFT JOIN pg_catalog.pg_proc p
+            ON $1[i] = p.proname
+           AND pg_catalog.pg_function_is_visible(p.oid)
+         WHERE p.oid IS NULL
+         ORDER BY s.i
+    ) INTO missing;
+    IF public.piggly_cond($PIGGLY$90692619183e90eb$PIGGLY$, (missing[1] IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$300273cd1bb175e5$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$2816c73ee66da9dc$PIGGLY$);RETURN ok( true, $2 );
+    END IF;
+    perform public.piggly_branch($PIGGLY$dab6ee03b0a5f507$PIGGLY$);RETURN ok( false, $2 ) || E'\n' || diag(
+        '    ' ||
+        array_to_string( missing, E'() missing\n    ') ||
+        '() missing'
+    );
+END;

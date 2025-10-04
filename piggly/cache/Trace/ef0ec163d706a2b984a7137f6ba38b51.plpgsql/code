@@ -1,0 +1,12 @@
+DECLARE
+    id integer;
+BEGIN
+    perform public.piggly_branch($PIGGLY$63503f1580063ee7$PIGGLY$);
+    id := _get_latest( 'todo', -1 );
+    IF public.piggly_cond($PIGGLY$0b9375e7a1a95afb$PIGGLY$, (id IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$0192440e407175aa$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$20ba40f793c5984c$PIGGLY$);RAISE EXCEPTION 'todo_end() called without todo_start()';
+    END IF;
+    EXECUTE 'DELETE FROM __tcache__ WHERE id = ' || id;
+    perform public.piggly_branch($PIGGLY$2c1d4f3ec264804e$PIGGLY$);RETURN;
+END;

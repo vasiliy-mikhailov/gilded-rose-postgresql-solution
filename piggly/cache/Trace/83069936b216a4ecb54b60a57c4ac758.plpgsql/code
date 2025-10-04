@@ -1,0 +1,20 @@
+DECLARE
+  l_new_quality numeric := p_quality;
+  l_new_sell_in numeric := p_sell_in - 1;
+  l_mult integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
+BEGIN
+  perform public.piggly_branch($PIGGLY$03c3b4b196f6b06e$PIGGLY$);
+  IF public.piggly_cond($PIGGLY$b25a2fb6ffd658a0$PIGGLY$, (l_new_quality < 50)) THEN
+    perform public.piggly_branch($PIGGLY$69e8653088eb768b$PIGGLY$);
+    l_new_quality := l_new_quality + l_mult;
+  END IF;
+  IF public.piggly_cond($PIGGLY$f771dc498c104288$PIGGLY$, (l_new_sell_in < 0)) THEN
+    perform public.piggly_branch($PIGGLY$692cd32085501d7d$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$caa4f439b47f0002$PIGGLY$, (l_new_quality < 50)) THEN
+      perform public.piggly_branch($PIGGLY$a7d5584e46eff710$PIGGLY$);
+      l_new_quality := l_new_quality + l_mult;
+    END IF;
+  END IF;
+  l_new_quality := clamp_quality(l_new_quality);
+  perform public.piggly_branch($PIGGLY$54ae3a20575d09c1$PIGGLY$);RETURN QUERY SELECT l_new_quality, l_new_sell_in;
+END;

@@ -1,0 +1,18 @@
+BEGIN
+    perform public.piggly_branch($PIGGLY$9234713917d5c9cd$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$3cb77a40f2809377$PIGGLY$, (pg_catalog.has_tablespace_privilege($1, $2, 'CREATE'))) THEN
+        perform public.piggly_branch($PIGGLY$bdb2b5def0009799$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$02579c61161a024c$PIGGLY$);RETURN '{CREATE}';
+    ELSE
+        perform public.piggly_branch($PIGGLY$4475f431bfdfcc9e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$ff931f2b77f29390$PIGGLY$);RETURN '{}';
+    END IF;
+EXCEPTION WHEN undefined_object THEN
+    -- Same error code for unknown user or tablespace. So figure out which.
+    perform public.piggly_branch($PIGGLY$948e5bcfa9bed5b2$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$0edd2f9389e20fce$PIGGLY$);RETURN CASE WHEN SQLERRM LIKE '%' || $1 || '%' THEN
+        '{undefined_role}'
+    ELSE
+        '{undefined_tablespace}'
+    END;
+END;

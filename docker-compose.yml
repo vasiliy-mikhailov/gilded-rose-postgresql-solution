@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  gildedrose-db:
+    container_name: gildedrose-db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: gilded
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: gilded_rose
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./piggly:/piggly
+      - ./src:/src
+      - ./tests:/tests

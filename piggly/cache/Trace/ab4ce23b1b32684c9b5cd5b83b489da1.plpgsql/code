@@ -1,0 +1,29 @@
+DECLARE
+    extras  TEXT[]  := '{}';
+    res     BOOLEAN := TRUE;
+    msg     TEXT    := '';
+    rec     RECORD;
+BEGIN
+    -- Find extra records.
+    perform public.piggly_branch($PIGGLY$e7d7f0eb5e029fa8$PIGGLY$);
+    FOR rec in EXECUTE _query($1) LOOP
+        perform public.piggly_cond($PIGGLY$943a28ed5a475ec5$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$727780e420d12426$PIGGLY$);
+        extras := extras || rec::text;
+    
+        perform public.piggly_signal($PIGGLY$943a28ed5a475ec5$PIGGLY$, $PIGGLY$@$PIGGLY$);
+    END LOOP;
+perform public.piggly_cond($PIGGLY$943a28ed5a475ec5$PIGGLY$, false);
+
+    -- What extra records do we have?
+    IF public.piggly_cond($PIGGLY$a2fce1eefe3381e1$PIGGLY$, (extras[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$7a745f34d301a159$PIGGLY$);
+        res := FALSE;
+        msg := E'\n' || diag(
+            E'    Unexpected records:\n        '
+            ||  array_to_string( extras, E'\n        ' )
+        );
+    END IF;
+
+    perform public.piggly_branch($PIGGLY$a8e0104602836f20$PIGGLY$);RETURN ok(res, $2) || msg;
+END;

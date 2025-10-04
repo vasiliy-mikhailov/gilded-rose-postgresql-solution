@@ -1,0 +1,15 @@
+DECLARE
+    want char := _contract_on($4);
+    have char := _rule_on($1, $2, $3);
+BEGIN
+    perform public.piggly_branch($PIGGLY$5f3c9eae53970bd7$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$11ebc26b36ed1ffa$PIGGLY$, (have IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$6a5afc6cdd07a36a$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$ecec11c798370759$PIGGLY$);RETURN is( _expand_on(have), _expand_on(want), $5 );
+    END IF;
+
+    perform public.piggly_branch($PIGGLY$0f7c11a3186fbc0a$PIGGLY$);RETURN ok( false, $5 ) || E'\n' || diag(
+        '    Rule ' || quote_ident($3) || ' does not exist on '
+        || quote_ident($1) || '.' || quote_ident($2)
+    );
+END;

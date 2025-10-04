@@ -1,0 +1,44 @@
+DECLARE
+    query            TEXT := _query($1);
+    iterations       ALIAS FOR $2;
+    return_percent   ALIAS FOR $3;
+    start_time       TEXT;
+    act_time         NUMERIC;
+    times            NUMERIC[];
+    offset_it        INT;
+    limit_it         INT;
+    offset_percent   NUMERIC;
+    a_time	     _time_trial_type;
+BEGIN
+    -- Execute the query over and over
+    perform public.piggly_branch($PIGGLY$388170471aaa56ec$PIGGLY$);
+    FOR i IN 1..iterations LOOP
+        perform public.piggly_cond($PIGGLY$4d5c28a4907290e9$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$029bacf69edf67c2$PIGGLY$);
+        start_time := timeofday();
+        EXECUTE query;
+        -- Store the execution time for the run in an array of times
+        times[i] := extract(millisecond from timeofday()::timestamptz - start_time::timestamptz);
+    
+        perform public.piggly_signal($PIGGLY$4d5c28a4907290e9$PIGGLY$, $PIGGLY$@$PIGGLY$);
+    END LOOP;
+perform public.piggly_cond($PIGGLY$4d5c28a4907290e9$PIGGLY$, false);
+    offset_percent := (1.0 - return_percent) / 2.0;
+    -- Ensure that offset skips the bottom X% of runs, or set it to 0
+    SELECT GREATEST((offset_percent * iterations)::int, 0) INTO offset_it;
+    -- Ensure that with limit the query to returning only the middle X% of runs
+    SELECT GREATEST((return_percent * iterations)::int, 1) INTO limit_it;
+
+    FOR a_time IN SELECT times[i]
+		  FROM generate_series(array_lower(times, 1), array_upper(times, 1)) i
+                  ORDER BY 1
+                  OFFSET offset_it
+                  LIMIT limit_it LOOP
+	perform public.piggly_cond($PIGGLY$f28754fa2547ee34$PIGGLY$, true);
+	perform public.piggly_branch($PIGGLY$75d497617855cef9$PIGGLY$);
+	perform public.piggly_branch($PIGGLY$1329dcc9a515565d$PIGGLY$);RETURN NEXT a_time;
+    
+	perform public.piggly_signal($PIGGLY$f28754fa2547ee34$PIGGLY$, $PIGGLY$@$PIGGLY$);
+    END LOOP;
+perform public.piggly_cond($PIGGLY$f28754fa2547ee34$PIGGLY$, false);
+END;

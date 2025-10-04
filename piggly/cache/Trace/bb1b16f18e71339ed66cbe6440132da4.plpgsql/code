@@ -1,0 +1,32 @@
+BEGIN
+    perform public.piggly_branch($PIGGLY$adfd25912fa03819$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$902c77c51921c078$PIGGLY$, (NOT _cexists( $1, $2, $3 ))) THEN
+        perform public.piggly_branch($PIGGLY$cbfd1c14fd98bcf1$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$cacea73a19ad9988$PIGGLY$);RETURN fail( $5 ) || E'\n'
+            || diag ('    Column ' || quote_ident($1) || '.' || quote_ident($2) || '.' || quote_ident($3) || ' does not exist' );
+    END IF;
+
+    IF public.piggly_cond($PIGGLY$929bfb88c6791984$PIGGLY$, (NOT _has_def( $1, $2, $3 ))) THEN
+        perform public.piggly_branch($PIGGLY$f83e0a85e794d997$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$d51b5c1865d36717$PIGGLY$);RETURN fail( $5 ) || E'\n'
+            || diag ('    Column ' || quote_ident($1) || '.' || quote_ident($2) || '.' || quote_ident($3) || ' has no default' );
+    END IF;
+
+    perform public.piggly_branch($PIGGLY$8490239c7a393faf$PIGGLY$);RETURN _def_is(
+        pg_catalog.pg_get_expr(d.adbin, d.adrelid),
+        pg_catalog.format_type(a.atttypid, a.atttypmod),
+        $4, $5
+    )
+      FROM pg_catalog.pg_namespace n, pg_catalog.pg_class c, pg_catalog.pg_attribute a,
+           pg_catalog.pg_attrdef d
+     WHERE n.oid = c.relnamespace
+       AND c.oid = a.attrelid
+       AND a.atthasdef
+       AND a.attrelid = d.adrelid
+       AND a.attnum = d.adnum
+       AND n.nspname = $1
+       AND c.relname = $2
+       AND a.attnum > 0
+       AND NOT a.attisdropped
+       AND a.attname = $3;
+END;

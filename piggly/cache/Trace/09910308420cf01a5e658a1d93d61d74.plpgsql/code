@@ -1,0 +1,102 @@
+DECLARE
+    tnumb   INTEGER;
+    aok     BOOLEAN;
+    adescr  TEXT;
+    res     BOOLEAN;
+    descr   TEXT;
+    adiag   TEXT;
+    have    ALIAS FOR $1;
+    eok     ALIAS FOR $2;
+    name    ALIAS FOR $3;
+    edescr  ALIAS FOR $4;
+    ediag   ALIAS FOR $5;
+    matchit ALIAS FOR $6;
+BEGIN
+    -- What test was it that just ran?
+    perform public.piggly_branch($PIGGLY$1456a3620fd2c69a$PIGGLY$);
+    tnumb := currval('__tresults___numb_seq');
+
+    -- Fetch the results.
+    aok    := substring(have, 1, 2) = 'ok';
+    adescr := COALESCE(substring(have FROM  E'(?:not )?ok [[:digit:]]+ - ([^\n]+)'), '');
+
+    -- Now delete those results.
+    EXECUTE 'ALTER SEQUENCE __tresults___numb_seq RESTART WITH ' || tnumb;
+    IF public.piggly_cond($PIGGLY$e7ece136387777b8$PIGGLY$, (NOT aok)) THEN perform public.piggly_branch($PIGGLY$19c6e6736775094d$PIGGLY$);PERFORM _set('failed', _get('failed') - 1); END IF;
+
+    -- Set up the description.
+    descr := coalesce( name || ' ', 'Test ' ) || 'should ';
+
+    -- So, did the test pass?
+    perform public.piggly_branch($PIGGLY$ba6b90e7ad50609c$PIGGLY$);RETURN NEXT is(
+        aok,
+        eok,
+        descr || CASE eok WHEN true then 'pass' ELSE 'fail' END
+    );
+
+    -- Was the description as expected?
+    IF public.piggly_cond($PIGGLY$c039e0e1c042e41c$PIGGLY$, (edescr IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$73241c5eda7a6760$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$7ffd2f3a8a36c2dd$PIGGLY$);RETURN NEXT is(
+            adescr,
+            edescr,
+            descr || 'have the proper description'
+        );
+    END IF;
+
+    -- Were the diagnostics as expected?
+    IF public.piggly_cond($PIGGLY$cb0f5854ac684590$PIGGLY$, (ediag IS NOT NULL)) THEN
+        -- Remove ok and the test number.
+        perform public.piggly_branch($PIGGLY$1af5b504a927b590$PIGGLY$);
+        adiag := substring(
+            have
+            FROM CASE WHEN aok THEN 4 ELSE 9 END + char_length(tnumb::text)
+        );
+
+        -- Remove the description, if there is one.
+        IF public.piggly_cond($PIGGLY$8723b96fef51651d$PIGGLY$, (adescr <> '')) THEN
+            perform public.piggly_branch($PIGGLY$e4948a2951e3473a$PIGGLY$);
+            adiag := substring(
+                adiag FROM 1 + char_length( ' - ' || substr(diag( adescr ), 3) )
+            );
+        END IF;
+
+        IF public.piggly_cond($PIGGLY$890c1d8c9017ec2a$PIGGLY$, (NOT aok)) THEN
+            -- Remove failure message from ok().
+            perform public.piggly_branch($PIGGLY$80c720a13c542e6f$PIGGLY$);
+            adiag := substring(adiag FROM 1 + char_length(diag(
+                'Failed test ' || tnumb ||
+                CASE adescr WHEN '' THEN '' ELSE COALESCE(': "' || adescr || '"', '') END
+            )));
+        END IF;
+
+        IF public.piggly_cond($PIGGLY$95410d7507cb83f0$PIGGLY$, (ediag <> '')) THEN
+           -- Remove the space before the diagnostics.
+           perform public.piggly_branch($PIGGLY$ca7cf80b37399250$PIGGLY$);
+           adiag := substring(adiag FROM 2);
+        END IF;
+
+        -- Remove the #s.
+        adiag := replace( substring(adiag from 3), E'\n# ', E'\n' );
+
+        -- Now compare the diagnostics.
+        IF public.piggly_cond($PIGGLY$885ad731a24dff7f$PIGGLY$, (matchit)) THEN
+            perform public.piggly_branch($PIGGLY$461963fae530a0c7$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$bd32b046465a2acb$PIGGLY$);RETURN NEXT matches(
+                adiag,
+                ediag,
+                descr || 'have the proper diagnostics'
+            );
+        ELSE
+            perform public.piggly_branch($PIGGLY$157584ceb241c72a$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$9882c275ff91d208$PIGGLY$);RETURN NEXT is(
+                adiag,
+                ediag,
+                descr || 'have the proper diagnostics'
+            );
+        END IF;
+    END IF;
+
+    -- And we're done
+    perform public.piggly_branch($PIGGLY$5c435f1f7dbb879b$PIGGLY$);RETURN;
+END;

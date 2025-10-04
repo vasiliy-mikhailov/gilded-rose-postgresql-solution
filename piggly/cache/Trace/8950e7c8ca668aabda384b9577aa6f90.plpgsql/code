@@ -1,0 +1,15 @@
+DECLARE
+    owner NAME := _get_index_owner($1, $2, $3);
+BEGIN
+    -- Make sure the index exists.
+    perform public.piggly_branch($PIGGLY$77ca1ae6d9af50bc$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$f825a7377ef2d03a$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$b39245785a04a321$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$91efbfb37f80f6b8$PIGGLY$);RETURN ok(FALSE, $5) || E'\n' || diag(
+            E'    Index ' || quote_ident($3) || ' ON '
+            || quote_ident($1) || '.' || quote_ident($2) || ' not found'
+        );
+    END IF;
+
+    perform public.piggly_branch($PIGGLY$9fbb0df364ca7939$PIGGLY$);RETURN is(owner, $4, $5);
+END;

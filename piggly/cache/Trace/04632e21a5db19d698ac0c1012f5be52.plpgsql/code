@@ -1,0 +1,44 @@
+DECLARE
+    want_type TEXT := $1;
+BEGIN
+    perform public.piggly_branch($PIGGLY$dadba96562021dfd$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$08fedf53260df3b8$PIGGLY$, (pg_version_num() >= 170000)) THEN
+        -- to_regtypemod() in 17 allows easy and corret normalization.
+        perform public.piggly_branch($PIGGLY$3240063e6932174a$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$bcf46037936f56d4$PIGGLY$);RETURN format_type(to_regtype(want_type), to_regtypemod(want_type));
+    END IF;
+
+    IF public.piggly_cond($PIGGLY$28f8c9d5fe006dc8$PIGGLY$, (want_type::regtype = 'interval'::regtype)) THEN
+        -- We cannot normlize interval types without to_regtypemod(), So
+        -- just return it as is.
+        perform public.piggly_branch($PIGGLY$9702cb85c38d0410$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$988471fa3ea85329$PIGGLY$);RETURN want_type;
+    END IF;
+
+    -- Use the typmodin functions to correctly normalize types.
+    DECLARE
+        typmodin_arg cstring[];
+        typmodin_func regproc;
+        typmod int;
+    BEGIN
+        -- Extract type modifier from type declaration and format as cstring[] literal.
+        perform public.piggly_branch($PIGGLY$a17b3facbd3d79fe$PIGGLY$);
+        typmodin_arg := translate(substring(want_type FROM '[(][^")]+[)]'), '()', '{}');
+
+        -- Find typmodin function for want_type.
+        SELECT typmodin INTO typmodin_func
+        FROM pg_catalog.pg_type
+        WHERE oid = want_type::regtype;
+
+        IF public.piggly_cond($PIGGLY$937be67197f3933a$PIGGLY$, (typmodin_func = 0)) THEN
+            -- Easy: types without typemods.
+            perform public.piggly_branch($PIGGLY$09300c1ed8f14a20$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$50a23f4523c9f89b$PIGGLY$);RETURN format_type(want_type::regtype, null);
+        END IF;
+
+        -- Get typemod via type-specific typmodin function.
+        EXECUTE format('SELECT %s(%L)', typmodin_func, typmodin_arg) INTO typmod;
+        perform public.piggly_branch($PIGGLY$d495f2754b55025d$PIGGLY$);RETURN format_type(want_type::regtype, typmod);
+    END;
+    EXCEPTION WHEN OTHERS THEN perform public.piggly_branch($PIGGLY$17c61840411bc1cd$PIGGLY$);perform public.piggly_branch($PIGGLY$8b881f7470c57838$PIGGLY$);RETURN NULL;
+END;

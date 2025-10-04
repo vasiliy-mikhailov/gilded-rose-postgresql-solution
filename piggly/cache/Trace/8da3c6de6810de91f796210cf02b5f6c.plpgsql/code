@@ -1,0 +1,18 @@
+DECLARE
+    actual_type TEXT := _get_dtype($1, $2, true);
+BEGIN
+    perform public.piggly_branch($PIGGLY$8fdfba377fcb48e3$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$4e50ee5a33120a17$PIGGLY$, (actual_type IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$f5f4bf2db16f0d7a$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$a57727c92f75b716$PIGGLY$);RETURN fail( $5 ) || E'\n' || diag (
+            '   Domain ' || quote_ident($1) || '.' || $2
+            || ' does not exist'
+        );
+    END IF;
+
+    IF public.piggly_cond($PIGGLY$89c926694e66cdef$PIGGLY$, (quote_ident($3) = ANY(current_schemas(true)))) THEN
+        perform public.piggly_branch($PIGGLY$d19c1adfd5d71a2e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$a7bfe90ac30d2d6d$PIGGLY$);RETURN isnt( actual_type, quote_ident($3) || '.' || _typename($4), $5);
+    END IF;
+    perform public.piggly_branch($PIGGLY$e415597e4d612067$PIGGLY$);RETURN isnt( actual_type, _typename(quote_ident($3) || '.' || $4), $5);
+END;

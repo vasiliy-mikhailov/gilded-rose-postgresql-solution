@@ -1,0 +1,8 @@
+BEGIN
+    perform public.piggly_branch($PIGGLY$264bba29e890771e$PIGGLY$);
+    CREATE TEMP TABLE _____coltmp___ AS
+    SELECT $1[i]
+    FROM generate_series(array_lower($1, 1), array_upper($1, 1)) s(i);
+    EXECUTE 'ALTER TABLE _____coltmp___ RENAME TO ' || $2;
+    perform public.piggly_branch($PIGGLY$533f62f0e45990b5$PIGGLY$);return $2;
+END;

@@ -1,0 +1,17 @@
+DECLARE
+    pname text;
+BEGIN
+    perform public.piggly_branch($PIGGLY$e5a9df052afb2db3$PIGGLY$);
+    SELECT quote_ident(ni.nspname) || '.' || quote_ident(p.proname)
+      FROM pg_catalog.pg_trigger t
+      JOIN pg_catalog.pg_class ct     ON ct.oid = t.tgrelid
+      JOIN pg_catalog.pg_namespace nt ON nt.oid = ct.relnamespace
+      JOIN pg_catalog.pg_proc p       ON p.oid = t.tgfoid
+      JOIN pg_catalog.pg_namespace ni ON ni.oid = p.pronamespace
+     WHERE nt.nspname = $1
+       AND ct.relname = $2
+       AND t.tgname   = $3
+      INTO pname;
+
+    perform public.piggly_branch($PIGGLY$1f1bbe8c03d76ddb$PIGGLY$);RETURN is( pname, quote_ident($4) || '.' || quote_ident($5), $6 );
+END;

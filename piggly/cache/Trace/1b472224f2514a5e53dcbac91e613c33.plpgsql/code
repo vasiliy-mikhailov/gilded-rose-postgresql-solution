@@ -1,0 +1,12 @@
+DECLARE
+    pgversion INTEGER := pg_version_num();
+BEGIN
+    perform public.piggly_branch($PIGGLY$ac9f5cfafeb5aba7$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$acf9bfcb61b4e12a$PIGGLY$, (pgversion < 80200)) THEN
+        perform public.piggly_branch($PIGGLY$2999133dd4923de0$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$b968f2207e550cd4$PIGGLY$);RETURN ARRAY['CREATE', 'TEMPORARY'];
+    ELSE
+        perform public.piggly_branch($PIGGLY$501b1a50451efe08$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$8fba303838739aa4$PIGGLY$);RETURN ARRAY['CREATE', 'CONNECT', 'TEMPORARY'];
+    END IF;
+END;

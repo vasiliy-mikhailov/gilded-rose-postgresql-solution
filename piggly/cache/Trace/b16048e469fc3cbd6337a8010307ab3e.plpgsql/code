@@ -1,0 +1,14 @@
+DECLARE
+    owner NAME := _get_rel_owner('f'::char, $1, $2);
+BEGIN
+    -- Make sure the table exists.
+    perform public.piggly_branch($PIGGLY$e0c430bf763971cc$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$82221888850f54d9$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$701ddea19ce4729b$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$8c4abd550600f497$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+            E'    Foreign table ' || quote_ident($1) || '.' || quote_ident($2) || ' does not exist'
+        );
+    END IF;
+
+    perform public.piggly_branch($PIGGLY$80b9d46ea0715dae$PIGGLY$);RETURN is(owner, $3, $4);
+END;

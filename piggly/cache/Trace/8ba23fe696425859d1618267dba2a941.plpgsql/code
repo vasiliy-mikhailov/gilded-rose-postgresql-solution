@@ -1,0 +1,15 @@
+DECLARE
+    pgversion INTEGER := pg_version_num();
+BEGIN
+    perform public.piggly_branch($PIGGLY$4ebc7cb66ea63a76$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$e3aca931856af17f$PIGGLY$, (pgversion < 80200)) THEN perform public.piggly_branch($PIGGLY$93bb262fd6bcb1c7$PIGGLY$);perform public.piggly_branch($PIGGLY$084aa2b6b57c853b$PIGGLY$);RETURN ARRAY[
+        'DELETE', 'INSERT', 'REFERENCES', 'RULE', 'SELECT', 'TRIGGER', 'UPDATE'
+    ];
+    ELSIF public.piggly_cond($PIGGLY$45593bd6070b1054$PIGGLY$, (pgversion < 80400)) THEN perform public.piggly_branch($PIGGLY$c71bcf840859358e$PIGGLY$);perform public.piggly_branch($PIGGLY$8660986aa50a22b7$PIGGLY$);RETURN ARRAY[
+        'DELETE', 'INSERT', 'REFERENCES', 'SELECT', 'TRIGGER', 'UPDATE'
+    ];
+    ELSE perform public.piggly_branch($PIGGLY$cdf0d71261c7b932$PIGGLY$);perform public.piggly_branch($PIGGLY$851f658a33b59c13$PIGGLY$);RETURN ARRAY[
+        'DELETE', 'INSERT', 'REFERENCES', 'SELECT', 'TRIGGER', 'TRUNCATE', 'UPDATE'
+    ];
+    END IF;
+END;

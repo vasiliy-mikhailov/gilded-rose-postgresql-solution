@@ -1,0 +1,25 @@
+DECLARE
+    privs  TEXT[] := ARRAY['INSERT', 'REFERENCES', 'SELECT', 'UPDATE'];
+    grants TEXT[] := '{}';
+BEGIN
+    perform public.piggly_branch($PIGGLY$a000fbeede548a84$PIGGLY$);
+    FOR i IN 1..array_upper(privs, 1) LOOP
+        perform public.piggly_cond($PIGGLY$88b5241e7f0b1aae$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$59ab7f78b6e3e3a6$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$a6ef12ef545730f5$PIGGLY$, (pg_catalog.has_column_privilege($1, $2, $3, privs[i]))) THEN
+            perform public.piggly_branch($PIGGLY$bdd31c21d5c44ef1$PIGGLY$);
+            grants := grants || privs[i];
+        END IF;
+    
+        perform public.piggly_signal($PIGGLY$88b5241e7f0b1aae$PIGGLY$, $PIGGLY$@$PIGGLY$);
+    END LOOP;
+perform public.piggly_cond($PIGGLY$88b5241e7f0b1aae$PIGGLY$, false);
+    perform public.piggly_branch($PIGGLY$729a3e654cb48e70$PIGGLY$);RETURN grants;
+EXCEPTION
+    -- Not a valid column name.
+    WHEN undefined_column THEN perform public.piggly_branch($PIGGLY$78ba1479cf73f4a4$PIGGLY$);perform public.piggly_branch($PIGGLY$ad3095602d7122c4$PIGGLY$);RETURN '{undefined_column}';
+    -- Not a valid table name.
+    WHEN undefined_table THEN perform public.piggly_branch($PIGGLY$15d5c2d6a03b7453$PIGGLY$);perform public.piggly_branch($PIGGLY$6db9de40d8a9714b$PIGGLY$);RETURN '{undefined_table}';
+    -- Not a valid role.
+    WHEN undefined_object THEN perform public.piggly_branch($PIGGLY$c86cd69b3bd7d4f7$PIGGLY$);perform public.piggly_branch($PIGGLY$5d75379a8b7c0686$PIGGLY$);RETURN '{undefined_role}';
+END;

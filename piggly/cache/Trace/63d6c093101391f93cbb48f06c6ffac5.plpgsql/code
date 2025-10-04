@@ -1,0 +1,18 @@
+BEGIN
+    perform public.piggly_branch($PIGGLY$70b0413c33c3056a$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$14aa3c3c959ddc56$PIGGLY$, (pg_catalog.has_server_privilege($1, $2, 'USAGE'))) THEN
+        perform public.piggly_branch($PIGGLY$6e1113c09af03363$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$09c60ec777a23110$PIGGLY$);RETURN '{USAGE}';
+    ELSE
+        perform public.piggly_branch($PIGGLY$436282dd9ff0aac7$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$5e670f9969520c8a$PIGGLY$);RETURN '{}';
+    END IF;
+EXCEPTION WHEN undefined_object THEN
+    -- Same error code for unknown user or server. So figure out which.
+    perform public.piggly_branch($PIGGLY$83f1c15f791e5b77$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$f73fb8cb8442e02c$PIGGLY$);RETURN CASE WHEN SQLERRM LIKE '%' || $1 || '%' THEN
+        '{undefined_role}'
+    ELSE
+        '{undefined_server}'
+    END;
+END;

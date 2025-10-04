@@ -1,0 +1,30 @@
+DECLARE
+    names text[];
+BEGIN
+    perform public.piggly_branch($PIGGLY$a35827fd38c0e62c$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$774e26c2847b160b$PIGGLY$, (_fkexists($1, $2))) THEN
+        perform public.piggly_branch($PIGGLY$ccd2feb6465083ee$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$87bc6deaa72ee0e8$PIGGLY$);RETURN pass( $3 );
+    END IF;
+
+    -- Try to show the columns.
+    SELECT ARRAY(
+        SELECT _ident_array_to_string(fk_columns, ', ')
+          FROM pg_all_foreign_keys
+         WHERE fk_table_name  = $1
+         ORDER BY fk_columns
+    ) INTO names;
+
+    IF public.piggly_cond($PIGGLY$5ef9763f8d536a3b$PIGGLY$, (NAMES[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$d36a805abe2a8263$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$02b76cb4804ddad1$PIGGLY$);RETURN fail($3) || E'\n' || diag(
+            '    Table ' || quote_ident($1) || E' has foreign key constraints on these columns:\n        '
+            || array_to_string( names, E'\n        ' )
+        );
+    END IF;
+
+    -- No FKs in this table.
+    perform public.piggly_branch($PIGGLY$a4100b4dba1cc3ab$PIGGLY$);RETURN fail($3) || E'\n' || diag(
+        '    Table ' || quote_ident($1) || ' has no foreign key columns'
+    );
+END;

@@ -1,0 +1,17 @@
+DECLARE
+    grants TEXT[] := _get_schema_privs( $2, $1::TEXT );
+BEGIN
+    perform public.piggly_branch($PIGGLY$31578fd3bd9ee58c$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$45e1c68c6fb95ba2$PIGGLY$, (grants[1] = 'invalid_schema_name')) THEN
+        perform public.piggly_branch($PIGGLY$faebba6723f10b2d$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$25db7375e739b632$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+            '    Schema ' || quote_ident($1) || ' does not exist'
+        );
+    ELSIF public.piggly_cond($PIGGLY$f2ffb5b27f3a591f$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$2237abde2ff6c1b8$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$679cb88e47e481d1$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+            '    Role ' || quote_ident($2) || ' does not exist'
+        );
+    END IF;
+    perform public.piggly_branch($PIGGLY$2712d20f60568ab7$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+END;

@@ -1,0 +1,17 @@
+DECLARE
+    grants TEXT[] := _get_table_privs( $2, quote_ident($1) );
+BEGIN
+    perform public.piggly_branch($PIGGLY$36342eee388b1804$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$13c71b0f0e61cc66$PIGGLY$, (grants[1] = 'undefined_table')) THEN
+        perform public.piggly_branch($PIGGLY$83507487f2f5ab2d$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$66717d44037ed02c$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+            '    Table ' || quote_ident($1) || '.' || quote_ident($2) || ' does not exist'
+        );
+    ELSIF public.piggly_cond($PIGGLY$2ddb2c3f109be716$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$31f588465e8c48cb$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$d42b6a928fe6db8a$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+            '    Role ' || quote_ident($2) || ' does not exist'
+        );
+    END IF;
+    perform public.piggly_branch($PIGGLY$329f0173e7f1b100$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+END;

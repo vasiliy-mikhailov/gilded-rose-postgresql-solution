@@ -1,0 +1,6 @@
+BEGIN
+    perform public.piggly_branch($PIGGLY$e1abfafab20bedb8$PIGGLY$);
+    EXECUTE 'UPDATE __tcache__ SET value = ' || $2
+        || ' WHERE id = ' || $1;
+    perform public.piggly_branch($PIGGLY$e9303f4e29723338$PIGGLY$);RETURN $2;
+END;

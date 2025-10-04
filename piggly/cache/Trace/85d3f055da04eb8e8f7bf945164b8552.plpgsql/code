@@ -1,0 +1,6 @@
+BEGIN
+    perform public.piggly_branch($PIGGLY$463a09fffd5a3ce4$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$9d8a8596c6fd3e7c$PIGGLY$);RETURN currval('__tresults___numb_seq');
+EXCEPTION
+    WHEN object_not_in_prerequisite_state THEN perform public.piggly_branch($PIGGLY$b3b3bb70b4277d53$PIGGLY$);perform public.piggly_branch($PIGGLY$acc9aa9c81a0693e$PIGGLY$);RETURN 0;
+END;

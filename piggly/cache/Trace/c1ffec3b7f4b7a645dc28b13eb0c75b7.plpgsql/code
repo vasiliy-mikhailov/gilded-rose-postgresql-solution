@@ -1,0 +1,32 @@
+DECLARE
+    privs  TEXT[] := _table_privs();
+    grants TEXT[] := '{}';
+BEGIN
+    perform public.piggly_branch($PIGGLY$13aa2fd3fe1a3baa$PIGGLY$);
+    FOR i IN 1..array_upper(privs, 1) LOOP
+        perform public.piggly_cond($PIGGLY$3e0a20fd61d7fe0c$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$eb7a95286e28ec5c$PIGGLY$);
+        BEGIN
+            perform public.piggly_branch($PIGGLY$fa85862803b262da$PIGGLY$);
+            IF public.piggly_cond($PIGGLY$62271cbcee1372cf$PIGGLY$, (pg_catalog.has_table_privilege($1, $2, privs[i]))) THEN
+                perform public.piggly_branch($PIGGLY$a0cac1981b78ed52$PIGGLY$);
+                grants := grants || privs[i];
+            END IF;
+        EXCEPTION WHEN undefined_table THEN
+            -- Not a valid table name.
+            perform public.piggly_branch($PIGGLY$db6782c9d6725d3c$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$6d5aace7275faaa4$PIGGLY$);RETURN '{undefined_table}';
+        WHEN undefined_object THEN
+            -- Not a valid role.
+            perform public.piggly_branch($PIGGLY$2b2c03de0ea31aec$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$0cabd47a63467aef$PIGGLY$);RETURN '{undefined_role}';
+        WHEN invalid_parameter_value THEN
+            -- Not a valid permission on this version of PostgreSQL; ignore;
+        perform public.piggly_branch($PIGGLY$860b90ae96bd17e2$PIGGLY$);
+        END;
+    
+        perform public.piggly_signal($PIGGLY$3e0a20fd61d7fe0c$PIGGLY$, $PIGGLY$@$PIGGLY$);
+    END LOOP;
+perform public.piggly_cond($PIGGLY$3e0a20fd61d7fe0c$PIGGLY$, false);
+    perform public.piggly_branch($PIGGLY$5460c987aedc2e14$PIGGLY$);RETURN grants;
+END;

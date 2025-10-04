@@ -1,0 +1,17 @@
+DECLARE
+    query     TEXT := _query($1);
+    max_time  ALIAS FOR $2;
+    descr     ALIAS FOR $3;
+    starts_at TEXT;
+    act_time  NUMERIC;
+BEGIN
+    perform public.piggly_branch($PIGGLY$38f74d1744cf99ca$PIGGLY$);
+    starts_at := timeofday();
+    EXECUTE query;
+    act_time := extract( millisecond from timeofday()::timestamptz - starts_at::timestamptz);
+    IF public.piggly_cond($PIGGLY$40e3b7d303746a95$PIGGLY$, (act_time < max_time)) THEN perform public.piggly_branch($PIGGLY$8d732ccfc63a277e$PIGGLY$);perform public.piggly_branch($PIGGLY$98537e3fc125af1d$PIGGLY$);RETURN ok(TRUE, descr); END IF;
+    perform public.piggly_branch($PIGGLY$05ae61a8089aa0b4$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
+           '      runtime: ' || act_time || ' ms' ||
+        E'\n      exceeds: ' || max_time || ' ms'
+    );
+END;

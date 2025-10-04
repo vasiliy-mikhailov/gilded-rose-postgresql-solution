@@ -1,0 +1,38 @@
+DECLARE
+    query     TEXT := _query($1);
+    errcode   ALIAS FOR $2;
+    errmsg    ALIAS FOR $3;
+    desctext  ALIAS FOR $4;
+    descr     TEXT;
+BEGIN
+    perform public.piggly_branch($PIGGLY$b610fd95e8539416$PIGGLY$);
+    descr := COALESCE(
+          desctext,
+          'threw ' || errcode || ': ' || errmsg,
+          'threw ' || errcode,
+          'threw ' || errmsg,
+          'threw an exception'
+    );
+    EXECUTE query;
+    perform public.piggly_branch($PIGGLY$008aae0f2bb6e400$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
+           '      caught: no exception' ||
+        E'\n      wanted: ' || COALESCE( errcode, 'an exception' )
+    );
+EXCEPTION WHEN OTHERS OR ASSERT_FAILURE THEN
+    perform public.piggly_branch($PIGGLY$89ff02b51c0a02a3$PIGGLY$);
+    IF (public.piggly_cond($PIGGLY$d954237efd8a8a5a$PIGGLY$, (errcode IS NULL OR SQLSTATE = errcode)
+        AND ( errmsg IS NULL OR SQLERRM = errmsg)))
+    THEN
+        -- The expected errcode and/or message was thrown.
+        perform public.piggly_branch($PIGGLY$2e7d591bd3d00a4e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$ff22f09cdd5a2507$PIGGLY$);RETURN ok( TRUE, descr );
+    ELSE
+        -- This was not the expected errcode or errmsg.
+        perform public.piggly_branch($PIGGLY$b02199d61fb7cd1f$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$98ab45e43cd619ef$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
+               '      caught: ' || SQLSTATE || ': ' || SQLERRM ||
+            E'\n      wanted: ' || COALESCE( errcode, 'an exception' ) ||
+            COALESCE( ': ' || errmsg, '')
+        );
+    END IF;
+END;

@@ -1,0 +1,28 @@
+DECLARE
+    what    ALIAS FOR $1;
+    extras  ALIAS FOR $2;
+    missing ALIAS FOR $3;
+    descr   ALIAS FOR $4;
+    msg     TEXT    := '';
+    res     BOOLEAN := TRUE;
+BEGIN
+    perform public.piggly_branch($PIGGLY$cac2f18c2c870529$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$a7c703704249ebed$PIGGLY$, (extras[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$a49d376be182f52c$PIGGLY$);
+        res = FALSE;
+        msg := E'\n' || diag(
+            '    Extra ' || what || E':\n        '
+            ||  _ident_array_to_sorted_string( extras, E'\n        ' )
+        );
+    END IF;
+    IF public.piggly_cond($PIGGLY$10099b9c6188f91c$PIGGLY$, (missing[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$c5f2c45b6a6c097a$PIGGLY$);
+        res = FALSE;
+        msg := msg || E'\n' || diag(
+            '    Missing ' || what || E':\n        '
+            ||  _ident_array_to_sorted_string( missing, E'\n        ' )
+        );
+    END IF;
+
+    perform public.piggly_branch($PIGGLY$eb2b27a0dfa78043$PIGGLY$);RETURN ok(res, descr) || msg;
+END;

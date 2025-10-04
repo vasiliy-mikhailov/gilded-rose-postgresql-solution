@@ -1,0 +1,28 @@
+DECLARE
+    missing text[];
+BEGIN
+    perform public.piggly_branch($PIGGLY$a7e8a0a292680971$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$a243c5a500028a55$PIGGLY$, (NOT _has_role($1))) THEN
+        perform public.piggly_branch($PIGGLY$5d6b161015ac5350$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$1b31753634c69876$PIGGLY$);RETURN fail( $3 ) || E'\n' || diag (
+            '    Role ' || quote_ident($1) || ' does not exist'
+        );
+    END IF;
+
+    SELECT ARRAY(
+        SELECT quote_ident($2[i])
+          FROM generate_series(1, array_upper($2, 1)) s(i)
+          LEFT JOIN pg_catalog.pg_roles r ON rolname = $2[i]
+         WHERE r.oid IS NULL
+            OR NOT r.oid = ANY ( _grolist($1) )
+         ORDER BY s.i
+    ) INTO missing;
+    IF public.piggly_cond($PIGGLY$d3878e950ff0180e$PIGGLY$, (missing[1] IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$489d1713fd714e3b$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$0a588d89df71923f$PIGGLY$);RETURN ok( true, $3 );
+    END IF;
+    perform public.piggly_branch($PIGGLY$7eb13c5a1d6dad21$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
+        '    Members missing from the ' || quote_ident($1) || E' role:\n        ' ||
+        array_to_string( missing, E'\n        ')
+    );
+END;

@@ -1,0 +1,40 @@
+DECLARE
+    have       ALIAS FOR $1;
+    want       ALIAS FOR $2;
+    have_rec   RECORD;
+    want_rec   RECORD;
+    have_found BOOLEAN;
+    want_found BOOLEAN;
+    err_msg    text := 'details not available in pg <= 9.1';
+BEGIN
+    perform public.piggly_branch($PIGGLY$32505024feff4a39$PIGGLY$);
+    FETCH have INTO have_rec;
+    have_found := FOUND;
+    FETCH want INTO want_rec;
+    want_found := FOUND;
+    WHILE public.piggly_cond($PIGGLY$00f45753044d9978$PIGGLY$, (have_found OR want_found)) LOOP
+        perform public.piggly_branch($PIGGLY$77635e20b6fecaa3$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$4b057f595acd6735$PIGGLY$, (have_rec IS DISTINCT FROM want_rec OR have_found <> want_found)) THEN
+            perform public.piggly_branch($PIGGLY$1c8c4b81670867ca$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$73f4205ec551c348$PIGGLY$);RETURN ok( true, $3 );
+        ELSE
+            perform public.piggly_branch($PIGGLY$10a3e1a96ec8aa88$PIGGLY$);
+            FETCH have INTO have_rec;
+            have_found := FOUND;
+            FETCH want INTO want_rec;
+            want_found := FOUND;
+        END IF;
+    END LOOP;
+    perform public.piggly_branch($PIGGLY$61f35f5e3c0a58cd$PIGGLY$);RETURN ok( false, $3 );
+EXCEPTION
+    WHEN datatype_mismatch THEN
+        perform public.piggly_branch($PIGGLY$6307f1af00c29264$PIGGLY$);
+        GET STACKED DIAGNOSTICS err_msg = MESSAGE_TEXT;
+        perform public.piggly_branch($PIGGLY$fbd6858fd66a3bbe$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
+            E'    Number of columns or their types differ between the queries' ||
+            CASE WHEN have_rec::TEXT = want_rec::text THEN '' ELSE E':\n' ||
+                '        have: ' || CASE WHEN have_found THEN have_rec::text ELSE 'NULL' END || E'\n' ||
+                '        want: ' || CASE WHEN want_found THEN want_rec::text ELSE 'NULL' END
+            END || E'\n        ERROR: ' || err_msg
+        );
+END;

@@ -1,0 +1,17 @@
+DECLARE
+    grants TEXT[] := _get_db_privs( $2, $1::TEXT );
+BEGIN
+    perform public.piggly_branch($PIGGLY$e6d260f102e961c3$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$b8b66951c2f1f285$PIGGLY$, (grants[1] = 'invalid_catalog_name')) THEN
+        perform public.piggly_branch($PIGGLY$f3849eddc281e657$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$74de1c79e9c26f2e$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+            '    Database ' || quote_ident($1) || ' does not exist'
+        );
+    ELSIF public.piggly_cond($PIGGLY$1e7c225e29f0f3b4$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$7ab97d85428fdcd6$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$d7069eede3ae65d5$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+            '    Role ' || quote_ident($2) || ' does not exist'
+        );
+    END IF;
+    perform public.piggly_branch($PIGGLY$409c65cb4a401363$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+END;

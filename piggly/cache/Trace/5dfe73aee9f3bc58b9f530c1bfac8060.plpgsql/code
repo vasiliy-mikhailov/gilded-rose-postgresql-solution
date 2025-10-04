@@ -1,0 +1,15 @@
+DECLARE
+    query          TEXT := _query($1);
+    expected_avg   ALIAS FOR $2;
+    within         ALIAS FOR $3;
+    iterations     ALIAS FOR $4;
+    descr          ALIAS FOR $5;
+    avg_time       NUMERIC;
+BEGIN
+  perform public.piggly_branch($PIGGLY$733d7e1eee34b8d9$PIGGLY$);
+  SELECT avg(a_time) FROM _time_trials(query, iterations, 0.8) t1 INTO avg_time;
+  IF public.piggly_cond($PIGGLY$d84a98f9d4d8147b$PIGGLY$, (abs(avg_time - expected_avg) < within)) THEN perform public.piggly_branch($PIGGLY$fec499cb976d520c$PIGGLY$);perform public.piggly_branch($PIGGLY$2e676725b1563121$PIGGLY$);RETURN ok(TRUE, descr); END IF;
+  perform public.piggly_branch($PIGGLY$ab23274d8936ea37$PIGGLY$);RETURN ok(FALSE, descr) || E'\n' || diag(' average runtime: ' || avg_time || ' ms'
+     || E'\n desired average: ' || expected_avg || ' +/- ' || within || ' ms'
+    );
+END;
