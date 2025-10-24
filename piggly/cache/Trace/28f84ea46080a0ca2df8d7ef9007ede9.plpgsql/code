@@ -1,11 +1,11 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$1f4048bd31dc16bf$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$f9d34f7727fd6eff$PIGGLY$, (pg_version_num() >= 110000)) THEN
-        perform public.piggly_branch($PIGGLY$f4335ad0210ddadb$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$85d8bacf4f5c2691$PIGGLY$);RETURN prokind FROM pg_catalog.pg_proc WHERE oid = p_oid;
+    perform public.piggly_branch($PIGGLY$685214bfc4523b1c$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$41fc055f67ccce83$PIGGLY$, (pg_version_num() >= 110000)) THEN
+        perform public.piggly_branch($PIGGLY$2ae84b62bb943980$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$17d034fbe7293868$PIGGLY$);RETURN prokind FROM pg_catalog.pg_proc WHERE oid = p_oid;
     ELSE
-        perform public.piggly_branch($PIGGLY$c7d593e822f2d14f$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$f9869c2d27a14405$PIGGLY$);RETURN CASE WHEN proisagg THEN 'a' WHEN proiswindow THEN 'w' ELSE 'f' END
+        perform public.piggly_branch($PIGGLY$00f972a23658ee79$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$8c4f4f79e66396b1$PIGGLY$);RETURN CASE WHEN proisagg THEN 'a' WHEN proiswindow THEN 'w' ELSE 'f' END
             FROM pg_catalog.pg_proc WHERE oid = p_oid;
     END IF;
 END;

@@ -2,13 +2,13 @@ DECLARE
     dbowner NAME := _get_db_owner($1);
 BEGIN
     -- Make sure the database exists.
-    perform public.piggly_branch($PIGGLY$2cbb62d234988617$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$b65f757f105df259$PIGGLY$, (dbowner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$3dd84d99c348db9c$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$3c5a59cc073e50ee$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$bd47c3c1a75622aa$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$64d3a1ef64a19fac$PIGGLY$, (dbowner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$a1ac15294a51bf26$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$221b3411a9a8744c$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
             E'    Database ' || quote_ident($1) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$3d12fa2f7d7d500a$PIGGLY$);RETURN is(dbowner, $2, $3);
+    perform public.piggly_branch($PIGGLY$344639b3a02b96f2$PIGGLY$);RETURN is(dbowner, $2, $3);
 END;

@@ -5,31 +5,31 @@ BEGIN
     -- Get the latest id and value, because todo() might have been called
     -- again before the todos ran out for the first call to todo(). This
     -- allows them to nest.
-    perform public.piggly_branch($PIGGLY$4182badf4a4d6bad$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$51171f50eb206c63$PIGGLY$);
     todos := _get_latest('todo');
-    IF public.piggly_cond($PIGGLY$43d56d3bf5cd9e72$PIGGLY$, (todos IS NULL)) THEN
+    IF public.piggly_cond($PIGGLY$5af4fa11b660b286$PIGGLY$, (todos IS NULL)) THEN
         -- No todos.
-        perform public.piggly_branch($PIGGLY$43530040b1afbab0$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$93ad5e8d881eb189$PIGGLY$);RETURN NULL;
+        perform public.piggly_branch($PIGGLY$ba172256582fa96e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$5c1047370c5265e2$PIGGLY$);RETURN NULL;
     END IF;
-    IF public.piggly_cond($PIGGLY$ca109516000a478d$PIGGLY$, (todos[2] = 0)) THEN
+    IF public.piggly_cond($PIGGLY$7b53209d9d806429$PIGGLY$, (todos[2] = 0)) THEN
         -- Todos depleted. Clean up.
-        perform public.piggly_branch($PIGGLY$62a14fe9da545c93$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$31612ad51bcea96d$PIGGLY$);
         EXECUTE 'DELETE FROM __tcache__ WHERE id = ' || todos[1];
-        perform public.piggly_branch($PIGGLY$af7411dd6c66e6d7$PIGGLY$);RETURN NULL;
+        perform public.piggly_branch($PIGGLY$cc0f9fe1aa25ed79$PIGGLY$);RETURN NULL;
     END IF;
     -- Decrement the count of counted todos and return the reason.
-    IF public.piggly_cond($PIGGLY$ffc05666d28bf616$PIGGLY$, (todos[2] <> -1)) THEN
-        perform public.piggly_branch($PIGGLY$ab08adcce61974a6$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$4b0d87815d01721d$PIGGLY$, (todos[2] <> -1)) THEN
+        perform public.piggly_branch($PIGGLY$523fb1979f4c409d$PIGGLY$);
         PERFORM _set(todos[1], todos[2] - 1);
     END IF;
     note := _get_note(todos[1]);
 
-    IF public.piggly_cond($PIGGLY$4dac2136fdf306e5$PIGGLY$, (todos[2] = 1)) THEN
+    IF public.piggly_cond($PIGGLY$4f4d9af10bd0bc27$PIGGLY$, (todos[2] = 1)) THEN
         -- This was the last todo, so delete the record.
-        perform public.piggly_branch($PIGGLY$9dd145ba6d6a1885$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$75052da4ddd78bea$PIGGLY$);
         EXECUTE 'DELETE FROM __tcache__ WHERE id = ' || todos[1];
     END IF;
 
-    perform public.piggly_branch($PIGGLY$b45c48740e5030ad$PIGGLY$);RETURN note;
+    perform public.piggly_branch($PIGGLY$e4a70227c47432db$PIGGLY$);RETURN note;
 END;

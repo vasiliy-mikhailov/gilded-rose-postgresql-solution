@@ -1,18 +1,18 @@
 DECLARE
     output TEXT[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$3faa745068a0f71a$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$4f6ed285eb7c121b$PIGGLY$);
     output := '{}';
     FOR i IN 1..how_many LOOP
-        perform public.piggly_cond($PIGGLY$84c1eab9e1cb6e7d$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$0573ef55e5b8db7d$PIGGLY$);
+        perform public.piggly_cond($PIGGLY$a594c1b9e2db3cfc$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$a60fa536b88141b7$PIGGLY$);
         output = array_append(
             output,
             ok( TRUE ) || ' ' || diag( 'SKIP' || COALESCE( ' ' || why, '') )
         );
     
-        perform public.piggly_signal($PIGGLY$84c1eab9e1cb6e7d$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$a594c1b9e2db3cfc$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$84c1eab9e1cb6e7d$PIGGLY$, false);
-    perform public.piggly_branch($PIGGLY$d52265971bd87c76$PIGGLY$);RETURN array_to_string(output, E'\n');
+perform public.piggly_cond($PIGGLY$a594c1b9e2db3cfc$PIGGLY$, false);
+    perform public.piggly_branch($PIGGLY$3de5733c5345fcec$PIGGLY$);RETURN array_to_string(output, E'\n');
 END;

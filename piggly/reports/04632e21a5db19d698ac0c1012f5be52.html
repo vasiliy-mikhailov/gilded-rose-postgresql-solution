@@ -41,15 +41,15 @@
 <a href="#L39" id="L39">39</a></td><td class="code"><span class="tK">DECLARE</span>
     <span class="tI">want_type</span> <span class="tD">TEXT</span> <span class="tK">:=</span> $1;
 <span class="tK">BEGIN</span>
-    <span class="c0" id="Tdf447f6b84a4082f" title="never evaluated"><span class="tK">IF</span> <span class="b00" id="Tb7ab53cf2b846a10" title="never evaluated">pg_version_num() &gt;= 170000 </span><span class="tK">THEN</span>
+    <span class="c0" id="T39dfc00aa08cb31a" title="never evaluated"><span class="tK">IF</span> <span class="b00" id="Tf832fa50ef7a8295" title="never evaluated">pg_version_num() &gt;= 170000 </span><span class="tK">THEN</span>
         <span class="tC">-- to_regtypemod() in 17 allows easy and corret normalization.
-</span>        <span class="c0" id="T17ee7ac5087d126f" title="never evaluated"><span class="c0" id="T5d4801e0c3ada46f" title="never evaluated"><span class="tK">RETURN</span> format_type(to_regtype(want_type), to_regtypemod(want_type))</span>;
+</span>        <span class="c0" id="Tc71e4928f62acca3" title="never evaluated"><span class="c0" id="T0f9979d3904edb06" title="never evaluated"><span class="tK">RETURN</span> format_type(to_regtype(want_type), to_regtypemod(want_type))</span>;
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
-    <span class="tK">IF</span> <span class="b00" id="Tfac2c5edb6633732" title="never evaluated">want_type::regtype = <span class="tS">'interval'</span>::regtype </span><span class="tK">THEN</span>
+    <span class="tK">IF</span> <span class="b00" id="T4a301be276d01499" title="never evaluated">want_type::regtype = <span class="tS">'interval'</span>::regtype </span><span class="tK">THEN</span>
         <span class="tC">-- We cannot normlize interval types without to_regtypemod(), So
 </span>        <span class="tC">-- just return it as is.
-</span>        <span class="c0" id="T355c81f0dcfeb2d6" title="never evaluated"><span class="c0" id="T0fd968dd276c9f8c" title="never evaluated"><span class="tK">RETURN</span> want_type</span>;
+</span>        <span class="c0" id="T0fcc90489c5775a0" title="never evaluated"><span class="c0" id="T4d2e499e70e47a55" title="never evaluated"><span class="tK">RETURN</span> want_type</span>;
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
     <span class="tC">-- Use the typmodin functions to correctly normalize types.
@@ -59,21 +59,21 @@
         <span class="tI">typmod</span> <span class="tD">int</span>;
     <span class="tK">BEGIN</span>
         <span class="tC">-- Extract type modifier from type declaration and format as cstring[] literal.
-</span>        <span class="c0" id="T3eb384de50ec36ae" title="never evaluated"><span class="tI">typmodin_arg</span> <span class="tK">:=</span> translate(substring(want_type FROM <span class="tS">'[(][^&quot;)]+[)]'</span>), <span class="tS">'()'</span>, <span class="tS">'{}'</span>);
+</span>        <span class="c0" id="T5ca1f82cead35bc8" title="never evaluated"><span class="tI">typmodin_arg</span> <span class="tK">:=</span> translate(substring(want_type FROM <span class="tS">'[(][^&quot;)]+[)]'</span>), <span class="tS">'()'</span>, <span class="tS">'{}'</span>);
 
         <span class="tC">-- Find typmodin function for want_type.
 </span>        <span class="tK">SELECT</span> typmodin INTO typmodin_func
         FROM pg_catalog.pg_type
         WHERE oid = want_type::regtype;
 
-        <span class="tK">IF</span> <span class="b00" id="T68783df78880efb6" title="never evaluated">typmodin_func = 0 </span><span class="tK">THEN</span>
+        <span class="tK">IF</span> <span class="b00" id="T26b2f83dc2c529ea" title="never evaluated">typmodin_func = 0 </span><span class="tK">THEN</span>
             <span class="tC">-- Easy: types without typemods.
-</span>            <span class="c0" id="T8fbc65d03767541b" title="never evaluated"><span class="c0" id="T2fd9957bfeb9f5c0" title="never evaluated"><span class="tK">RETURN</span> format_type(want_type::regtype, null)</span>;
+</span>            <span class="c0" id="Tc46ceaa4f5041071" title="never evaluated"><span class="c0" id="T3f8a80263bceba7a" title="never evaluated"><span class="tK">RETURN</span> format_type(want_type::regtype, null)</span>;
         </span><span class="tK">END</span> <span class="tK">IF</span>;
 
         <span class="tC">-- Get typemod via type-specific typmodin function.
 </span>        <span class="tK">EXECUTE</span> format(<span class="tS">'SELECT %s(%L)'</span>, typmodin_func, typmodin_arg) INTO typmod;
-        <span class="c0" id="T0e84207b6d4767da" title="never evaluated"><span class="tK">RETURN</span> format_type(want_type::regtype, typmod)</span>;
+        <span class="c0" id="T10f9c2794f4e4835" title="never evaluated"><span class="tK">RETURN</span> format_type(want_type::regtype, typmod)</span>;
     </span><span class="tK">END</span>;
-    </span><span class="tK">EXCEPTION</span> <span class="tK">WHEN</span> OTHERS <span class="tK">THEN</span> <span class="c0" id="T25f5e4eee328dbcb" title="never evaluated"><span class="c0" id="Tcb614e182e538a91" title="never evaluated"><span class="tK">RETURN</span> NULL</span>;
-</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Tdf447f6b84a4082f" onMouseOver="highlight('Tdf447f6b84a4082f')">never evaluated</a></li><li class="branch"><a href="#Tb7ab53cf2b846a10" onMouseOver="highlight('Tb7ab53cf2b846a10')">never evaluated</a></li><li class="block"><a href="#T17ee7ac5087d126f" onMouseOver="highlight('T17ee7ac5087d126f')">never evaluated</a></li><li class="block"><a href="#T5d4801e0c3ada46f" onMouseOver="highlight('T5d4801e0c3ada46f')">never evaluated</a></li><li class="branch"><a href="#Tfac2c5edb6633732" onMouseOver="highlight('Tfac2c5edb6633732')">never evaluated</a></li><li class="block"><a href="#T355c81f0dcfeb2d6" onMouseOver="highlight('T355c81f0dcfeb2d6')">never evaluated</a></li><li class="block"><a href="#T0fd968dd276c9f8c" onMouseOver="highlight('T0fd968dd276c9f8c')">never evaluated</a></li><li class="block"><a href="#T3eb384de50ec36ae" onMouseOver="highlight('T3eb384de50ec36ae')">never evaluated</a></li><li class="branch"><a href="#T68783df78880efb6" onMouseOver="highlight('T68783df78880efb6')">never evaluated</a></li><li class="block"><a href="#T8fbc65d03767541b" onMouseOver="highlight('T8fbc65d03767541b')">never evaluated</a></li><li class="block"><a href="#T2fd9957bfeb9f5c0" onMouseOver="highlight('T2fd9957bfeb9f5c0')">never evaluated</a></li><li class="block"><a href="#T0e84207b6d4767da" onMouseOver="highlight('T0e84207b6d4767da')">never evaluated</a></li><li class="block"><a href="#T25f5e4eee328dbcb" onMouseOver="highlight('T25f5e4eee328dbcb')">never evaluated</a></li><li class="block"><a href="#Tcb614e182e538a91" onMouseOver="highlight('Tcb614e182e538a91')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 05, 2025 13:46 UTC</div><a href="index.html" class="return">Return to index</a></body></html>
+    </span><span class="tK">EXCEPTION</span> <span class="tK">WHEN</span> OTHERS <span class="tK">THEN</span> <span class="c0" id="T6d06136f95f0c237" title="never evaluated"><span class="c0" id="Tde0810cce4ed6109" title="never evaluated"><span class="tK">RETURN</span> NULL</span>;
+</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#T39dfc00aa08cb31a" onMouseOver="highlight('T39dfc00aa08cb31a')">never evaluated</a></li><li class="branch"><a href="#Tf832fa50ef7a8295" onMouseOver="highlight('Tf832fa50ef7a8295')">never evaluated</a></li><li class="block"><a href="#Tc71e4928f62acca3" onMouseOver="highlight('Tc71e4928f62acca3')">never evaluated</a></li><li class="block"><a href="#T0f9979d3904edb06" onMouseOver="highlight('T0f9979d3904edb06')">never evaluated</a></li><li class="branch"><a href="#T4a301be276d01499" onMouseOver="highlight('T4a301be276d01499')">never evaluated</a></li><li class="block"><a href="#T0fcc90489c5775a0" onMouseOver="highlight('T0fcc90489c5775a0')">never evaluated</a></li><li class="block"><a href="#T4d2e499e70e47a55" onMouseOver="highlight('T4d2e499e70e47a55')">never evaluated</a></li><li class="block"><a href="#T5ca1f82cead35bc8" onMouseOver="highlight('T5ca1f82cead35bc8')">never evaluated</a></li><li class="branch"><a href="#T26b2f83dc2c529ea" onMouseOver="highlight('T26b2f83dc2c529ea')">never evaluated</a></li><li class="block"><a href="#Tc46ceaa4f5041071" onMouseOver="highlight('Tc46ceaa4f5041071')">never evaluated</a></li><li class="block"><a href="#T3f8a80263bceba7a" onMouseOver="highlight('T3f8a80263bceba7a')">never evaluated</a></li><li class="block"><a href="#T10f9c2794f4e4835" onMouseOver="highlight('T10f9c2794f4e4835')">never evaluated</a></li><li class="block"><a href="#T6d06136f95f0c237" onMouseOver="highlight('T6d06136f95f0c237')">never evaluated</a></li><li class="block"><a href="#Tde0810cce4ed6109" onMouseOver="highlight('Tde0810cce4ed6109')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 24, 2025 10:33 UTC</div><a href="index.html" class="return">Return to index</a></body></html>

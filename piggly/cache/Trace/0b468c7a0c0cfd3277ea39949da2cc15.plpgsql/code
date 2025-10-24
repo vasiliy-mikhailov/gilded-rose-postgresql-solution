@@ -6,14 +6,14 @@ DECLARE
     result BOOLEAN;
     output TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$31355a515f87ba2a$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$b8365f5b54505c9a$PIGGLY$);
     EXECUTE 'SELECT ' ||
             COALESCE(quote_literal( have ), 'NULL') || '::' || pg_typeof(have) || ' '
             || op || ' ' ||
             COALESCE(quote_literal( want ), 'NULL') || '::' || pg_typeof(want)
        INTO result;
     output := ok( COALESCE(result, FALSE), descr );
-    perform public.piggly_branch($PIGGLY$7b684428d49a4371$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$5cdcf85531790df7$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
            '    ' || COALESCE( quote_literal(have), 'NULL' ) ||
            E'\n        ' || op ||
            E'\n    ' || COALESCE( quote_literal(want), 'NULL' )

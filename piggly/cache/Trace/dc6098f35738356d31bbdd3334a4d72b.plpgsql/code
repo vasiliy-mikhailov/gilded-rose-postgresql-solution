@@ -1,15 +1,15 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$14829d6519ff6b62$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$9dc939851a25b7b5$PIGGLY$, (pg_catalog.has_function_privilege($1, $2, 'EXECUTE'))) THEN
-        perform public.piggly_branch($PIGGLY$e087bd539a00644f$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$a00e30675275ea95$PIGGLY$);RETURN '{EXECUTE}';
+    perform public.piggly_branch($PIGGLY$b241f43003772f74$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$4a376ee470aa06d5$PIGGLY$, (pg_catalog.has_function_privilege($1, $2, 'EXECUTE'))) THEN
+        perform public.piggly_branch($PIGGLY$2cd4eaa9ec763c13$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$00d042f6ac4482f9$PIGGLY$);RETURN '{EXECUTE}';
     ELSE
-        perform public.piggly_branch($PIGGLY$c383bd5579af47f1$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$865aa77784501830$PIGGLY$);RETURN '{}';
+        perform public.piggly_branch($PIGGLY$91e918073c09098a$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$01fbe88741f556ce$PIGGLY$);RETURN '{}';
     END IF;
 EXCEPTION
     -- Not a valid func name.
-    WHEN undefined_function THEN perform public.piggly_branch($PIGGLY$a6d52e11e45f50ca$PIGGLY$);perform public.piggly_branch($PIGGLY$27af4bc8f2057400$PIGGLY$);RETURN '{undefined_function}';
+    WHEN undefined_function THEN perform public.piggly_branch($PIGGLY$742108a4e573772c$PIGGLY$);perform public.piggly_branch($PIGGLY$6cd313a8b9f1edd7$PIGGLY$);RETURN '{undefined_function}';
     -- Not a valid role.
-    WHEN undefined_object   THEN perform public.piggly_branch($PIGGLY$1a15d49b86012904$PIGGLY$);perform public.piggly_branch($PIGGLY$974cff44264374a9$PIGGLY$);RETURN '{undefined_role}';
+    WHEN undefined_object   THEN perform public.piggly_branch($PIGGLY$5d95476d5578ef22$PIGGLY$);perform public.piggly_branch($PIGGLY$4346ee9b643a21eb$PIGGLY$);RETURN '{undefined_role}';
 END;

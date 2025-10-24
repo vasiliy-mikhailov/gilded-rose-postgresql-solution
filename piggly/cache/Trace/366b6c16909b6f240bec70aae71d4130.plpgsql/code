@@ -11,17 +11,17 @@ DECLARE
     fnumb    INTEGER := 0;
     tok      BOOLEAN := TRUE;
 BEGIN
-    perform public.piggly_branch($PIGGLY$081a61e496c82c45$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$1cf42f5590eb95c2$PIGGLY$);
     BEGIN
         -- No plan support.
-        perform public.piggly_branch($PIGGLY$06ee209a30fa95b2$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$441af6b4aef96508$PIGGLY$);
         PERFORM * FROM no_plan();
-        FOR tap IN SELECT * FROM _runem(startup, false) LOOP perform public.piggly_cond($PIGGLY$5defd1d18ad62c81$PIGGLY$, true);perform public.piggly_branch($PIGGLY$5c89892a38952bab$PIGGLY$);perform public.piggly_branch($PIGGLY$4e0891b7f4ff5d9b$PIGGLY$);RETURN NEXT tap; perform public.piggly_signal($PIGGLY$5defd1d18ad62c81$PIGGLY$, $PIGGLY$@$PIGGLY$);END LOOP;
-perform public.piggly_cond($PIGGLY$5defd1d18ad62c81$PIGGLY$, false);
+        FOR tap IN SELECT * FROM _runem(startup, false) LOOP perform public.piggly_cond($PIGGLY$1449e7ea9f3b9bb4$PIGGLY$, true);perform public.piggly_branch($PIGGLY$135213318585018c$PIGGLY$);perform public.piggly_branch($PIGGLY$8a4473eeb890c1c0$PIGGLY$);RETURN NEXT tap; perform public.piggly_signal($PIGGLY$1449e7ea9f3b9bb4$PIGGLY$, $PIGGLY$@$PIGGLY$);END LOOP;
+perform public.piggly_cond($PIGGLY$1449e7ea9f3b9bb4$PIGGLY$, false);
     EXCEPTION
         -- Catch all exceptions and simply rethrow custom exceptions. This
         -- will roll back everything in the above block.
-        WHEN raise_exception THEN perform public.piggly_branch($PIGGLY$d17a639ef56f7127$PIGGLY$);perform public.piggly_branch($PIGGLY$b879505104dae89d$PIGGLY$);RAISE EXCEPTION '%', SQLERRM;
+        WHEN raise_exception THEN perform public.piggly_branch($PIGGLY$b153012f76aacba3$PIGGLY$);perform public.piggly_branch($PIGGLY$2bb352d1b6fe80b9$PIGGLY$);RAISE EXCEPTION '%', SQLERRM;
     END;
 
     -- Record how startup tests have failed.
@@ -30,16 +30,16 @@ perform public.piggly_cond($PIGGLY$5defd1d18ad62c81$PIGGLY$, false);
     FOR i IN 1..COALESCE(array_upper(tests, 1), 0) LOOP
 
         -- What subtest are we running?
-        perform public.piggly_cond($PIGGLY$9545d27b45daed64$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$d61f6204a5065921$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$4e7851cc806668e8$PIGGLY$);RETURN NEXT diag_test_name('Subtest: ' || tests[i]);
+        perform public.piggly_cond($PIGGLY$29b07bf59b37f019$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$41592a19ab3cb743$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$c777caca24b879cc$PIGGLY$);RETURN NEXT diag_test_name('Subtest: ' || tests[i]);
 
         -- Reset the results.
         tok := TRUE;
         tnumb := COALESCE(_get('curr_test'), 0);
 
-        IF public.piggly_cond($PIGGLY$5e40ff15fe9cf5e9$PIGGLY$, (tnumb > 0)) THEN
-            perform public.piggly_branch($PIGGLY$aad43dd70005a8cf$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$c0972c55cdc73931$PIGGLY$, (tnumb > 0)) THEN
+            perform public.piggly_branch($PIGGLY$b2fb82e95f2125ba$PIGGLY$);
             EXECUTE 'ALTER SEQUENCE __tresults___numb_seq RESTART WITH 1';
             PERFORM _set('curr_test', 0);
             PERFORM _set('failed', 0);
@@ -57,56 +57,56 @@ perform public.piggly_cond($PIGGLY$5defd1d18ad62c81$PIGGLY$, false);
             chkname  text;
             typname  text;
         BEGIN
-            perform public.piggly_branch($PIGGLY$19d1dcff52286ccc$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$c81776ba49cf1fc8$PIGGLY$);
             BEGIN
                 -- Run the setup functions.
-                perform public.piggly_branch($PIGGLY$6b1a79b8931d75d2$PIGGLY$);
+                perform public.piggly_branch($PIGGLY$0f2707906594a0c8$PIGGLY$);
                 FOR tap IN SELECT * FROM _runem(setup, false) LOOP
-                    perform public.piggly_cond($PIGGLY$bb93f8403c0b3cb1$PIGGLY$, true);
-                    perform public.piggly_branch($PIGGLY$4f3675a0f2e9f1ee$PIGGLY$);
-                    perform public.piggly_branch($PIGGLY$3808e773c0c2811e$PIGGLY$);RETURN NEXT regexp_replace(tap, '^', '    ', 'gn');
+                    perform public.piggly_cond($PIGGLY$fe0aea07d04d9f41$PIGGLY$, true);
+                    perform public.piggly_branch($PIGGLY$874f88bb4eb18008$PIGGLY$);
+                    perform public.piggly_branch($PIGGLY$7ee7747c6631bc0b$PIGGLY$);RETURN NEXT regexp_replace(tap, '^', '    ', 'gn');
                 
-                    perform public.piggly_signal($PIGGLY$bb93f8403c0b3cb1$PIGGLY$, $PIGGLY$@$PIGGLY$);
+                    perform public.piggly_signal($PIGGLY$fe0aea07d04d9f41$PIGGLY$, $PIGGLY$@$PIGGLY$);
                 END LOOP;
-perform public.piggly_cond($PIGGLY$bb93f8403c0b3cb1$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$fe0aea07d04d9f41$PIGGLY$, false);
 
                 -- Run the actual test function.
                 FOR tap IN EXECUTE 'SELECT * FROM ' || tests[i] || '()' LOOP
-                    perform public.piggly_cond($PIGGLY$4df39709d5beedb2$PIGGLY$, true);
-                    perform public.piggly_branch($PIGGLY$d4264938e8560f16$PIGGLY$);
-                    perform public.piggly_branch($PIGGLY$f8f431fd20b5883f$PIGGLY$);RETURN NEXT regexp_replace(tap, '^', '    ', 'gn');
+                    perform public.piggly_cond($PIGGLY$f3760bdd93edcf1f$PIGGLY$, true);
+                    perform public.piggly_branch($PIGGLY$20b436ce0cc82248$PIGGLY$);
+                    perform public.piggly_branch($PIGGLY$b6461cf1cebbbe04$PIGGLY$);RETURN NEXT regexp_replace(tap, '^', '    ', 'gn');
                 
-                    perform public.piggly_signal($PIGGLY$4df39709d5beedb2$PIGGLY$, $PIGGLY$@$PIGGLY$);
+                    perform public.piggly_signal($PIGGLY$f3760bdd93edcf1f$PIGGLY$, $PIGGLY$@$PIGGLY$);
                 END LOOP;
-perform public.piggly_cond($PIGGLY$4df39709d5beedb2$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$f3760bdd93edcf1f$PIGGLY$, false);
 
                 -- Run the teardown functions.
                 FOR tap IN SELECT * FROM _runem(teardown, false) LOOP
-                    perform public.piggly_cond($PIGGLY$535c617a461397ba$PIGGLY$, true);
-                    perform public.piggly_branch($PIGGLY$0a68eabe88aadd69$PIGGLY$);
-                    perform public.piggly_branch($PIGGLY$aa45c433cff081c6$PIGGLY$);RETURN NEXT regexp_replace(tap, '^', '    ', 'gn');
+                    perform public.piggly_cond($PIGGLY$c8646bb1111758cd$PIGGLY$, true);
+                    perform public.piggly_branch($PIGGLY$67e266ae5e7dbc52$PIGGLY$);
+                    perform public.piggly_branch($PIGGLY$788af0fc7e022627$PIGGLY$);RETURN NEXT regexp_replace(tap, '^', '    ', 'gn');
                 
-                    perform public.piggly_signal($PIGGLY$535c617a461397ba$PIGGLY$, $PIGGLY$@$PIGGLY$);
+                    perform public.piggly_signal($PIGGLY$c8646bb1111758cd$PIGGLY$, $PIGGLY$@$PIGGLY$);
                 END LOOP;
-perform public.piggly_cond($PIGGLY$535c617a461397ba$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$c8646bb1111758cd$PIGGLY$, false);
 
                 -- Emit the plan.
                 fnumb := COALESCE(_get('curr_test'), 0);
-                perform public.piggly_branch($PIGGLY$363ba9de87d02034$PIGGLY$);RETURN NEXT '    1..' || fnumb;
+                perform public.piggly_branch($PIGGLY$228fea042b956944$PIGGLY$);RETURN NEXT '    1..' || fnumb;
 
                 -- Emit any error messages.
-                IF public.piggly_cond($PIGGLY$c3b403a478864fee$PIGGLY$, (fnumb = 0)) THEN
-                    perform public.piggly_branch($PIGGLY$d7397585a9b9c7c9$PIGGLY$);
-                    perform public.piggly_branch($PIGGLY$d2595de1e8fc7e69$PIGGLY$);RETURN NEXT '    # No tests run!';
+                IF public.piggly_cond($PIGGLY$b42e9d21bdb4fc97$PIGGLY$, (fnumb = 0)) THEN
+                    perform public.piggly_branch($PIGGLY$1f203a7fe47198f2$PIGGLY$);
+                    perform public.piggly_branch($PIGGLY$9412443c374bc52b$PIGGLY$);RETURN NEXT '    # No tests run!';
                     tok = false;
                 ELSE
                     -- Report failures.
-                    perform public.piggly_branch($PIGGLY$f159179c62e58dec$PIGGLY$);
+                    perform public.piggly_branch($PIGGLY$1cfcdb61e21566a8$PIGGLY$);
                     ffaild := num_failed();
-                    IF public.piggly_cond($PIGGLY$974c870695a660a1$PIGGLY$, (ffaild > 0)) THEN
-                        perform public.piggly_branch($PIGGLY$9370e51d26848987$PIGGLY$);
+                    IF public.piggly_cond($PIGGLY$78b1fdea8895246b$PIGGLY$, (ffaild > 0)) THEN
+                        perform public.piggly_branch($PIGGLY$56286a64cc4934bd$PIGGLY$);
                         tok := FALSE;
-                        perform public.piggly_branch($PIGGLY$d203c69a4643a80c$PIGGLY$);RETURN NEXT '    ' || diag(
+                        perform public.piggly_branch($PIGGLY$971e92bd719f09f0$PIGGLY$);RETURN NEXT '    ' || diag(
                             'Looks like you failed ' || ffaild || ' test' ||
                              CASE ffaild WHEN 1 THEN '' ELSE 's' END
                              || ' of ' || fnumb
@@ -116,7 +116,7 @@ perform public.piggly_cond($PIGGLY$535c617a461397ba$PIGGLY$, false);
 
             EXCEPTION WHEN OTHERS THEN
                 -- Something went wrong. Record that fact.
-                perform public.piggly_branch($PIGGLY$a69f79a177e24f2c$PIGGLY$);
+                perform public.piggly_branch($PIGGLY$60026b53a1dcab0a$PIGGLY$);
                 errstate := SQLSTATE;
                 errmsg := SQLERRM;
                 GET STACKED DIAGNOSTICS
@@ -131,15 +131,15 @@ perform public.piggly_cond($PIGGLY$535c617a461397ba$PIGGLY$, false);
             END;
 
             -- Always raise an exception to rollback any changes.
-            perform public.piggly_branch($PIGGLY$04127241876f8eca$PIGGLY$);RAISE EXCEPTION '__TAP_ROLLBACK__';
+            perform public.piggly_branch($PIGGLY$3b910258d3cce9d5$PIGGLY$);RAISE EXCEPTION '__TAP_ROLLBACK__';
 
         EXCEPTION WHEN raise_exception THEN
-            perform public.piggly_branch($PIGGLY$12b4d1920172afaa$PIGGLY$);
-            IF public.piggly_cond($PIGGLY$d66176dbc9c5e608$PIGGLY$, (errmsg IS NOT NULL)) THEN
+            perform public.piggly_branch($PIGGLY$1bf940f2d477e62b$PIGGLY$);
+            IF public.piggly_cond($PIGGLY$eb59a6715a773a9a$PIGGLY$, (errmsg IS NOT NULL)) THEN
                 -- Something went wrong. Emit the error message.
-                perform public.piggly_branch($PIGGLY$b299dfe82194982d$PIGGLY$);
+                perform public.piggly_branch($PIGGLY$30f08f02d99d1faf$PIGGLY$);
                 tok := FALSE;
-               perform public.piggly_branch($PIGGLY$43057d2507c4b4af$PIGGLY$);RETURN NEXT regexp_replace( diag('Test died: ' || _error_diag(
+               perform public.piggly_branch($PIGGLY$dc62656f0c63dd11$PIGGLY$);RETURN NEXT regexp_replace( diag('Test died: ' || _error_diag(
                    errstate, errmsg, detail, hint, context, schname, tabname, colname, chkname, typname
                )), '^', '    ', 'gn');
                 errmsg := NULL;
@@ -152,29 +152,29 @@ perform public.piggly_cond($PIGGLY$535c617a461397ba$PIGGLY$, false);
         PERFORM _set('failed', tfaild);
 
         -- Record this test.
-        perform public.piggly_branch($PIGGLY$a27cfb893c4943ac$PIGGLY$);RETURN NEXT ok(tok, tests[i]);
-        IF public.piggly_cond($PIGGLY$19eef6736f88e0d8$PIGGLY$, (NOT tok)) THEN perform public.piggly_branch($PIGGLY$6a40922f407fb7ab$PIGGLY$);tfaild := tfaild + 1; END IF;
+        perform public.piggly_branch($PIGGLY$3117358e207357dd$PIGGLY$);RETURN NEXT ok(tok, tests[i]);
+        IF public.piggly_cond($PIGGLY$933356e07ae37e63$PIGGLY$, (NOT tok)) THEN perform public.piggly_branch($PIGGLY$1d1ea4888783fb10$PIGGLY$);tfaild := tfaild + 1; END IF;
 
     
-        perform public.piggly_signal($PIGGLY$9545d27b45daed64$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$29b07bf59b37f019$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$9545d27b45daed64$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$29b07bf59b37f019$PIGGLY$, false);
 
     -- Run the shutdown functions.
-    FOR tap IN SELECT * FROM _runem(shutdown, false) LOOP perform public.piggly_cond($PIGGLY$008b8459c96be68d$PIGGLY$, true);perform public.piggly_branch($PIGGLY$e678c01a7097623c$PIGGLY$);perform public.piggly_branch($PIGGLY$58f4f681e78791a2$PIGGLY$);RETURN NEXT tap; perform public.piggly_signal($PIGGLY$008b8459c96be68d$PIGGLY$, $PIGGLY$@$PIGGLY$);END LOOP;
-perform public.piggly_cond($PIGGLY$008b8459c96be68d$PIGGLY$, false);
+    FOR tap IN SELECT * FROM _runem(shutdown, false) LOOP perform public.piggly_cond($PIGGLY$76796d8561c89159$PIGGLY$, true);perform public.piggly_branch($PIGGLY$4b09070f6b7200ad$PIGGLY$);perform public.piggly_branch($PIGGLY$217a86c5b345d897$PIGGLY$);RETURN NEXT tap; perform public.piggly_signal($PIGGLY$76796d8561c89159$PIGGLY$, $PIGGLY$@$PIGGLY$);END LOOP;
+perform public.piggly_cond($PIGGLY$76796d8561c89159$PIGGLY$, false);
 
     -- Finish up.
     FOR tap IN SELECT * FROM _finish( COALESCE(_get('curr_test'), 0), 0, tfaild ) LOOP
-        perform public.piggly_cond($PIGGLY$dbad2531c7ca99c3$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$b3ee1c3e9f0110fa$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$ecba882cefb933ac$PIGGLY$);RETURN NEXT tap;
+        perform public.piggly_cond($PIGGLY$8055faf35f374661$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$fc49e0cb361f9b93$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$e625a59bac37d179$PIGGLY$);RETURN NEXT tap;
     
-        perform public.piggly_signal($PIGGLY$dbad2531c7ca99c3$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$8055faf35f374661$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$dbad2531c7ca99c3$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$8055faf35f374661$PIGGLY$, false);
 
     -- Clean up and return.
     PERFORM _cleanup();
-    perform public.piggly_branch($PIGGLY$29902d3b9347b95a$PIGGLY$);RETURN;
+    perform public.piggly_branch($PIGGLY$49d348905852aee1$PIGGLY$);RETURN;
 END;

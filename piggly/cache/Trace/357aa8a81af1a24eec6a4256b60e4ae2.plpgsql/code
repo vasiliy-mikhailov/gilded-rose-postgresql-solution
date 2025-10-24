@@ -5,7 +5,7 @@ DECLARE
     desctext  ALIAS FOR $4;
     descr     TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$93a1b846eb8a8d20$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$bdbbe7d5ff199e62$PIGGLY$);
     descr := COALESCE(
           desctext,
           'threw ' || errcode || ': ' || errmsg,
@@ -14,22 +14,22 @@ BEGIN
           'threw an exception'
     );
     EXECUTE query;
-    perform public.piggly_branch($PIGGLY$f9311c4570f2b553$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$33c2b31e985e9d9a$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
            '      caught: no exception' ||
         E'\n      wanted: ' || COALESCE( errcode, 'an exception' )
     );
 EXCEPTION WHEN OTHERS OR ASSERT_FAILURE THEN
-    perform public.piggly_branch($PIGGLY$31703a771185011c$PIGGLY$);
-    IF (public.piggly_cond($PIGGLY$2dcc93dd35ce25aa$PIGGLY$, (errcode IS NULL OR SQLSTATE = errcode)
+    perform public.piggly_branch($PIGGLY$6b56bbe6b3935a25$PIGGLY$);
+    IF (public.piggly_cond($PIGGLY$778aacca21bfe075$PIGGLY$, (errcode IS NULL OR SQLSTATE = errcode)
         AND ( errmsg IS NULL OR SQLERRM = errmsg)))
     THEN
         -- The expected errcode and/or message was thrown.
-        perform public.piggly_branch($PIGGLY$214c071ce6dcc4ea$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$133443d34482913b$PIGGLY$);RETURN ok( TRUE, descr );
+        perform public.piggly_branch($PIGGLY$7ad68bcbc3493bd2$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$5396729210c87bb9$PIGGLY$);RETURN ok( TRUE, descr );
     ELSE
         -- This was not the expected errcode or errmsg.
-        perform public.piggly_branch($PIGGLY$85a59478e307cd2a$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$01c7431ed7aa8931$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
+        perform public.piggly_branch($PIGGLY$5ea9ac2d04a691da$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$b579d5f155c0c88c$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
                '      caught: ' || SQLSTATE || ': ' || SQLERRM ||
             E'\n      wanted: ' || COALESCE( errcode, 'an exception' ) ||
             COALESCE( ': ' || errmsg, '')

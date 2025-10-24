@@ -2,10 +2,10 @@ DECLARE
     want REFCURSOR;
     res  TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$476a13932a91f17d$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$a2eb62cc70b4068c$PIGGLY$);
     OPEN want FOR SELECT $2[i]
     FROM generate_series(array_lower($2, 1), array_upper($2, 1)) s(i);
     res := results_ne($1, want, $3);
     CLOSE want;
-    perform public.piggly_branch($PIGGLY$2255050d4e7d1bc9$PIGGLY$);RETURN res;
+    perform public.piggly_branch($PIGGLY$dfb2df0f9be3bab5$PIGGLY$);RETURN res;
 END;

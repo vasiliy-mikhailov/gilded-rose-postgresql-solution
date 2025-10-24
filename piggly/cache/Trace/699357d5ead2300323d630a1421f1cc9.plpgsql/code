@@ -1,8 +1,8 @@
 DECLARE
     typeof regtype := pg_typeof($1);
 BEGIN
-    perform public.piggly_branch($PIGGLY$04984b5083f6e9e3$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$da653157b787dfaf$PIGGLY$, (typeof = $2)) THEN perform public.piggly_branch($PIGGLY$2842841cc8bae82d$PIGGLY$);perform public.piggly_branch($PIGGLY$91c568069c0b96d0$PIGGLY$);RETURN ok(true, $3 || ' isa ' || $2 ); END IF;
-    perform public.piggly_branch($PIGGLY$c4852d93576c66b0$PIGGLY$);RETURN ok(false, $3 || ' isa ' || $2 ) || E'\n' ||
+    perform public.piggly_branch($PIGGLY$20cb1e856743c03d$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$4229e7ef843e260b$PIGGLY$, (typeof = $2)) THEN perform public.piggly_branch($PIGGLY$f7700f2bc12e34f7$PIGGLY$);perform public.piggly_branch($PIGGLY$95459cd2997822a0$PIGGLY$);RETURN ok(true, $3 || ' isa ' || $2 ); END IF;
+    perform public.piggly_branch($PIGGLY$39f1165c8a6ec3c9$PIGGLY$);RETURN ok(false, $3 || ' isa ' || $2 ) || E'\n' ||
         diag('    ' || $3 || ' isn''t a "' || $2 || '" it''s a "' || typeof || '"');
 END;

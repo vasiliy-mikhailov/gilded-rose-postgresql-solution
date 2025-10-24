@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_language_owner($1);
 BEGIN
     -- Make sure the language exists.
-    perform public.piggly_branch($PIGGLY$c87f4ad089560302$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$2b05168b5426a22a$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$8dcc89b8a3585a51$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$348403226a033a36$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$bc676fa638504ff0$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$ff230cbd9c5c6995$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$19542bb237841274$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$2e6b785075bcbee2$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
             E'    Language ' || quote_ident($1) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$b3e5de3b9bb47864$PIGGLY$);RETURN is(owner, $2, $3);
+    perform public.piggly_branch($PIGGLY$085782042d191d7c$PIGGLY$);RETURN is(owner, $2, $3);
 END;

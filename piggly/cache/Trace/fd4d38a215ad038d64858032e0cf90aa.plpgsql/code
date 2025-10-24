@@ -1,7 +1,7 @@
 DECLARE
     aname name;
 BEGIN
-    perform public.piggly_branch($PIGGLY$4ad4b71b666877ff$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$c0fdbbf16831484a$PIGGLY$);
     SELECT am.amname
       FROM pg_catalog.pg_index x
       JOIN pg_catalog.pg_class ct    ON ct.oid = x.indrelid
@@ -13,5 +13,5 @@ BEGIN
        AND n.nspname  = $1
       INTO aname;
 
-      perform public.piggly_branch($PIGGLY$a1763eb6579cff3e$PIGGLY$);return is( aname, $4, $5 );
+      perform public.piggly_branch($PIGGLY$2548a393a4165abf$PIGGLY$);return is( aname, $4, $5 );
 END;

@@ -1,18 +1,18 @@
 DECLARE
     actual_type TEXT := _get_dtype($1, $2, true);
 BEGIN
-    perform public.piggly_branch($PIGGLY$9a67f2cc3019efc1$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$3dabe271715943a1$PIGGLY$, (actual_type IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$1d63f4847cee0145$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$4924dffd417d2f56$PIGGLY$);RETURN fail( $5 ) || E'\n' || diag (
+    perform public.piggly_branch($PIGGLY$82baab6e0b399b55$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$6e35f96d0c26f018$PIGGLY$, (actual_type IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$63b463afcf7ee411$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$b2f36114cb923d16$PIGGLY$);RETURN fail( $5 ) || E'\n' || diag (
             '   Domain ' || quote_ident($1) || '.' || $2
             || ' does not exist'
         );
     END IF;
 
-    IF public.piggly_cond($PIGGLY$c6a90e57ece740d6$PIGGLY$, (quote_ident($3) = ANY(current_schemas(true)))) THEN
-        perform public.piggly_branch($PIGGLY$7cd0593f4b26ce07$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$36edb175b24fb3b2$PIGGLY$);RETURN isnt( actual_type, quote_ident($3) || '.' || _typename($4), $5);
+    IF public.piggly_cond($PIGGLY$213488f3ae903895$PIGGLY$, (quote_ident($3) = ANY(current_schemas(true)))) THEN
+        perform public.piggly_branch($PIGGLY$3b921e4c39985ea3$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$63f37a5dd2f3daf2$PIGGLY$);RETURN isnt( actual_type, quote_ident($3) || '.' || _typename($4), $5);
     END IF;
-    perform public.piggly_branch($PIGGLY$983fe30ee46eedf7$PIGGLY$);RETURN isnt( actual_type, _typename(quote_ident($3) || '.' || $4), $5);
+    perform public.piggly_branch($PIGGLY$5933ff0185fe70f2$PIGGLY$);RETURN isnt( actual_type, _typename(quote_ident($3) || '.' || $4), $5);
 END;

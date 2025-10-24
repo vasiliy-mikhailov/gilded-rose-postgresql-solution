@@ -8,21 +8,21 @@ DECLARE
     offset_it        INT;
     limit_it         INT;
     offset_percent   NUMERIC;
-    a_time	     _time_trial_type;
+    a_time           _time_trial_type;
 BEGIN
     -- Execute the query over and over
-    perform public.piggly_branch($PIGGLY$cbe217a63cb8a4f4$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$2d3c06b1ef8ea7ec$PIGGLY$);
     FOR i IN 1..iterations LOOP
-        perform public.piggly_cond($PIGGLY$9b25a0b7dcb9f9d7$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$9a7f8ec1c991b74f$PIGGLY$);
+        perform public.piggly_cond($PIGGLY$18a03c28a61f8f99$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$630bedf6911e99a6$PIGGLY$);
         start_time := timeofday();
         EXECUTE query;
         -- Store the execution time for the run in an array of times
         times[i] := extract(millisecond from timeofday()::timestamptz - start_time::timestamptz);
     
-        perform public.piggly_signal($PIGGLY$9b25a0b7dcb9f9d7$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$18a03c28a61f8f99$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$9b25a0b7dcb9f9d7$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$18a03c28a61f8f99$PIGGLY$, false);
     offset_percent := (1.0 - return_percent) / 2.0;
     -- Ensure that offset skips the bottom X% of runs, or set it to 0
     SELECT GREATEST((offset_percent * iterations)::int, 0) INTO offset_it;
@@ -30,15 +30,15 @@ perform public.piggly_cond($PIGGLY$9b25a0b7dcb9f9d7$PIGGLY$, false);
     SELECT GREATEST((return_percent * iterations)::int, 1) INTO limit_it;
 
     FOR a_time IN SELECT times[i]
-		  FROM generate_series(array_lower(times, 1), array_upper(times, 1)) i
+        FROM generate_series(array_lower(times, 1), array_upper(times, 1)) i
                   ORDER BY 1
                   OFFSET offset_it
                   LIMIT limit_it LOOP
-	perform public.piggly_cond($PIGGLY$6e8f855ffe2ffd28$PIGGLY$, true);
-	perform public.piggly_branch($PIGGLY$1ba68a6484eed920$PIGGLY$);
-	perform public.piggly_branch($PIGGLY$bf03f48e083db391$PIGGLY$);RETURN NEXT a_time;
+    perform public.piggly_cond($PIGGLY$eb56e844d2498bf5$PIGGLY$, true);
+    perform public.piggly_branch($PIGGLY$526981b5c2663639$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$e6c555b3751946aa$PIGGLY$);RETURN NEXT a_time;
     
-	perform public.piggly_signal($PIGGLY$6e8f855ffe2ffd28$PIGGLY$, $PIGGLY$@$PIGGLY$);
+    perform public.piggly_signal($PIGGLY$eb56e844d2498bf5$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$6e8f855ffe2ffd28$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$eb56e844d2498bf5$PIGGLY$, false);
 END;

@@ -1,4 +1,4 @@
 BEGIN
-  perform public.piggly_branch($PIGGLY$4df322cce02dadda$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$85947bb4cb055f33$PIGGLY$);
   INSERT INTO item (name, sell_in, quality) VALUES (name, sell_in, quality);
 END;

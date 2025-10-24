@@ -1,8 +1,8 @@
 DECLARE
     ret integer;
 BEGIN
-    perform public.piggly_branch($PIGGLY$4261b197363e6eb0$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$b64e45ba56799e9b$PIGGLY$);
     EXECUTE 'SELECT MAX(id) FROM __tcache__ WHERE label = ' ||
     quote_literal($1) || ' AND value = ' || $2 INTO ret;
-    perform public.piggly_branch($PIGGLY$e73baf290dabd989$PIGGLY$);RETURN ret;
+    perform public.piggly_branch($PIGGLY$6ff10da34bc2b952$PIGGLY$);RETURN ret;
 END;

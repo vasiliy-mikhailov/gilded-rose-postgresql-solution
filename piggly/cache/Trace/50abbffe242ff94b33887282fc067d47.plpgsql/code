@@ -2,13 +2,13 @@ DECLARE
     want char := _contract_on($4);
     have char := _rule_on($1, $2, $3);
 BEGIN
-    perform public.piggly_branch($PIGGLY$5e568cd76ca91e05$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$3609c3a6e8f7c0ce$PIGGLY$, (have IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$ef5432cbd9d0c439$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$27c32f55d0d60bd7$PIGGLY$);RETURN is( _expand_on(have), _expand_on(want), $5 );
+    perform public.piggly_branch($PIGGLY$bfff3c5baf7a1a05$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$4417761218dbe89e$PIGGLY$, (have IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$a694be5209fe79ff$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$85513db0c6f63e73$PIGGLY$);RETURN is( _expand_on(have), _expand_on(want), $5 );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$cbd4b053c5981661$PIGGLY$);RETURN ok( false, $5 ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$94f838442a50602f$PIGGLY$);RETURN ok( false, $5 ) || E'\n' || diag(
         '    Rule ' || quote_ident($3) || ' does not exist on '
         || quote_ident($1) || '.' || quote_ident($2)
     );

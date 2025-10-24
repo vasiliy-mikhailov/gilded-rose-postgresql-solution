@@ -6,13 +6,13 @@ DECLARE
             || CASE WHEN $5 THEN 'be NOT' ELSE 'allow' END || ' NULL'
     );
 BEGIN
-    perform public.piggly_branch($PIGGLY$1cc2354e87b0e30f$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$5de2b920d6153d73$PIGGLY$, (NOT _cexists( $1, $2, $3 ))) THEN
-        perform public.piggly_branch($PIGGLY$9bc08bec920bde62$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$95a478b47c860b6d$PIGGLY$);RETURN fail( c_desc ) || E'\n'
+    perform public.piggly_branch($PIGGLY$6d090e02cbe5af28$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$374800700ee82d60$PIGGLY$, (NOT _cexists( $1, $2, $3 ))) THEN
+        perform public.piggly_branch($PIGGLY$02646601f3937483$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$16dc4ee63d869d87$PIGGLY$);RETURN fail( c_desc ) || E'\n'
             || diag ('    Column ' || qcol || ' does not exist' );
     END IF;
-    perform public.piggly_branch($PIGGLY$2b76a5c79abebb82$PIGGLY$);RETURN ok(
+    perform public.piggly_branch($PIGGLY$82671ead68bcb835$PIGGLY$);RETURN ok(
         EXISTS(
             SELECT true
               FROM pg_catalog.pg_namespace n

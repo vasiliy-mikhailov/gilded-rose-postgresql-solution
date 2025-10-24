@@ -3,6 +3,6 @@ DECLARE
   l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
   l_total_delta integer := l_delta + (CASE WHEN l_new_sell_in < 0 THEN l_delta ELSE 0 END);
 BEGIN
-  perform public.piggly_branch($PIGGLY$4e41d3654868d757$PIGGLY$);
-  perform public.piggly_branch($PIGGLY$11c20e9d42abbf67$PIGGLY$);RETURN QUERY SELECT decrease_quality(p_quality, l_total_delta), l_new_sell_in;
+  perform public.piggly_branch($PIGGLY$58a3caae2b060080$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$ea80000af901333e$PIGGLY$);RETURN QUERY SELECT decrease_quality(p_quality, l_total_delta), l_new_sell_in;
 END;

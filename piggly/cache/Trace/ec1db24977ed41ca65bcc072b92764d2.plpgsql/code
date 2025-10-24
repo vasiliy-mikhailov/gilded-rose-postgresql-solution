@@ -2,10 +2,10 @@ DECLARE
     thing text;
 BEGIN
     -- Function, cast, or special SQL syntax.
-    perform public.piggly_branch($PIGGLY$1a1818d2938c9dcf$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$25014c8a50b6bd50$PIGGLY$, ($1 ~ '^[^'']+[(]' OR $1 ~ '[)]::[^'']+$' OR $1 = ANY('{CURRENT_CATALOG,CURRENT_ROLE,CURRENT_SCHEMA,CURRENT_USER,SESSION_USER,USER,CURRENT_DATE,CURRENT_TIME,CURRENT_TIMESTAMP,LOCALTIME,LOCALTIMESTAMP}'))) THEN
-        perform public.piggly_branch($PIGGLY$e55a9246c2e2b171$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$ac927dbc2694d237$PIGGLY$);RETURN is( $1, $3, $4 );
+    perform public.piggly_branch($PIGGLY$44c8bc35d6747471$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$b3ac4e1348bd7dd1$PIGGLY$, ($1 ~ '^[^'']+[(]' OR $1 ~ '[)]::[^'']+$' OR $1 = ANY('{CURRENT_CATALOG,CURRENT_ROLE,CURRENT_SCHEMA,CURRENT_USER,SESSION_USER,USER,CURRENT_DATE,CURRENT_TIME,CURRENT_TIMESTAMP,LOCALTIME,LOCALTIMESTAMP}'))) THEN
+        perform public.piggly_branch($PIGGLY$58a8605367157900$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$448ab2094499909a$PIGGLY$);RETURN is( $1, $3, $4 );
     END IF;
 
     EXECUTE 'SELECT is('
@@ -13,5 +13,5 @@ BEGIN
              || COALESCE(quote_literal($3), 'NULL') || '::' || $2 || ', '
              || COALESCE(quote_literal($4), 'NULL')
     || ')' INTO thing;
-    perform public.piggly_branch($PIGGLY$2488b59b1ea54197$PIGGLY$);RETURN thing;
+    perform public.piggly_branch($PIGGLY$62337492931124a4$PIGGLY$);RETURN thing;
 END;

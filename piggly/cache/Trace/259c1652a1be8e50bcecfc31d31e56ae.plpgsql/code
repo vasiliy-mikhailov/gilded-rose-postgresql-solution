@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_rel_owner('v'::char, $1);
 BEGIN
     -- Make sure the view exists.
-    perform public.piggly_branch($PIGGLY$8e5ad52c89d47f4c$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$89f1fec421e3ecdc$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$d4dfa489da36ba85$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$50e6055a2472ab48$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$f218afa61673759c$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$3de1e75f4d8c819f$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$a3689cfe4c37032f$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$c839415aeb60051b$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
             E'    View ' || quote_ident($1) || ' does not exist'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$7caadf709de164fe$PIGGLY$);RETURN is(owner, $2, $3);
+    perform public.piggly_branch($PIGGLY$499af387379914ea$PIGGLY$);RETURN is(owner, $2, $3);
 END;

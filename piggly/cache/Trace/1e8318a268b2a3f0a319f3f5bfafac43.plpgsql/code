@@ -3,12 +3,12 @@ DECLARE
     want REFCURSOR;
     res  TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$e9a116a024746b16$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$6eeb9f140d46d512$PIGGLY$);
     OPEN have FOR EXECUTE _query($1);
     OPEN want FOR SELECT $2[i]
     FROM generate_series(array_lower($2, 1), array_upper($2, 1)) s(i);
     res := results_eq(have, want, $3);
     CLOSE have;
     CLOSE want;
-    perform public.piggly_branch($PIGGLY$20fcac2446b0c0a2$PIGGLY$);RETURN res;
+    perform public.piggly_branch($PIGGLY$3b8fcdb1a358fbd2$PIGGLY$);RETURN res;
 END;

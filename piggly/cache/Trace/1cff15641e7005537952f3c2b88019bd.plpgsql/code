@@ -1,10 +1,10 @@
 DECLARE
     is_super boolean := _is_super($1);
 BEGIN
-    perform public.piggly_branch($PIGGLY$3db99cde5e897543$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$f5dc36e2cd4948b5$PIGGLY$, (is_super IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$70121ebfc0821505$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$11ca7fc06b62ed06$PIGGLY$);RETURN fail( $2 ) || E'\n' || diag( '    User ' || quote_ident($1) || ' does not exist') ;
+    perform public.piggly_branch($PIGGLY$d8d43acf941828c0$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$fa79f94f257cd94d$PIGGLY$, (is_super IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$49ebdba5c262f920$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$f606de85ca7c7184$PIGGLY$);RETURN fail( $2 ) || E'\n' || diag( '    User ' || quote_ident($1) || ' does not exist') ;
     END IF;
-    perform public.piggly_branch($PIGGLY$d95f3715f46d504c$PIGGLY$);RETURN ok( NOT is_super, $2 );
+    perform public.piggly_branch($PIGGLY$1310b2c0d0b05515$PIGGLY$);RETURN ok( NOT is_super, $2 );
 END;

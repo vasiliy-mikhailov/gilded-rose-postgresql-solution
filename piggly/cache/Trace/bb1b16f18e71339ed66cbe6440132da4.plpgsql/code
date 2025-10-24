@@ -1,18 +1,18 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$f80f9ba50695f7fb$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$664b7d636ac25ccd$PIGGLY$, (NOT _cexists( $1, $2, $3 ))) THEN
-        perform public.piggly_branch($PIGGLY$88e69707c9569ea6$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$758e1ecdd0907a70$PIGGLY$);RETURN fail( $5 ) || E'\n'
+    perform public.piggly_branch($PIGGLY$4254500e7a849a42$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$7fe700832799863b$PIGGLY$, (NOT _cexists( $1, $2, $3 ))) THEN
+        perform public.piggly_branch($PIGGLY$df80ddcdda7b7949$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$134dc5d9bb9d68c0$PIGGLY$);RETURN fail( $5 ) || E'\n'
             || diag ('    Column ' || quote_ident($1) || '.' || quote_ident($2) || '.' || quote_ident($3) || ' does not exist' );
     END IF;
 
-    IF public.piggly_cond($PIGGLY$9c057dc9057a5166$PIGGLY$, (NOT _has_def( $1, $2, $3 ))) THEN
-        perform public.piggly_branch($PIGGLY$e244fd6d04c1739a$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$d5dbd204b404e47a$PIGGLY$);RETURN fail( $5 ) || E'\n'
+    IF public.piggly_cond($PIGGLY$5f7bced9e429852d$PIGGLY$, (NOT _has_def( $1, $2, $3 ))) THEN
+        perform public.piggly_branch($PIGGLY$5d3dd19d07cb87f4$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$6f0a90265e08a0ea$PIGGLY$);RETURN fail( $5 ) || E'\n'
             || diag ('    Column ' || quote_ident($1) || '.' || quote_ident($2) || '.' || quote_ident($3) || ' has no default' );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$48a61860cc9fbe56$PIGGLY$);RETURN _def_is(
+    perform public.piggly_branch($PIGGLY$6e91c19ef5247f5d$PIGGLY$);RETURN _def_is(
         pg_catalog.pg_get_expr(d.adbin, d.adrelid),
         pg_catalog.format_type(a.atttypid, a.atttypmod),
         $4, $5

@@ -1,10 +1,10 @@
 DECLARE
     names text[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$89d5643f8ec37d4c$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$5aa3ca68644486a6$PIGGLY$, (_fkexists($1, $2, $3))) THEN
-        perform public.piggly_branch($PIGGLY$3c65c471520e9c74$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$082e7e9f30effa0a$PIGGLY$);RETURN pass( $4 );
+    perform public.piggly_branch($PIGGLY$ea168efb804ad77a$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$1fadfab11d683da0$PIGGLY$, (_fkexists($1, $2, $3))) THEN
+        perform public.piggly_branch($PIGGLY$21488a37dd0e4eec$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$ec1b6311626da615$PIGGLY$);RETURN pass( $4 );
     END IF;
 
     -- Try to show the columns.
@@ -16,16 +16,16 @@ BEGIN
          ORDER BY fk_columns
     ) INTO names;
 
-    IF public.piggly_cond($PIGGLY$d040c80948f5b7d8$PIGGLY$, (names[1] IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$1d6d8b777e80083a$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$7f373a6b47b4c8dc$PIGGLY$);RETURN fail($4) || E'\n' || diag(
+    IF public.piggly_cond($PIGGLY$b072fd39deb71229$PIGGLY$, (names[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$c8d012cee272b006$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$3db65cc7bd624e7f$PIGGLY$);RETURN fail($4) || E'\n' || diag(
             '    Table ' || quote_ident($1) || '.' || quote_ident($2) || E' has foreign key constraints on these columns:\n        '
             ||  array_to_string( names, E'\n        ' )
         );
     END IF;
 
     -- No FKs in this table.
-    perform public.piggly_branch($PIGGLY$9019dbe1e6924106$PIGGLY$);RETURN fail($4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$e9e51675402accb4$PIGGLY$);RETURN fail($4) || E'\n' || diag(
         '    Table ' || quote_ident($1) || '.' || quote_ident($2) || ' has no foreign key columns'
     );
 END;

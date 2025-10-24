@@ -1,16 +1,16 @@
 DECLARE
      index_cols name[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$4575671939aeecd4$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$21d280bde514e4ff$PIGGLY$);
     index_cols := _ikeys($1, $2, $3 );
 
-    IF public.piggly_cond($PIGGLY$babd630d294380ab$PIGGLY$, (index_cols IS NULL OR index_cols = '{}'::name[])) THEN
-        perform public.piggly_branch($PIGGLY$b76df72bfbe1c71e$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$493cf1c1c3fd662b$PIGGLY$);RETURN ok( false, $5 ) || E'\n'
+    IF public.piggly_cond($PIGGLY$5fc8a4ea4f0808e4$PIGGLY$, (index_cols IS NULL OR index_cols = '{}'::name[])) THEN
+        perform public.piggly_branch($PIGGLY$14b05cce73a0227f$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$aa28ea381b5a146d$PIGGLY$);RETURN ok( false, $5 ) || E'\n'
             || diag( 'Index ' || quote_ident($3) || ' ON ' || quote_ident($1) || '.' || quote_ident($2) || ' not found');
     END IF;
 
-    perform public.piggly_branch($PIGGLY$a50d6164b8982d09$PIGGLY$);RETURN is(
+    perform public.piggly_branch($PIGGLY$87bd2c7289b39511$PIGGLY$);RETURN is(
         quote_ident($3) || ' ON ' || quote_ident($1) || '.' || quote_ident($2) || '(' || array_to_string( index_cols, ', ' ) || ')',
         quote_ident($3) || ' ON ' || quote_ident($1) || '.' || quote_ident($2) || '(' || array_to_string( $4, ', ' ) || ')',
         $5

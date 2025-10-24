@@ -5,12 +5,12 @@ DECLARE
     starts_at TEXT;
     act_time  NUMERIC;
 BEGIN
-    perform public.piggly_branch($PIGGLY$52f15988f3a25e94$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$164aa3037e654f1f$PIGGLY$);
     starts_at := timeofday();
     EXECUTE query;
     act_time := extract( millisecond from timeofday()::timestamptz - starts_at::timestamptz);
-    IF public.piggly_cond($PIGGLY$564edc910b1ff872$PIGGLY$, (act_time < max_time)) THEN perform public.piggly_branch($PIGGLY$47fa61b07cc3fc83$PIGGLY$);perform public.piggly_branch($PIGGLY$79ecdabe7aae582b$PIGGLY$);RETURN ok(TRUE, descr); END IF;
-    perform public.piggly_branch($PIGGLY$646333bb9ad4f92b$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
+    IF public.piggly_cond($PIGGLY$860f2796f4b6fcf6$PIGGLY$, (act_time < max_time)) THEN perform public.piggly_branch($PIGGLY$79b7e2adc99f75b2$PIGGLY$);perform public.piggly_branch($PIGGLY$4057bed2f1127bf0$PIGGLY$);RETURN ok(TRUE, descr); END IF;
+    perform public.piggly_branch($PIGGLY$87a4884846c6d1ed$PIGGLY$);RETURN ok( FALSE, descr ) || E'\n' || diag(
            '      runtime: ' || act_time || ' ms' ||
         E'\n      exceeds: ' || max_time || ' ms'
     );

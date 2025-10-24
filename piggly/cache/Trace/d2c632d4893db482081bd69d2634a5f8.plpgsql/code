@@ -1,12 +1,12 @@
 DECLARE
     ret integer[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$7b03f211974b485e$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$cef88e74d5224633$PIGGLY$);
     EXECUTE 'SELECT ARRAY[id, value] FROM __tcache__ WHERE label = ' ||
     quote_literal($1) || ' AND id = (SELECT MAX(id) FROM __tcache__ WHERE label = ' ||
     quote_literal($1) || ') LIMIT 1' INTO ret;
-    perform public.piggly_branch($PIGGLY$98579e1d8c733c42$PIGGLY$);RETURN ret;
+    perform public.piggly_branch($PIGGLY$5d7e44590130c7e1$PIGGLY$);RETURN ret;
 EXCEPTION WHEN undefined_table THEN
-   perform public.piggly_branch($PIGGLY$2e5b73875ce45123$PIGGLY$);
-   perform public.piggly_branch($PIGGLY$22a3543ace4750ae$PIGGLY$);RAISE EXCEPTION 'You tried to run a test without a plan! Gotta have a plan';
+   perform public.piggly_branch($PIGGLY$9e2049329afe4f3e$PIGGLY$);
+   perform public.piggly_branch($PIGGLY$c2df360ac7efc2be$PIGGLY$);RAISE EXCEPTION 'You tried to run a test without a plan! Gotta have a plan';
 END;

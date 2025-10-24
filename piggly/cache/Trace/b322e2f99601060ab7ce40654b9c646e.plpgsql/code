@@ -1,17 +1,17 @@
 DECLARE
     grants TEXT[] := _get_schema_privs( $2, $1::TEXT );
 BEGIN
-    perform public.piggly_branch($PIGGLY$8aada8a3b64e05bd$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$5c26d7a0ecb8eb1c$PIGGLY$, (grants[1] = 'invalid_schema_name')) THEN
-        perform public.piggly_branch($PIGGLY$565548eaac51fbf6$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$cfac37b70daa9c03$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$cfb7fb421a682d16$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$9c82b6cd4962fb5e$PIGGLY$, (grants[1] = 'invalid_schema_name')) THEN
+        perform public.piggly_branch($PIGGLY$24ab4476d566fb84$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$af1477a99fc3920c$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Schema ' || quote_ident($1) || ' does not exist'
         );
-    ELSIF public.piggly_cond($PIGGLY$3a2ef7410265d6b7$PIGGLY$, (grants[1] = 'undefined_role')) THEN
-        perform public.piggly_branch($PIGGLY$60fd425c4a4bc84b$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$937b8f339fba9f45$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
+    ELSIF public.piggly_cond($PIGGLY$5c46283f0b383315$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$31b75479f9bb12ce$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$1b283c5ae6f55e19$PIGGLY$);RETURN ok(FALSE, $4) || E'\n' || diag(
             '    Role ' || quote_ident($2) || ' does not exist'
         );
     END IF;
-    perform public.piggly_branch($PIGGLY$067c2588eb7ff9b5$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
+    perform public.piggly_branch($PIGGLY$0aabf8f26526a64c$PIGGLY$);RETURN _assets_are('privileges', grants, $3, $4);
 END;

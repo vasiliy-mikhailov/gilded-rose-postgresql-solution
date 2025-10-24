@@ -1,10 +1,10 @@
 DECLARE
     rec    RECORD;
 BEGIN
-    perform public.piggly_branch($PIGGLY$992125dfde36594f$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$bf24d9b04259cd26$PIGGLY$);
     EXECUTE _query($1) INTO rec;
-    IF public.piggly_cond($PIGGLY$514fe5c4a9f89d1a$PIGGLY$, (NOT rec IS DISTINCT FROM $2)) THEN perform public.piggly_branch($PIGGLY$f87954e00e692dcd$PIGGLY$);perform public.piggly_branch($PIGGLY$5959a2cd06450842$PIGGLY$);RETURN ok(true, $3); END IF;
-    perform public.piggly_branch($PIGGLY$13ea9e97a00c2129$PIGGLY$);RETURN ok(false, $3 ) || E'\n' || diag(
+    IF public.piggly_cond($PIGGLY$4f3c45d0a433c85e$PIGGLY$, (NOT rec IS DISTINCT FROM $2)) THEN perform public.piggly_branch($PIGGLY$7c7239e314ba7cd8$PIGGLY$);perform public.piggly_branch($PIGGLY$ba89807fd10d4d69$PIGGLY$);RETURN ok(true, $3); END IF;
+    perform public.piggly_branch($PIGGLY$b54e2b6bd6713cc6$PIGGLY$);RETURN ok(false, $3 ) || E'\n' || diag(
            '        have: ' || CASE WHEN rec IS NULL THEN 'NULL' ELSE rec::text END ||
         E'\n        want: ' || CASE WHEN $2  IS NULL THEN 'NULL' ELSE $2::text  END
     );

@@ -64,36 +64,36 @@
     <span class="tI">msg</span>     <span class="tD">TEXT</span>    <span class="tK">:=</span> <span class="tS">''</span>;
     <span class="tI">rec</span>     <span class="tD">RECORD</span>;
 <span class="tK">BEGIN</span>
-    <span class="c0" id="Tb822ad2356b83e96" title="never evaluated"><span class="tK">BEGIN</span>
+    <span class="c0" id="Teca719b969779025" title="never evaluated"><span class="tK">BEGIN</span>
         <span class="tC">-- Find extra records.
-</span>        <span class="c0" id="T6df22eed2fe6e84f" title="never evaluated"><span class="tK">FOR</span> <span class="tI">rec</span> <span class="tK">in</span> <span class="l[0, 0, 0, 0]" id="T2800c263878f500c" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'SELECT * FROM '</span> || have || <span class="tS">' EXCEPT '</span> || $4
+</span>        <span class="c0" id="Td60ef7de2d6243e0" title="never evaluated"><span class="tK">FOR</span> <span class="tI">rec</span> <span class="tK">in</span> <span class="l[0, 0, 0, 0]" id="T919aa34118dd5576" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'SELECT * FROM '</span> || have || <span class="tS">' EXCEPT '</span> || $4
                         || <span class="tS">'SELECT * FROM '</span> || want </span><span class="tK">LOOP</span>
-            <span class="c0" id="T5626ef1d3b574c12" title="never evaluated"><span class="tI">extras</span> <span class="tK">:=</span> extras || rec::text;
+            <span class="c0" id="T8129b9596106cd32" title="never evaluated"><span class="tI">extras</span> <span class="tK">:=</span> extras || rec::text;
         </span><span class="tK">END</span> <span class="tK">LOOP</span>;
 
         <span class="tC">-- Find missing records.
-</span>        <span class="tK">FOR</span> <span class="tI">rec</span> <span class="tK">in</span> <span class="l[0, 0, 0, 0]" id="T88615493323b6b57" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'SELECT * FROM '</span> || want || <span class="tS">' EXCEPT '</span> || $4
+</span>        <span class="tK">FOR</span> <span class="tI">rec</span> <span class="tK">in</span> <span class="l[0, 0, 0, 0]" id="T628364c55cc6b0ab" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'SELECT * FROM '</span> || want || <span class="tS">' EXCEPT '</span> || $4
                         || <span class="tS">'SELECT * FROM '</span> || have </span><span class="tK">LOOP</span>
-            <span class="c0" id="T3c1693cb28cf4f01" title="never evaluated"><span class="tI">missing</span> <span class="tK">:=</span> missing || rec::text;
+            <span class="c0" id="Tb4bd439509a52581" title="never evaluated"><span class="tI">missing</span> <span class="tK">:=</span> missing || rec::text;
         </span><span class="tK">END</span> <span class="tK">LOOP</span>;
 
         <span class="tC">-- Drop the temporary tables.
 </span>        <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || have;
         <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || want;
     </span><span class="tK">EXCEPTION</span> <span class="tK">WHEN</span> syntax_error OR datatype_mismatch <span class="tK">THEN</span>
-        <span class="c0" id="T04ccc7657a4f9fda" title="never evaluated"><span class="tI">msg</span> <span class="tK">:=</span> E<span class="tS">'\n'</span> || diag(
+        <span class="c0" id="T2933b52809364cd4" title="never evaluated"><span class="tI">msg</span> <span class="tK">:=</span> E<span class="tS">'\n'</span> || diag(
             E<span class="tS">'    Columns differ between queries:\n'</span>
             || <span class="tS">'        have: ('</span> || _temptypes(have) || E<span class="tS">')\n'</span>
             || <span class="tS">'        want: ('</span> || _temptypes(want) || <span class="tS">')'</span>
         );
         <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || have;
         <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || want;
-        <span class="c0" id="Tc71eda99d7f1e944" title="never evaluated"><span class="tK">RETURN</span> ok(FALSE, $3) || msg</span>;
+        <span class="c0" id="Tba87bbbeb4601b4c" title="never evaluated"><span class="tK">RETURN</span> ok(FALSE, $3) || msg</span>;
     </span><span class="tK">END</span>;
 
     <span class="tC">-- What extra records do we have?
-</span>    <span class="tK">IF</span> <span class="b00" id="Te3c9bedb2e14b2f6" title="never evaluated">extras[1] IS NOT NULL </span><span class="tK">THEN</span>
-        <span class="c0" id="Tbc86ee67d85ff6e3" title="never evaluated"><span class="tI">res</span> <span class="tK">:=</span> FALSE;
+</span>    <span class="tK">IF</span> <span class="b00" id="T06a07edf083ea692" title="never evaluated">extras[1] IS NOT NULL </span><span class="tK">THEN</span>
+        <span class="c0" id="T0bfeb59f31811bfc" title="never evaluated"><span class="tI">res</span> <span class="tK">:=</span> FALSE;
         <span class="tI">msg</span> <span class="tK">:=</span> E<span class="tS">'\n'</span> || diag(
             E<span class="tS">'    Extra records:\n        '</span>
             ||  array_to_string( extras, E<span class="tS">'\n        '</span> )
@@ -101,13 +101,13 @@
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
     <span class="tC">-- What missing records do we have?
-</span>    <span class="tK">IF</span> <span class="b00" id="T5420557d1b22cae7" title="never evaluated">missing[1] IS NOT NULL </span><span class="tK">THEN</span>
-        <span class="c0" id="T4d07907dd12c2108" title="never evaluated"><span class="tI">res</span> <span class="tK">:=</span> FALSE;
+</span>    <span class="tK">IF</span> <span class="b00" id="T7053d9471a49a241" title="never evaluated">missing[1] IS NOT NULL </span><span class="tK">THEN</span>
+        <span class="c0" id="T35ce1961ce5a4542" title="never evaluated"><span class="tI">res</span> <span class="tK">:=</span> FALSE;
         <span class="tI">msg</span> <span class="tK">:=</span> msg || E<span class="tS">'\n'</span> || diag(
             E<span class="tS">'    Missing records:\n        '</span>
             ||  array_to_string( missing, E<span class="tS">'\n        '</span> )
         );
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
-    <span class="c0" id="Tf81f22d061503f8e" title="never evaluated"><span class="tK">RETURN</span> ok(res, $3) || msg</span>;
-</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Tb822ad2356b83e96" onMouseOver="highlight('Tb822ad2356b83e96')">never evaluated</a></li><li class="block"><a href="#T6df22eed2fe6e84f" onMouseOver="highlight('T6df22eed2fe6e84f')">never evaluated</a></li><li class="block"><a href="#T5626ef1d3b574c12" onMouseOver="highlight('T5626ef1d3b574c12')">never evaluated</a></li><li class="loop"><a href="#T2800c263878f500c" onMouseOver="highlight('T2800c263878f500c')">never evaluated</a></li><li class="block"><a href="#T3c1693cb28cf4f01" onMouseOver="highlight('T3c1693cb28cf4f01')">never evaluated</a></li><li class="loop"><a href="#T88615493323b6b57" onMouseOver="highlight('T88615493323b6b57')">never evaluated</a></li><li class="block"><a href="#T04ccc7657a4f9fda" onMouseOver="highlight('T04ccc7657a4f9fda')">never evaluated</a></li><li class="block"><a href="#Tc71eda99d7f1e944" onMouseOver="highlight('Tc71eda99d7f1e944')">never evaluated</a></li><li class="branch"><a href="#Te3c9bedb2e14b2f6" onMouseOver="highlight('Te3c9bedb2e14b2f6')">never evaluated</a></li><li class="block"><a href="#Tbc86ee67d85ff6e3" onMouseOver="highlight('Tbc86ee67d85ff6e3')">never evaluated</a></li><li class="branch"><a href="#T5420557d1b22cae7" onMouseOver="highlight('T5420557d1b22cae7')">never evaluated</a></li><li class="block"><a href="#T4d07907dd12c2108" onMouseOver="highlight('T4d07907dd12c2108')">never evaluated</a></li><li class="block"><a href="#Tf81f22d061503f8e" onMouseOver="highlight('Tf81f22d061503f8e')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 05, 2025 13:46 UTC</div><a href="index.html" class="return">Return to index</a></body></html>
+    <span class="c0" id="T4d0dd2f25f3e2744" title="never evaluated"><span class="tK">RETURN</span> ok(res, $3) || msg</span>;
+</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Teca719b969779025" onMouseOver="highlight('Teca719b969779025')">never evaluated</a></li><li class="block"><a href="#Td60ef7de2d6243e0" onMouseOver="highlight('Td60ef7de2d6243e0')">never evaluated</a></li><li class="block"><a href="#T8129b9596106cd32" onMouseOver="highlight('T8129b9596106cd32')">never evaluated</a></li><li class="loop"><a href="#T919aa34118dd5576" onMouseOver="highlight('T919aa34118dd5576')">never evaluated</a></li><li class="block"><a href="#Tb4bd439509a52581" onMouseOver="highlight('Tb4bd439509a52581')">never evaluated</a></li><li class="loop"><a href="#T628364c55cc6b0ab" onMouseOver="highlight('T628364c55cc6b0ab')">never evaluated</a></li><li class="block"><a href="#T2933b52809364cd4" onMouseOver="highlight('T2933b52809364cd4')">never evaluated</a></li><li class="block"><a href="#Tba87bbbeb4601b4c" onMouseOver="highlight('Tba87bbbeb4601b4c')">never evaluated</a></li><li class="branch"><a href="#T06a07edf083ea692" onMouseOver="highlight('T06a07edf083ea692')">never evaluated</a></li><li class="block"><a href="#T0bfeb59f31811bfc" onMouseOver="highlight('T0bfeb59f31811bfc')">never evaluated</a></li><li class="branch"><a href="#T7053d9471a49a241" onMouseOver="highlight('T7053d9471a49a241')">never evaluated</a></li><li class="block"><a href="#T35ce1961ce5a4542" onMouseOver="highlight('T35ce1961ce5a4542')">never evaluated</a></li><li class="block"><a href="#T4d0dd2f25f3e2744" onMouseOver="highlight('T4d0dd2f25f3e2744')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 24, 2025 10:33 UTC</div><a href="index.html" class="return">Return to index</a></body></html>

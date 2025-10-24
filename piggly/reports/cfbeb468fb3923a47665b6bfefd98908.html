@@ -36,26 +36,26 @@
     <span class="tC">-- Get the latest id and value, because todo() might have been called
 </span>    <span class="tC">-- again before the todos ran out for the first call to todo(). This
 </span>    <span class="tC">-- allows them to nest.
-</span>    <span class="c1" id="T4182badf4a4d6bad"><span class="tI">todos</span> <span class="tK">:=</span> _get_latest(<span class="tS">'todo'</span>);
-    <span class="tK">IF</span> <span class="b10" id="T43d56d3bf5cd9e72" title="never evaluates false">todos IS NULL </span><span class="tK">THEN</span>
+</span>    <span class="c1" id="T51171f50eb206c63"><span class="tI">todos</span> <span class="tK">:=</span> _get_latest(<span class="tS">'todo'</span>);
+    <span class="tK">IF</span> <span class="b10" id="T5af4fa11b660b286" title="never evaluates false">todos IS NULL </span><span class="tK">THEN</span>
         <span class="tC">-- No todos.
-</span>        <span class="c1" id="T43530040b1afbab0"><span class="c1" id="T93ad5e8d881eb189"><span class="tK">RETURN</span> NULL</span>;
+</span>        <span class="c1" id="Tba172256582fa96e"><span class="c1" id="T5c1047370c5265e2"><span class="tK">RETURN</span> NULL</span>;
     </span><span class="tK">END</span> <span class="tK">IF</span>;
-    <span class="tK">IF</span> <span class="b00" id="Tca109516000a478d" title="never evaluated">todos[2] = 0 </span><span class="tK">THEN</span>
+    <span class="tK">IF</span> <span class="b00" id="T7b53209d9d806429" title="never evaluated">todos[2] = 0 </span><span class="tK">THEN</span>
         <span class="tC">-- Todos depleted. Clean up.
-</span>        <span class="c0" id="T62a14fe9da545c93" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'DELETE FROM __tcache__ WHERE id = '</span> || todos[1];
-        <span class="c0" id="Taf7411dd6c66e6d7" title="never evaluated"><span class="tK">RETURN</span> NULL</span>;
+</span>        <span class="c0" id="T31612ad51bcea96d" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'DELETE FROM __tcache__ WHERE id = '</span> || todos[1];
+        <span class="c0" id="Tcc0f9fe1aa25ed79" title="never evaluated"><span class="tK">RETURN</span> NULL</span>;
     </span><span class="tK">END</span> <span class="tK">IF</span>;
     <span class="tC">-- Decrement the count of counted todos and return the reason.
-</span>    <span class="tK">IF</span> <span class="b00" id="Tffc05666d28bf616" title="never evaluated">todos[2] &lt;&gt; -1 </span><span class="tK">THEN</span>
-        <span class="c0" id="Tab08adcce61974a6" title="never evaluated"><span class="tK">PERFORM</span> _set(todos[1], todos[2] - 1);
+</span>    <span class="tK">IF</span> <span class="b00" id="T4b0d87815d01721d" title="never evaluated">todos[2] &lt;&gt; -1 </span><span class="tK">THEN</span>
+        <span class="c0" id="T523fb1979f4c409d" title="never evaluated"><span class="tK">PERFORM</span> _set(todos[1], todos[2] - 1);
     </span><span class="tK">END</span> <span class="tK">IF</span>;
     <span class="tI">note</span> <span class="tK">:=</span> _get_note(todos[1]);
 
-    <span class="tK">IF</span> <span class="b00" id="T4dac2136fdf306e5" title="never evaluated">todos[2] = 1 </span><span class="tK">THEN</span>
+    <span class="tK">IF</span> <span class="b00" id="T4f4d9af10bd0bc27" title="never evaluated">todos[2] = 1 </span><span class="tK">THEN</span>
         <span class="tC">-- This was the last todo, so delete the record.
-</span>        <span class="c0" id="T9dd145ba6d6a1885" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'DELETE FROM __tcache__ WHERE id = '</span> || todos[1];
+</span>        <span class="c0" id="T75052da4ddd78bea" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'DELETE FROM __tcache__ WHERE id = '</span> || todos[1];
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
-    <span class="c0" id="Tb45c48740e5030ad" title="never evaluated"><span class="tK">RETURN</span> note</span>;
-</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="branch"><a href="#T43d56d3bf5cd9e72" onMouseOver="highlight('T43d56d3bf5cd9e72')">never evaluates false</a></li><li class="branch"><a href="#Tca109516000a478d" onMouseOver="highlight('Tca109516000a478d')">never evaluated</a></li><li class="block"><a href="#T62a14fe9da545c93" onMouseOver="highlight('T62a14fe9da545c93')">never evaluated</a></li><li class="block"><a href="#Taf7411dd6c66e6d7" onMouseOver="highlight('Taf7411dd6c66e6d7')">never evaluated</a></li><li class="branch"><a href="#Tffc05666d28bf616" onMouseOver="highlight('Tffc05666d28bf616')">never evaluated</a></li><li class="block"><a href="#Tab08adcce61974a6" onMouseOver="highlight('Tab08adcce61974a6')">never evaluated</a></li><li class="branch"><a href="#T4dac2136fdf306e5" onMouseOver="highlight('T4dac2136fdf306e5')">never evaluated</a></li><li class="block"><a href="#T9dd145ba6d6a1885" onMouseOver="highlight('T9dd145ba6d6a1885')">never evaluated</a></li><li class="block"><a href="#Tb45c48740e5030ad" onMouseOver="highlight('Tb45c48740e5030ad')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 05, 2025 13:46 UTC</div><a href="index.html" class="return">Return to index</a></body></html>
+    <span class="c0" id="Te4a70227c47432db" title="never evaluated"><span class="tK">RETURN</span> note</span>;
+</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="branch"><a href="#T5af4fa11b660b286" onMouseOver="highlight('T5af4fa11b660b286')">never evaluates false</a></li><li class="branch"><a href="#T7b53209d9d806429" onMouseOver="highlight('T7b53209d9d806429')">never evaluated</a></li><li class="block"><a href="#T31612ad51bcea96d" onMouseOver="highlight('T31612ad51bcea96d')">never evaluated</a></li><li class="block"><a href="#Tcc0f9fe1aa25ed79" onMouseOver="highlight('Tcc0f9fe1aa25ed79')">never evaluated</a></li><li class="branch"><a href="#T4b0d87815d01721d" onMouseOver="highlight('T4b0d87815d01721d')">never evaluated</a></li><li class="block"><a href="#T523fb1979f4c409d" onMouseOver="highlight('T523fb1979f4c409d')">never evaluated</a></li><li class="branch"><a href="#T4f4d9af10bd0bc27" onMouseOver="highlight('T4f4d9af10bd0bc27')">never evaluated</a></li><li class="block"><a href="#T75052da4ddd78bea" onMouseOver="highlight('T75052da4ddd78bea')">never evaluated</a></li><li class="block"><a href="#Te4a70227c47432db" onMouseOver="highlight('Te4a70227c47432db')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 24, 2025 10:33 UTC</div><a href="index.html" class="return">Return to index</a></body></html>

@@ -1,16 +1,16 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$e5ce44a328fa910f$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$26f1f4af35abeb1e$PIGGLY$, (pg_catalog.has_foreign_data_wrapper_privilege($1, $2, 'USAGE'))) THEN
-        perform public.piggly_branch($PIGGLY$728c12af1a274fdd$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$9388d8a54488336d$PIGGLY$);RETURN '{USAGE}';
+    perform public.piggly_branch($PIGGLY$61c5f657a72c03ab$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$9b1b5243c7412367$PIGGLY$, (pg_catalog.has_foreign_data_wrapper_privilege($1, $2, 'USAGE'))) THEN
+        perform public.piggly_branch($PIGGLY$acae067a61771bd3$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$3856a0700236586c$PIGGLY$);RETURN '{USAGE}';
     ELSE
-        perform public.piggly_branch($PIGGLY$2bd187cd44bab6c8$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$7abc8b3dae72bd84$PIGGLY$);RETURN '{}';
+        perform public.piggly_branch($PIGGLY$10f54d6f9b144955$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$1a67769840d33d11$PIGGLY$);RETURN '{}';
     END IF;
 EXCEPTION WHEN undefined_object THEN
     -- Same error code for unknown user or fdw. So figure out which.
-    perform public.piggly_branch($PIGGLY$e287bd13de9f7328$PIGGLY$);
-    perform public.piggly_branch($PIGGLY$a2f306506f12096c$PIGGLY$);RETURN CASE WHEN SQLERRM LIKE '%' || $1 || '%' THEN
+    perform public.piggly_branch($PIGGLY$44b5c7bc72de6854$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$bfba99bd73cc2c20$PIGGLY$);RETURN CASE WHEN SQLERRM LIKE '%' || $1 || '%' THEN
         '{undefined_role}'
     ELSE
         '{undefined_fdw}'

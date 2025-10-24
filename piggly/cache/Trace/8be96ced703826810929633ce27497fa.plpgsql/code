@@ -5,41 +5,41 @@ DECLARE
     plural    CHAR;
     raise_ex  ALIAS FOR $4;
 BEGIN
-    perform public.piggly_branch($PIGGLY$ff91c5d6ef608c6c$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$6afaedbdfdacbf8d$PIGGLY$);
     plural    := CASE exp_tests WHEN 1 THEN '' ELSE 's' END;
 
-    IF public.piggly_cond($PIGGLY$65128baee8adc008$PIGGLY$, (curr_test IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$98d91e04f932a59d$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$f89e71f57b8e74eb$PIGGLY$);RAISE EXCEPTION '# No tests run!';
+    IF public.piggly_cond($PIGGLY$a8ae4b9cbef9983e$PIGGLY$, (curr_test IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$c3c9bce1f1b01d62$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$56805dee33219625$PIGGLY$);RAISE EXCEPTION '# No tests run!';
     END IF;
 
-    IF public.piggly_cond($PIGGLY$00cce1e97a31c84b$PIGGLY$, (exp_tests = 0 OR exp_tests IS NULL)) THEN
+    IF public.piggly_cond($PIGGLY$19efc15e4ab15b0a$PIGGLY$, (exp_tests = 0 OR exp_tests IS NULL)) THEN
          -- No plan. Output one now.
-        perform public.piggly_branch($PIGGLY$20639129e2f82ec8$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$a525a4e7367fe4a4$PIGGLY$);
         exp_tests = curr_test;
-        perform public.piggly_branch($PIGGLY$3e1e37874703f18d$PIGGLY$);RETURN NEXT '1..' || exp_tests;
+        perform public.piggly_branch($PIGGLY$96bc8187ef4da1d0$PIGGLY$);RETURN NEXT '1..' || exp_tests;
     END IF;
 
-    IF public.piggly_cond($PIGGLY$404626dc452f1eba$PIGGLY$, (curr_test <> exp_tests)) THEN
-        perform public.piggly_branch($PIGGLY$305172596a968f5b$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$e72dd819df34fdc0$PIGGLY$);RETURN NEXT diag(
+    IF public.piggly_cond($PIGGLY$6cf758f8503f158c$PIGGLY$, (curr_test <> exp_tests)) THEN
+        perform public.piggly_branch($PIGGLY$6581f14bf07911c1$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$bd48c0d7fc6a385b$PIGGLY$);RETURN NEXT diag(
             'Looks like you planned ' || exp_tests || ' test' ||
             plural || ' but ran ' || curr_test
         );
-    ELSIF public.piggly_cond($PIGGLY$ff38b21760167a02$PIGGLY$, (num_faild > 0)) THEN
-        perform public.piggly_branch($PIGGLY$5bd3b6706da227e9$PIGGLY$);
-        IF public.piggly_cond($PIGGLY$0405592c3c571bab$PIGGLY$, (raise_ex)) THEN
-            perform public.piggly_branch($PIGGLY$8561a01be2411edf$PIGGLY$);
-            perform public.piggly_branch($PIGGLY$f5ccb1001f8799b0$PIGGLY$);RAISE EXCEPTION  '% test% failed of %', num_faild, CASE num_faild WHEN 1 THEN '' ELSE 's' END, exp_tests;
+    ELSIF public.piggly_cond($PIGGLY$82531d469534ce3a$PIGGLY$, (num_faild > 0)) THEN
+        perform public.piggly_branch($PIGGLY$b18c8f988ea72cc4$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$a574121bb85f6d4d$PIGGLY$, (raise_ex)) THEN
+            perform public.piggly_branch($PIGGLY$3d72217369653025$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$c841404bca81a035$PIGGLY$);RAISE EXCEPTION  '% test% failed of %', num_faild, CASE num_faild WHEN 1 THEN '' ELSE 's' END, exp_tests;
         END IF;
-        perform public.piggly_branch($PIGGLY$933bb27241729c55$PIGGLY$);RETURN NEXT diag(
+        perform public.piggly_branch($PIGGLY$3e975942bed707c2$PIGGLY$);RETURN NEXT diag(
             'Looks like you failed ' || num_faild || ' test' ||
             CASE num_faild WHEN 1 THEN '' ELSE 's' END
             || ' of ' || exp_tests
         );
     ELSE
 
-    perform public.piggly_branch($PIGGLY$f819214108e69e20$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$5fcf45bd08a85fe3$PIGGLY$);
     END IF;
-    perform public.piggly_branch($PIGGLY$798b106502e47309$PIGGLY$);RETURN;
+    perform public.piggly_branch($PIGGLY$5f3bc1bd77c50bd2$PIGGLY$);RETURN;
 END;

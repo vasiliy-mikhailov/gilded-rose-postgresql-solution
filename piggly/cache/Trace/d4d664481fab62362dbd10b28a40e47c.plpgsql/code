@@ -1,12 +1,12 @@
 BEGIN
-   perform public.piggly_branch($PIGGLY$77100718e87cb554$PIGGLY$);
-   IF public.piggly_cond($PIGGLY$9669043719d18ba7$PIGGLY$, (_is_schema($1))) THEN
+   perform public.piggly_branch($PIGGLY$44866f63e8db839b$PIGGLY$);
+   IF public.piggly_cond($PIGGLY$f3cbf00b5e3f35d3$PIGGLY$, (_is_schema($1))) THEN
        -- ( schema, table, index )
-       perform public.piggly_branch($PIGGLY$e343ff43b646cdde$PIGGLY$);
-       perform public.piggly_branch($PIGGLY$712954ee6a63f057$PIGGLY$);RETURN ok( _have_index( $1, $2, $3 ), 'Index ' || quote_ident($3) || ' should exist' );
+       perform public.piggly_branch($PIGGLY$9005c9ea13d810dd$PIGGLY$);
+       perform public.piggly_branch($PIGGLY$52bfbb3938c9e810$PIGGLY$);RETURN ok( _have_index( $1, $2, $3 ), 'Index ' || quote_ident($3) || ' should exist' );
    ELSE
        -- ( table, index, column/expression )
-       perform public.piggly_branch($PIGGLY$c1eff900e4a3a0c3$PIGGLY$);
-       perform public.piggly_branch($PIGGLY$53ee35658b2da6db$PIGGLY$);RETURN has_index( $1, $2, $3, 'Index ' || quote_ident($2) || ' should exist' );
+       perform public.piggly_branch($PIGGLY$9d79d752e4067f1f$PIGGLY$);
+       perform public.piggly_branch($PIGGLY$3987ff66916a7cc8$PIGGLY$);RETURN has_index( $1, $2, $3, 'Index ' || quote_ident($2) || ' should exist' );
    END IF;
 END;

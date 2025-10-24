@@ -1,7 +1,7 @@
 DECLARE
     pname text;
 BEGIN
-    perform public.piggly_branch($PIGGLY$892f60990b7ae402$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$7659043d048e4600$PIGGLY$);
     SELECT quote_ident(ni.nspname) || '.' || quote_ident(p.proname)
       FROM pg_catalog.pg_trigger t
       JOIN pg_catalog.pg_class ct     ON ct.oid = t.tgrelid
@@ -13,5 +13,5 @@ BEGIN
        AND t.tgname   = $3
       INTO pname;
 
-    perform public.piggly_branch($PIGGLY$a1581bc780d99c4f$PIGGLY$);RETURN is( pname, quote_ident($4) || '.' || quote_ident($5), $6 );
+    perform public.piggly_branch($PIGGLY$41e498bee5461e1c$PIGGLY$);RETURN is( pname, quote_ident($4) || '.' || quote_ident($5), $6 );
 END;

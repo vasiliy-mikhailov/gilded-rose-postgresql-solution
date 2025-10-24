@@ -1,9 +1,9 @@
 DECLARE
     is_it boolean := _is_instead($1, $2, $3);
 BEGIN
-    perform public.piggly_branch($PIGGLY$3ffa24784910a227$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$b2cf27577e1a850a$PIGGLY$, (is_it IS NOT NULL)) THEN perform public.piggly_branch($PIGGLY$2d9eae63e30df6d0$PIGGLY$);perform public.piggly_branch($PIGGLY$2a1ceffabc612ce7$PIGGLY$);RETURN ok( is_it, $4 ); END IF;
-    perform public.piggly_branch($PIGGLY$df77dbfe4e44fb26$PIGGLY$);RETURN ok( FALSE, $4 ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$eb399d24c7f27bd6$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$e764c014c7902002$PIGGLY$, (is_it IS NOT NULL)) THEN perform public.piggly_branch($PIGGLY$cf973197af07d96a$PIGGLY$);perform public.piggly_branch($PIGGLY$6ed0deaf8815d7c8$PIGGLY$);RETURN ok( is_it, $4 ); END IF;
+    perform public.piggly_branch($PIGGLY$617a268e08d69e81$PIGGLY$);RETURN ok( FALSE, $4 ) || E'\n' || diag(
         '    Rule ' || quote_ident($3) || ' does not exist'
     );
 END;

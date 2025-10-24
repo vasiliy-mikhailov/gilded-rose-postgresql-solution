@@ -1,10 +1,10 @@
 DECLARE
     is_trusted boolean := _is_trusted($1);
 BEGIN
-    perform public.piggly_branch($PIGGLY$66931e31a2e59388$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$f2b92e2054690c48$PIGGLY$, (is_trusted IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$0092b074d3e53498$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$47134e768e90f8b2$PIGGLY$);RETURN fail( $2 ) || E'\n' || diag( '    Procedural language ' || quote_ident($1) || ' does not exist') ;
+    perform public.piggly_branch($PIGGLY$3fe5fdcc28009fe6$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$6ed1b0369cb3f765$PIGGLY$, (is_trusted IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$f9366517c1dde6d2$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$431d35b3ac7694ce$PIGGLY$);RETURN fail( $2 ) || E'\n' || diag( '    Procedural language ' || quote_ident($1) || ' does not exist') ;
     END IF;
-    perform public.piggly_branch($PIGGLY$939263377438e813$PIGGLY$);RETURN ok( is_trusted, $2 );
+    perform public.piggly_branch($PIGGLY$9d364f804f52fa3f$PIGGLY$);RETURN ok( is_trusted, $2 );
 END;

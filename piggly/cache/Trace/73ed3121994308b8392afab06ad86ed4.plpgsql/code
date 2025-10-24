@@ -3,25 +3,25 @@ DECLARE
     keys TEXT[] := '{}';
     have TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$938281faa6e6644e$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$a2a20cad4da4d7d6$PIGGLY$);
     FOR akey IN SELECT * FROM _keys($1, $2, $3) LOOP
-        perform public.piggly_cond($PIGGLY$d6a62d08a1a3b9a8$PIGGLY$, true);
-        perform public.piggly_branch($PIGGLY$ed15755ad8a12638$PIGGLY$);
-        IF public.piggly_cond($PIGGLY$d0226d24609bf599$PIGGLY$, (akey = $4)) THEN perform public.piggly_branch($PIGGLY$681a76a157e2d2d0$PIGGLY$);perform public.piggly_branch($PIGGLY$0aa74c6a3e20fbea$PIGGLY$);RETURN pass($5); END IF;
+        perform public.piggly_cond($PIGGLY$f8685dff476943cc$PIGGLY$, true);
+        perform public.piggly_branch($PIGGLY$658c20d9f4ebc3d8$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$34babcf15b1be8a2$PIGGLY$, (akey = $4)) THEN perform public.piggly_branch($PIGGLY$46d6b64f6538a800$PIGGLY$);perform public.piggly_branch($PIGGLY$ac5c3e5e6f477b29$PIGGLY$);RETURN pass($5); END IF;
         keys = keys || akey::text;
     
-        perform public.piggly_signal($PIGGLY$d6a62d08a1a3b9a8$PIGGLY$, $PIGGLY$@$PIGGLY$);
+        perform public.piggly_signal($PIGGLY$f8685dff476943cc$PIGGLY$, $PIGGLY$@$PIGGLY$);
     END LOOP;
-perform public.piggly_cond($PIGGLY$d6a62d08a1a3b9a8$PIGGLY$, false);
-    IF public.piggly_cond($PIGGLY$2506643a144da6d5$PIGGLY$, (array_upper(keys, 0) = 1)) THEN
-        perform public.piggly_branch($PIGGLY$2700d81292acd8fe$PIGGLY$);
+perform public.piggly_cond($PIGGLY$f8685dff476943cc$PIGGLY$, false);
+    IF public.piggly_cond($PIGGLY$82c6468d321cbe6a$PIGGLY$, (array_upper(keys, 0) = 1)) THEN
+        perform public.piggly_branch($PIGGLY$4b00401ea02fec3c$PIGGLY$);
         have := 'No ' || $6 || ' constraints';
     ELSE
-        perform public.piggly_branch($PIGGLY$4252fc691a4eb4af$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$bc8dbc5b63accbbc$PIGGLY$);
         have := array_to_string(keys, E'\n              ');
     END IF;
 
-    perform public.piggly_branch($PIGGLY$1b96b9e22dd4853c$PIGGLY$);RETURN fail($5) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$67066fc6b5dac52b$PIGGLY$);RETURN fail($5) || E'\n' || diag(
              '        have: ' || have
        || E'\n        want: ' || CASE WHEN $4 IS NULL THEN 'NULL' ELSE $4::text END
     );

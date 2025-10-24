@@ -5,9 +5,9 @@ DECLARE
     descr  ALIAS FOR $4;
     output TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$6194e3b419a74833$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$6a640d0d967c69e1$PIGGLY$);
     output := ok( result, descr );
-    perform public.piggly_branch($PIGGLY$bfa3683fcaa50a58$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$dcd8b47cc17858b9$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
            '                  ' || COALESCE( quote_literal(got), 'NULL' ) ||
         E'\n         matches: ' || COALESCE( quote_literal(rx), 'NULL' )
     ) END;

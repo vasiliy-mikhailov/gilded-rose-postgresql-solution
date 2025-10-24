@@ -47,35 +47,35 @@
     <span class="tI">msg</span>     <span class="tD">TEXT</span>    <span class="tK">:=</span> <span class="tS">''</span>;
     <span class="tI">rec</span>     <span class="tD">RECORD</span>;
 <span class="tK">BEGIN</span>
-    <span class="c0" id="Teb7e61ad69f93d68" title="never evaluated"><span class="tK">BEGIN</span>
+    <span class="c0" id="Tee3c72f601d374c4" title="never evaluated"><span class="tK">BEGIN</span>
         <span class="tC">-- Find relevant records.
-</span>        <span class="c0" id="T95ed469aa206390e" title="never evaluated"><span class="tK">FOR</span> <span class="tI">rec</span> <span class="tK">in</span> <span class="l[0, 0, 0, 0]" id="T9ec41b960766d88f" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'SELECT * FROM '</span> || want || <span class="tS">' '</span> || $4
+</span>        <span class="c0" id="Tb0c25ee0f6f13fa4" title="never evaluated"><span class="tK">FOR</span> <span class="tI">rec</span> <span class="tK">in</span> <span class="l[0, 0, 0, 0]" id="Tae6a9735626cdba2" title="never evaluated"><span class="tK">EXECUTE</span> <span class="tS">'SELECT * FROM '</span> || want || <span class="tS">' '</span> || $4
                        || <span class="tS">' SELECT * FROM '</span> || have </span><span class="tK">LOOP</span>
-            <span class="c0" id="T915ff91a5bdaf0e7" title="never evaluated"><span class="tI">results</span> <span class="tK">:=</span> results || rec::text;
+            <span class="c0" id="Taf9e2683d5f5e014" title="never evaluated"><span class="tI">results</span> <span class="tK">:=</span> results || rec::text;
         </span><span class="tK">END</span> <span class="tK">LOOP</span>;
 
         <span class="tC">-- Drop the temporary tables.
 </span>        <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || have;
         <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || want;
     </span><span class="tK">EXCEPTION</span> <span class="tK">WHEN</span> syntax_error OR datatype_mismatch <span class="tK">THEN</span>
-        <span class="c0" id="T12584063a620dd22" title="never evaluated"><span class="tI">msg</span> <span class="tK">:=</span> E<span class="tS">'\n'</span> || diag(
+        <span class="c0" id="T1a42f2da427e1066" title="never evaluated"><span class="tI">msg</span> <span class="tK">:=</span> E<span class="tS">'\n'</span> || diag(
             E<span class="tS">'    Columns differ between queries:\n'</span>
             || <span class="tS">'        have: ('</span> || _temptypes(have) || E<span class="tS">')\n'</span>
             || <span class="tS">'        want: ('</span> || _temptypes(want) || <span class="tS">')'</span>
         );
         <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || have;
         <span class="tK">EXECUTE</span> <span class="tS">'DROP TABLE '</span> || want;
-        <span class="c0" id="T4913d2bebc1b117d" title="never evaluated"><span class="tK">RETURN</span> ok(FALSE, $3) || msg</span>;
+        <span class="c0" id="Te75e971bef3d0a18" title="never evaluated"><span class="tK">RETURN</span> ok(FALSE, $3) || msg</span>;
     </span><span class="tK">END</span>;
 
     <span class="tC">-- What records do we have?
-</span>    <span class="tK">IF</span> <span class="b00" id="T352428763032643e" title="never evaluated">results[1] IS NOT NULL </span><span class="tK">THEN</span>
-        <span class="c0" id="T34eaeb20c1905568" title="never evaluated"><span class="tI">res</span> <span class="tK">:=</span> FALSE;
+</span>    <span class="tK">IF</span> <span class="b00" id="Tf3752c2b46d7b71d" title="never evaluated">results[1] IS NOT NULL </span><span class="tK">THEN</span>
+        <span class="c0" id="T10418e24746d7dc2" title="never evaluated"><span class="tI">res</span> <span class="tK">:=</span> FALSE;
         <span class="tI">msg</span> <span class="tK">:=</span> msg || E<span class="tS">'\n'</span> || diag(
             <span class="tS">'    '</span> || $5 || E<span class="tS">' records:\n        '</span>
             ||  array_to_string( results, E<span class="tS">'\n        '</span> )
         );
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
-    <span class="c0" id="Tec7f52480c767be7" title="never evaluated"><span class="tK">RETURN</span> ok(res, $3) || msg</span>;
-</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Teb7e61ad69f93d68" onMouseOver="highlight('Teb7e61ad69f93d68')">never evaluated</a></li><li class="block"><a href="#T95ed469aa206390e" onMouseOver="highlight('T95ed469aa206390e')">never evaluated</a></li><li class="block"><a href="#T915ff91a5bdaf0e7" onMouseOver="highlight('T915ff91a5bdaf0e7')">never evaluated</a></li><li class="loop"><a href="#T9ec41b960766d88f" onMouseOver="highlight('T9ec41b960766d88f')">never evaluated</a></li><li class="block"><a href="#T12584063a620dd22" onMouseOver="highlight('T12584063a620dd22')">never evaluated</a></li><li class="block"><a href="#T4913d2bebc1b117d" onMouseOver="highlight('T4913d2bebc1b117d')">never evaluated</a></li><li class="branch"><a href="#T352428763032643e" onMouseOver="highlight('T352428763032643e')">never evaluated</a></li><li class="block"><a href="#T34eaeb20c1905568" onMouseOver="highlight('T34eaeb20c1905568')">never evaluated</a></li><li class="block"><a href="#Tec7f52480c767be7" onMouseOver="highlight('Tec7f52480c767be7')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 05, 2025 13:46 UTC</div><a href="index.html" class="return">Return to index</a></body></html>
+    <span class="c0" id="T83564a05975db3ab" title="never evaluated"><span class="tK">RETURN</span> ok(res, $3) || msg</span>;
+</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Tee3c72f601d374c4" onMouseOver="highlight('Tee3c72f601d374c4')">never evaluated</a></li><li class="block"><a href="#Tb0c25ee0f6f13fa4" onMouseOver="highlight('Tb0c25ee0f6f13fa4')">never evaluated</a></li><li class="block"><a href="#Taf9e2683d5f5e014" onMouseOver="highlight('Taf9e2683d5f5e014')">never evaluated</a></li><li class="loop"><a href="#Tae6a9735626cdba2" onMouseOver="highlight('Tae6a9735626cdba2')">never evaluated</a></li><li class="block"><a href="#T1a42f2da427e1066" onMouseOver="highlight('T1a42f2da427e1066')">never evaluated</a></li><li class="block"><a href="#Te75e971bef3d0a18" onMouseOver="highlight('Te75e971bef3d0a18')">never evaluated</a></li><li class="branch"><a href="#Tf3752c2b46d7b71d" onMouseOver="highlight('Tf3752c2b46d7b71d')">never evaluated</a></li><li class="block"><a href="#T10418e24746d7dc2" onMouseOver="highlight('T10418e24746d7dc2')">never evaluated</a></li><li class="block"><a href="#T83564a05975db3ab" onMouseOver="highlight('T83564a05975db3ab')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 24, 2025 10:33 UTC</div><a href="index.html" class="return">Return to index</a></body></html>

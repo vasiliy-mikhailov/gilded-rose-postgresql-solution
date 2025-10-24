@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_opclass_owner($1);
 BEGIN
     -- Make sure the opclass exists.
-    perform public.piggly_branch($PIGGLY$5ec16af708b08bf0$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$e449133cb73e73f3$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$d3ae31a7aa28ffe8$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$4442c99442165021$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$f3071dc443154cda$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$6906cea95b47d198$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$9aa852d049f81704$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$6922a2f5402353cb$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
             E'    Operator class ' || quote_ident($1) || ' not found'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$ac03aaabaf9f8e73$PIGGLY$);RETURN is(owner, $2, $3);
+    perform public.piggly_branch($PIGGLY$c689e30cc0da24d6$PIGGLY$);RETURN is(owner, $2, $3);
 END;

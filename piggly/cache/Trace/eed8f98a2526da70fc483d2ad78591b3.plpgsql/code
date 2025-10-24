@@ -2,9 +2,9 @@ DECLARE
     want REFCURSOR;
     res  TEXT;
 BEGIN
-    perform public.piggly_branch($PIGGLY$08d5e0ec490ad36e$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$0384bd6df7bd0f2a$PIGGLY$);
     OPEN want FOR EXECUTE _query($2);
     res := results_eq($1, want, $3);
     CLOSE want;
-    perform public.piggly_branch($PIGGLY$85f13b792f502402$PIGGLY$);RETURN res;
+    perform public.piggly_branch($PIGGLY$55c56f2364c41a62$PIGGLY$);RETURN res;
 END;

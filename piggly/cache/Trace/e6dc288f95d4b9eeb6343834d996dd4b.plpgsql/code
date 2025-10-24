@@ -1,7 +1,7 @@
 DECLARE
     aname name;
 BEGIN
-    perform public.piggly_branch($PIGGLY$2a3af7676da62479$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$fc6527b465f60b75$PIGGLY$);
     SELECT am.amname
       FROM pg_catalog.pg_index x
       JOIN pg_catalog.pg_class ct ON ct.oid = x.indrelid
@@ -11,7 +11,7 @@ BEGIN
        AND ci.relname = $2
       INTO aname;
 
-      perform public.piggly_branch($PIGGLY$2edad72cc8712379$PIGGLY$);return is(
+      perform public.piggly_branch($PIGGLY$651b385aa0317042$PIGGLY$);return is(
           aname, $3,
           'Index ' || quote_ident($2) || ' should be a ' || quote_ident($3) || ' index'
       );

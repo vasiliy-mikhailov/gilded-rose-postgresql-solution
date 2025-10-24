@@ -13,7 +13,7 @@ DECLARE
     matchit ALIAS FOR $6;
 BEGIN
     -- What test was it that just ran?
-    perform public.piggly_branch($PIGGLY$f7ea1eeb2e6c80a7$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$2756079107bf45d3$PIGGLY$);
     tnumb := currval('__tresults___numb_seq');
 
     -- Fetch the results.
@@ -22,22 +22,22 @@ BEGIN
 
     -- Now delete those results.
     EXECUTE 'ALTER SEQUENCE __tresults___numb_seq RESTART WITH ' || tnumb;
-    IF public.piggly_cond($PIGGLY$4ebf2dd2c851b86a$PIGGLY$, (NOT aok)) THEN perform public.piggly_branch($PIGGLY$97193028e0710731$PIGGLY$);PERFORM _set('failed', _get('failed') - 1); END IF;
+    IF public.piggly_cond($PIGGLY$010132a17d6535a3$PIGGLY$, (NOT aok)) THEN perform public.piggly_branch($PIGGLY$2d42afbbf85e764f$PIGGLY$);PERFORM _set('failed', _get('failed') - 1); END IF;
 
     -- Set up the description.
     descr := coalesce( name || ' ', 'Test ' ) || 'should ';
 
     -- So, did the test pass?
-    perform public.piggly_branch($PIGGLY$248e973f1d55823f$PIGGLY$);RETURN NEXT is(
+    perform public.piggly_branch($PIGGLY$6b3ac50dc9978a81$PIGGLY$);RETURN NEXT is(
         aok,
         eok,
         descr || CASE eok WHEN true then 'pass' ELSE 'fail' END
     );
 
     -- Was the description as expected?
-    IF public.piggly_cond($PIGGLY$fb54ed0ff1dea2b9$PIGGLY$, (edescr IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$b57c582d03faf55d$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$6260531a29d630c8$PIGGLY$);RETURN NEXT is(
+    IF public.piggly_cond($PIGGLY$d4425bb9032dd660$PIGGLY$, (edescr IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$bc6ad60510765fb8$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$eebdced805895a4b$PIGGLY$);RETURN NEXT is(
             adescr,
             edescr,
             descr || 'have the proper description'
@@ -45,34 +45,34 @@ BEGIN
     END IF;
 
     -- Were the diagnostics as expected?
-    IF public.piggly_cond($PIGGLY$6cedb3ca438d62c2$PIGGLY$, (ediag IS NOT NULL)) THEN
+    IF public.piggly_cond($PIGGLY$276add7131bbc3bf$PIGGLY$, (ediag IS NOT NULL)) THEN
         -- Remove ok and the test number.
-        perform public.piggly_branch($PIGGLY$0ce8189d150fcb3a$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$7c4e2c26bab42bbc$PIGGLY$);
         adiag := substring(
             have
             FROM CASE WHEN aok THEN 4 ELSE 9 END + char_length(tnumb::text)
         );
 
         -- Remove the description, if there is one.
-        IF public.piggly_cond($PIGGLY$df449a49e02a4622$PIGGLY$, (adescr <> '')) THEN
-            perform public.piggly_branch($PIGGLY$aa03ed72a80e19ff$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$c7ee8428bebf01f3$PIGGLY$, (adescr <> '')) THEN
+            perform public.piggly_branch($PIGGLY$e0135a8e69ad3cab$PIGGLY$);
             adiag := substring(
                 adiag FROM 1 + char_length( ' - ' || substr(diag( adescr ), 3) )
             );
         END IF;
 
-        IF public.piggly_cond($PIGGLY$e6177958bd0ed74d$PIGGLY$, (NOT aok)) THEN
+        IF public.piggly_cond($PIGGLY$88e53aaf284fa581$PIGGLY$, (NOT aok)) THEN
             -- Remove failure message from ok().
-            perform public.piggly_branch($PIGGLY$cd9d28d632b2152a$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$fa107f0d835ddc7e$PIGGLY$);
             adiag := substring(adiag FROM 1 + char_length(diag(
                 'Failed test ' || tnumb ||
                 CASE adescr WHEN '' THEN '' ELSE COALESCE(': "' || adescr || '"', '') END
             )));
         END IF;
 
-        IF public.piggly_cond($PIGGLY$240c672523cacc13$PIGGLY$, (ediag <> '')) THEN
+        IF public.piggly_cond($PIGGLY$40b1abd940387409$PIGGLY$, (ediag <> '')) THEN
            -- Remove the space before the diagnostics.
-           perform public.piggly_branch($PIGGLY$41242214fe3e58b8$PIGGLY$);
+           perform public.piggly_branch($PIGGLY$8a91285b60247733$PIGGLY$);
            adiag := substring(adiag FROM 2);
         END IF;
 
@@ -80,16 +80,16 @@ BEGIN
         adiag := replace( substring(adiag from 3), E'\n# ', E'\n' );
 
         -- Now compare the diagnostics.
-        IF public.piggly_cond($PIGGLY$cbe56333946ffc4a$PIGGLY$, (matchit)) THEN
-            perform public.piggly_branch($PIGGLY$65441d514309e266$PIGGLY$);
-            perform public.piggly_branch($PIGGLY$60ed690e39a98c62$PIGGLY$);RETURN NEXT matches(
+        IF public.piggly_cond($PIGGLY$7b6cf469bd2fff7b$PIGGLY$, (matchit)) THEN
+            perform public.piggly_branch($PIGGLY$f07730df7f02ad95$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$fc5245ba97d5b950$PIGGLY$);RETURN NEXT matches(
                 adiag,
                 ediag,
                 descr || 'have the proper diagnostics'
             );
         ELSE
-            perform public.piggly_branch($PIGGLY$9dcb617a385dac08$PIGGLY$);
-            perform public.piggly_branch($PIGGLY$2a0ed82055602bc8$PIGGLY$);RETURN NEXT is(
+            perform public.piggly_branch($PIGGLY$7a7910204fc212de$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$9f4b03d265c6e6f1$PIGGLY$);RETURN NEXT is(
                 adiag,
                 ediag,
                 descr || 'have the proper diagnostics'
@@ -98,5 +98,5 @@ BEGIN
     END IF;
 
     -- And we're done
-    perform public.piggly_branch($PIGGLY$fa823771708dd4fe$PIGGLY$);RETURN;
+    perform public.piggly_branch($PIGGLY$be683f7d344fc49e$PIGGLY$);RETURN;
 END;

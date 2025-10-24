@@ -7,30 +7,30 @@ DECLARE
     want_found BOOLEAN;
     err_msg    text := 'details not available in pg <= 9.1';
 BEGIN
-    perform public.piggly_branch($PIGGLY$7a03e26d90b98040$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$1c70f915e524554b$PIGGLY$);
     FETCH have INTO have_rec;
     have_found := FOUND;
     FETCH want INTO want_rec;
     want_found := FOUND;
-    WHILE public.piggly_cond($PIGGLY$98c9f3b1ace0eeb7$PIGGLY$, (have_found OR want_found)) LOOP
-        perform public.piggly_branch($PIGGLY$3a87aa642eb5c59d$PIGGLY$);
-        IF public.piggly_cond($PIGGLY$2040018b46e2a50a$PIGGLY$, (have_rec IS DISTINCT FROM want_rec OR have_found <> want_found)) THEN
-            perform public.piggly_branch($PIGGLY$8e24a81b5b392072$PIGGLY$);
-            perform public.piggly_branch($PIGGLY$2c7ed2a920f07b11$PIGGLY$);RETURN ok( true, $3 );
+    WHILE public.piggly_cond($PIGGLY$c80f09973aa2ca8b$PIGGLY$, (have_found OR want_found)) LOOP
+        perform public.piggly_branch($PIGGLY$d8fca909c877bde1$PIGGLY$);
+        IF public.piggly_cond($PIGGLY$fd1924253573d950$PIGGLY$, (have_rec IS DISTINCT FROM want_rec OR have_found <> want_found)) THEN
+            perform public.piggly_branch($PIGGLY$25d9c6ffde8a769a$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$580dd044f33fb6c2$PIGGLY$);RETURN ok( true, $3 );
         ELSE
-            perform public.piggly_branch($PIGGLY$9af3d49372470c90$PIGGLY$);
+            perform public.piggly_branch($PIGGLY$3149ee41417e7cea$PIGGLY$);
             FETCH have INTO have_rec;
             have_found := FOUND;
             FETCH want INTO want_rec;
             want_found := FOUND;
         END IF;
     END LOOP;
-    perform public.piggly_branch($PIGGLY$75a5dc7df4062bc6$PIGGLY$);RETURN ok( false, $3 );
+    perform public.piggly_branch($PIGGLY$0a5be9e2bdd56bcc$PIGGLY$);RETURN ok( false, $3 );
 EXCEPTION
     WHEN datatype_mismatch THEN
-        perform public.piggly_branch($PIGGLY$47533b4f4ed45610$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$0a75861f7d3c0f5c$PIGGLY$);
         GET STACKED DIAGNOSTICS err_msg = MESSAGE_TEXT;
-        perform public.piggly_branch($PIGGLY$24f206df90207cd0$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
+        perform public.piggly_branch($PIGGLY$2c47d513745ff23f$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
             E'    Number of columns or their types differ between the queries' ||
             CASE WHEN have_rec::TEXT = want_rec::text THEN '' ELSE E':\n' ||
                 '        have: ' || CASE WHEN have_found THEN have_rec::text ELSE 'NULL' END || E'\n' ||

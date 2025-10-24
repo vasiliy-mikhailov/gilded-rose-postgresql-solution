@@ -1,4 +1,4 @@
 BEGIN
-  perform public.piggly_branch($PIGGLY$a6633ea3e65c2108$PIGGLY$);
-  perform public.piggly_branch($PIGGLY$5c8e8b7854bb9b44$PIGGLY$);RETURN QUERY SELECT p_quality, p_sell_in;
+  perform public.piggly_branch($PIGGLY$a39b22ec087fedde$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$f0c4d35b475e06cc$PIGGLY$);RETURN QUERY SELECT p_quality, p_sell_in;
 END;

@@ -50,13 +50,13 @@
     <span class="tI">rownum</span>     <span class="tD">INTEGER</span> <span class="tK">:=</span> 1;
     <span class="tI">err_msg</span>    <span class="tD">text</span> <span class="tK">:=</span> <span class="tS">'details not available in pg &lt;= 9.1'</span>;
 <span class="tK">BEGIN</span>
-    <span class="c0" id="T180a711c1a5924f6" title="never evaluated"><span class="tK">FETCH</span> have INTO have_rec;
+    <span class="c0" id="Tacec99e01f507110" title="never evaluated"><span class="tK">FETCH</span> have INTO have_rec;
     <span class="tI">have_found</span> <span class="tK">:=</span> FOUND;
     <span class="tK">FETCH</span> want INTO want_rec;
     <span class="tI">want_found</span> <span class="tK">:=</span> FOUND;
-    <span class="tK">WHILE</span> <span class="l[0, 0, 0, 0]" id="Tf367358be449d847" title="never evaluated">have_found OR want_found </span><span class="tK">LOOP</span>
-        <span class="c0" id="T11ce946b6dc9aaa8" title="never evaluated"><span class="tK">IF</span> <span class="b00" id="T0b5dc8d32063aa80" title="never evaluated">have_rec IS DISTINCT FROM want_rec OR have_found &lt;&gt; want_found </span><span class="tK">THEN</span>
-            <span class="c0" id="T1404bdffc52d62c3" title="never evaluated"><span class="c0" id="T812873dd43c6c9f7" title="never evaluated"><span class="tK">RETURN</span> ok( false, $3 ) || E<span class="tS">'\n'</span> || diag(
+    <span class="tK">WHILE</span> <span class="l[0, 0, 0, 0]" id="Tb98a479cccb9525a" title="never evaluated">have_found OR want_found </span><span class="tK">LOOP</span>
+        <span class="c0" id="T60dad3d70bbc38b6" title="never evaluated"><span class="tK">IF</span> <span class="b00" id="Ta2ebf7b687b22e3b" title="never evaluated">have_rec IS DISTINCT FROM want_rec OR have_found &lt;&gt; want_found </span><span class="tK">THEN</span>
+            <span class="c0" id="Teef3a26c987463af" title="never evaluated"><span class="c0" id="T93c2ce955d5ccfbc" title="never evaluated"><span class="tK">RETURN</span> ok( false, $3 ) || E<span class="tS">'\n'</span> || diag(
                 <span class="tS">'    Results differ beginning at row '</span> || rownum || E<span class="tS">':\n'</span> ||
                 <span class="tS">'        have: '</span> || CASE WHEN have_found THEN have_rec::text ELSE <span class="tS">'NULL'</span> END || E<span class="tS">'\n'</span> ||
                 <span class="tS">'        want: '</span> || CASE WHEN want_found THEN want_rec::text ELSE <span class="tS">'NULL'</span> END
@@ -69,15 +69,15 @@
         <span class="tI">want_found</span> <span class="tK">:=</span> FOUND;
     </span><span class="tK">END</span> <span class="tK">LOOP</span>;
 
-    <span class="c0" id="T3c83dd799607e919" title="never evaluated"><span class="tK">RETURN</span> ok( true, $3 )</span>;
+    <span class="c0" id="T0324b86cd272eab2" title="never evaluated"><span class="tK">RETURN</span> ok( true, $3 )</span>;
 </span><span class="tK">EXCEPTION</span>
     <span class="tK">WHEN</span> datatype_mismatch <span class="tK">THEN</span>
-        <span class="c0" id="Tdfbb4bbf24b628a4" title="never evaluated"><span class="tK">GET</span> <span class="tK">STACKED</span> <span class="tK">DIAGNOSTICS</span> err_msg = MESSAGE_TEXT;
-        <span class="c0" id="Tcfaa59b7164c9580" title="never evaluated"><span class="tK">RETURN</span> ok( false, $3 ) || E<span class="tS">'\n'</span> || diag(
+        <span class="c0" id="Teb535a7de86847af" title="never evaluated"><span class="tK">GET</span> <span class="tK">STACKED</span> <span class="tK">DIAGNOSTICS</span> err_msg = MESSAGE_TEXT;
+        <span class="c0" id="T27b4bee9f34865c6" title="never evaluated"><span class="tK">RETURN</span> ok( false, $3 ) || E<span class="tS">'\n'</span> || diag(
             E<span class="tS">'    Number of columns or their types differ between the queries'</span> ||
             CASE WHEN have_rec::TEXT = want_rec::text THEN <span class="tS">''</span> ELSE E<span class="tS">':\n'</span> ||
                 <span class="tS">'        have: '</span> || CASE WHEN have_found THEN have_rec::text ELSE <span class="tS">'NULL'</span> END || E<span class="tS">'\n'</span> ||
                 <span class="tS">'        want: '</span> || CASE WHEN want_found THEN want_rec::text ELSE <span class="tS">'NULL'</span> END
             END || E<span class="tS">'\n        ERROR: '</span> || err_msg
         )</span>;
-</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#T180a711c1a5924f6" onMouseOver="highlight('T180a711c1a5924f6')">never evaluated</a></li><li class="loop"><a href="#Tf367358be449d847" onMouseOver="highlight('Tf367358be449d847')">never evaluated</a></li><li class="block"><a href="#T11ce946b6dc9aaa8" onMouseOver="highlight('T11ce946b6dc9aaa8')">never evaluated</a></li><li class="branch"><a href="#T0b5dc8d32063aa80" onMouseOver="highlight('T0b5dc8d32063aa80')">never evaluated</a></li><li class="block"><a href="#T1404bdffc52d62c3" onMouseOver="highlight('T1404bdffc52d62c3')">never evaluated</a></li><li class="block"><a href="#T812873dd43c6c9f7" onMouseOver="highlight('T812873dd43c6c9f7')">never evaluated</a></li><li class="block"><a href="#T3c83dd799607e919" onMouseOver="highlight('T3c83dd799607e919')">never evaluated</a></li><li class="block"><a href="#Tdfbb4bbf24b628a4" onMouseOver="highlight('Tdfbb4bbf24b628a4')">never evaluated</a></li><li class="block"><a href="#Tcfaa59b7164c9580" onMouseOver="highlight('Tcfaa59b7164c9580')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 05, 2025 13:46 UTC</div><a href="index.html" class="return">Return to index</a></body></html>
+</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Tacec99e01f507110" onMouseOver="highlight('Tacec99e01f507110')">never evaluated</a></li><li class="loop"><a href="#Tb98a479cccb9525a" onMouseOver="highlight('Tb98a479cccb9525a')">never evaluated</a></li><li class="block"><a href="#T60dad3d70bbc38b6" onMouseOver="highlight('T60dad3d70bbc38b6')">never evaluated</a></li><li class="branch"><a href="#Ta2ebf7b687b22e3b" onMouseOver="highlight('Ta2ebf7b687b22e3b')">never evaluated</a></li><li class="block"><a href="#Teef3a26c987463af" onMouseOver="highlight('Teef3a26c987463af')">never evaluated</a></li><li class="block"><a href="#T93c2ce955d5ccfbc" onMouseOver="highlight('T93c2ce955d5ccfbc')">never evaluated</a></li><li class="block"><a href="#T0324b86cd272eab2" onMouseOver="highlight('T0324b86cd272eab2')">never evaluated</a></li><li class="block"><a href="#Teb535a7de86847af" onMouseOver="highlight('Teb535a7de86847af')">never evaluated</a></li><li class="block"><a href="#T27b4bee9f34865c6" onMouseOver="highlight('T27b4bee9f34865c6')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 24, 2025 10:33 UTC</div><a href="index.html" class="return">Return to index</a></body></html>

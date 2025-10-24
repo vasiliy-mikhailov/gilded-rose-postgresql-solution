@@ -5,16 +5,16 @@ DECLARE
    todo_why TEXT;
    ok       BOOL;
 BEGIN
-   perform public.piggly_branch($PIGGLY$d208f91aa6da3b86$PIGGLY$);
+   perform public.piggly_branch($PIGGLY$390d1775adb97712$PIGGLY$);
    todo_why := _todo();
    ok       := CASE
        WHEN aok = TRUE THEN aok
        WHEN todo_why IS NULL THEN COALESCE(aok, false)
        ELSE TRUE
     END;
-    IF public.piggly_cond($PIGGLY$2e5c073700086961$PIGGLY$, (_get('plan') IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$b539ac124bb83c33$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$6e02e188a38feecc$PIGGLY$);RAISE EXCEPTION 'You tried to run a test without a plan! Gotta have a plan';
+    IF public.piggly_cond($PIGGLY$84fb32623f141ab0$PIGGLY$, (_get('plan') IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$65af0bc32e911f4e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$4db754828fdb85fe$PIGGLY$);RAISE EXCEPTION 'You tried to run a test without a plan! Gotta have a plan';
     END IF;
 
     test_num := add_result(
@@ -25,7 +25,7 @@ BEGIN
         COALESCE(todo_why, '')
     );
 
-    perform public.piggly_branch($PIGGLY$ce4e4053950bab26$PIGGLY$);RETURN (CASE aok WHEN TRUE THEN '' ELSE 'not ' END)
+    perform public.piggly_branch($PIGGLY$80cdd16b9b369408$PIGGLY$);RETURN (CASE aok WHEN TRUE THEN '' ELSE 'not ' END)
            || 'ok ' || _set( 'curr_test', test_num )
            || CASE descr WHEN '' THEN '' ELSE COALESCE( ' - ' || substr(diag( descr ), 3), '' ) END
            || COALESCE( ' ' || diag( 'TODO ' || todo_why ), '')

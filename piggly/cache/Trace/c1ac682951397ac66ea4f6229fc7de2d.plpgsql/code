@@ -6,10 +6,10 @@ DECLARE
     res     BOOLEAN := TRUE;
     msg     TEXT    := '';
 BEGIN
-    perform public.piggly_branch($PIGGLY$595d310fa3053abb$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$5d9fa2a88bce153b$PIGGLY$);
     BEGIN
         -- Find extra records.
-        perform public.piggly_branch($PIGGLY$f8798944b7f0baa5$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$0c258e822bbe27de$PIGGLY$);
         EXECUTE 'SELECT EXISTS ( '
              || '( SELECT * FROM ' || have || ' EXCEPT ' || $4
              || '  SELECT * FROM ' || want
@@ -22,7 +22,7 @@ BEGIN
         EXECUTE 'DROP TABLE ' || have;
         EXECUTE 'DROP TABLE ' || want;
     EXCEPTION WHEN syntax_error OR datatype_mismatch THEN
-        perform public.piggly_branch($PIGGLY$55de52bed6970e3d$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$2c5ce730e02a272d$PIGGLY$);
         msg := E'\n' || diag(
             E'    Columns differ between queries:\n'
             || '        have: (' || _temptypes(have) || E')\n'
@@ -30,9 +30,9 @@ BEGIN
         );
         EXECUTE 'DROP TABLE ' || have;
         EXECUTE 'DROP TABLE ' || want;
-        perform public.piggly_branch($PIGGLY$88f032e3c622dac0$PIGGLY$);RETURN ok(FALSE, $3) || msg;
+        perform public.piggly_branch($PIGGLY$2ff8dd96d0e8af5d$PIGGLY$);RETURN ok(FALSE, $3) || msg;
     END;
 
     -- Return the value from the query.
-    perform public.piggly_branch($PIGGLY$8126087062203194$PIGGLY$);RETURN ok(res, $3);
+    perform public.piggly_branch($PIGGLY$1efd9f27138af111$PIGGLY$);RETURN ok(res, $3);
 END;

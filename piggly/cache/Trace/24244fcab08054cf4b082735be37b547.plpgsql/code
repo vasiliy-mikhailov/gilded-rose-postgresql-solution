@@ -1,4 +1,4 @@
 BEGIN
-  perform public.piggly_branch($PIGGLY$d90265ee4ea70407$PIGGLY$);
-  perform public.piggly_branch($PIGGLY$4863904ece2c632e$PIGGLY$);RETURN GREATEST(p_quality - p_delta, 0);
+  perform public.piggly_branch($PIGGLY$b4c37cd33d6e222f$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$7994854944c30cf5$PIGGLY$);RETURN GREATEST(p_quality - p_delta, 0);
 END;

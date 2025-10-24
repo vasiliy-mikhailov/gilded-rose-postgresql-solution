@@ -3,10 +3,10 @@ DECLARE
     output TEXT;
 BEGIN
     -- Would prefer $1 IS NOT DISTINCT FROM, but that's not supported by 8.1.
-    perform public.piggly_branch($PIGGLY$faa8429edc71af11$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$796d25cbf28b02a2$PIGGLY$);
     result := NOT $1 IS DISTINCT FROM $2;
     output := ok( result, $3 );
-    perform public.piggly_branch($PIGGLY$dbba0a7f7bf0f7ed$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$c4061b12b5963bca$PIGGLY$);RETURN output || CASE result WHEN TRUE THEN '' ELSE E'\n' || diag(
            '        have: ' || CASE WHEN $1 IS NULL THEN 'NULL' ELSE $1::text END ||
         E'\n        want: ' || CASE WHEN $2 IS NULL THEN 'NULL' ELSE $2::text END
     ) END;

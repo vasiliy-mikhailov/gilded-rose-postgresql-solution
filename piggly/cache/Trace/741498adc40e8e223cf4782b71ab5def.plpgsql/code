@@ -1,17 +1,17 @@
 DECLARE
     grants TEXT[] := _get_ac_privs( $3, quote_ident($1) || '.' || quote_ident($2) );
 BEGIN
-    perform public.piggly_branch($PIGGLY$6d50e2795888bace$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$a80de998e983e017$PIGGLY$, (grants[1] = 'undefined_table')) THEN
-        perform public.piggly_branch($PIGGLY$b4f632abe25b6b3c$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$84fb7a69eeeed339$PIGGLY$);RETURN ok(FALSE, $5) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$b957c2875dac8be5$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$6c37ed2bfcfc7263$PIGGLY$, (grants[1] = 'undefined_table')) THEN
+        perform public.piggly_branch($PIGGLY$3fe9ed1013601f8c$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$c280957a189d7faf$PIGGLY$);RETURN ok(FALSE, $5) || E'\n' || diag(
             '    Table ' || quote_ident($1) || '.' || quote_ident($2) || ' does not exist'
         );
-    ELSIF public.piggly_cond($PIGGLY$dace39bcfcfa72f5$PIGGLY$, (grants[1] = 'undefined_role')) THEN
-        perform public.piggly_branch($PIGGLY$a64d3d7cf0c7fa90$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$f7092ac97e0abf68$PIGGLY$);RETURN ok(FALSE, $5) || E'\n' || diag(
+    ELSIF public.piggly_cond($PIGGLY$b8a4a65857308fe9$PIGGLY$, (grants[1] = 'undefined_role')) THEN
+        perform public.piggly_branch($PIGGLY$3542f34ffaa994c5$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$ebebc1887e85db03$PIGGLY$);RETURN ok(FALSE, $5) || E'\n' || diag(
             '    Role ' || quote_ident($3) || ' does not exist'
         );
     END IF;
-    perform public.piggly_branch($PIGGLY$415d8bd224dd888e$PIGGLY$);RETURN _assets_are('privileges', grants, $4, $5);
+    perform public.piggly_branch($PIGGLY$8e799b6bd3057631$PIGGLY$);RETURN _assets_are('privileges', grants, $4, $5);
 END;

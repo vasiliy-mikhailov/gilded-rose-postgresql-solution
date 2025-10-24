@@ -1,9 +1,9 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$e5c458d8a40c78e5$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$49e2de3e428af20f$PIGGLY$, (NOT _cexists( $1, $2, $3 ))) THEN
-        perform public.piggly_branch($PIGGLY$2c7327587d45590b$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$08f9cb0b376d259d$PIGGLY$);RETURN fail( $4 ) || E'\n'
+    perform public.piggly_branch($PIGGLY$91d042065fe97495$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$c12bcc6e8ee663e5$PIGGLY$, (NOT _cexists( $1, $2, $3 ))) THEN
+        perform public.piggly_branch($PIGGLY$9a8b955689fa408e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$8fd78f8cfa0b1c4c$PIGGLY$);RETURN fail( $4 ) || E'\n'
             || diag ('    Column ' || quote_ident($1) || '.' || quote_ident($2) || '.' || quote_ident($3) || ' does not exist' );
     END IF;
-    perform public.piggly_branch($PIGGLY$1d30846516610a50$PIGGLY$);RETURN ok( NOT _has_def( $1, $2, $3 ), $4 );
+    perform public.piggly_branch($PIGGLY$7c9520252f77e736$PIGGLY$);RETURN ok( NOT _has_def( $1, $2, $3 ), $4 );
 END;

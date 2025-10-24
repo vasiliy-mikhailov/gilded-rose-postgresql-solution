@@ -1,6 +1,6 @@
 BEGIN
-    perform public.piggly_branch($PIGGLY$72850e53e26810ef$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$ef228d1f446839e2$PIGGLY$);
     EXECUTE 'INSERT INTO __tcache__ (label, value, note) values (' ||
     quote_literal($1) || ', ' || $2 || ', ' || quote_literal(COALESCE($3, '')) || ')';
-    perform public.piggly_branch($PIGGLY$b0b80cda3be9e5b7$PIGGLY$);RETURN $2;
+    perform public.piggly_branch($PIGGLY$e47292b774193a8d$PIGGLY$);RETURN $2;
 END;

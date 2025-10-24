@@ -6,25 +6,25 @@ DECLARE
     msg     TEXT    := '';
     rec     RECORD;
 BEGIN
-    perform public.piggly_branch($PIGGLY$eb7e61ad69f93d68$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$ee3c72f601d374c4$PIGGLY$);
     BEGIN
         -- Find relevant records.
-        perform public.piggly_branch($PIGGLY$95ed469aa206390e$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$b0c25ee0f6f13fa4$PIGGLY$);
         FOR rec in EXECUTE 'SELECT * FROM ' || want || ' ' || $4
                        || ' SELECT * FROM ' || have LOOP
-            perform public.piggly_cond($PIGGLY$9ec41b960766d88f$PIGGLY$, true);
-            perform public.piggly_branch($PIGGLY$915ff91a5bdaf0e7$PIGGLY$);
+            perform public.piggly_cond($PIGGLY$ae6a9735626cdba2$PIGGLY$, true);
+            perform public.piggly_branch($PIGGLY$af9e2683d5f5e014$PIGGLY$);
             results := results || rec::text;
         
-            perform public.piggly_signal($PIGGLY$9ec41b960766d88f$PIGGLY$, $PIGGLY$@$PIGGLY$);
+            perform public.piggly_signal($PIGGLY$ae6a9735626cdba2$PIGGLY$, $PIGGLY$@$PIGGLY$);
         END LOOP;
-perform public.piggly_cond($PIGGLY$9ec41b960766d88f$PIGGLY$, false);
+perform public.piggly_cond($PIGGLY$ae6a9735626cdba2$PIGGLY$, false);
 
         -- Drop the temporary tables.
         EXECUTE 'DROP TABLE ' || have;
         EXECUTE 'DROP TABLE ' || want;
     EXCEPTION WHEN syntax_error OR datatype_mismatch THEN
-        perform public.piggly_branch($PIGGLY$12584063a620dd22$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$1a42f2da427e1066$PIGGLY$);
         msg := E'\n' || diag(
             E'    Columns differ between queries:\n'
             || '        have: (' || _temptypes(have) || E')\n'
@@ -32,12 +32,12 @@ perform public.piggly_cond($PIGGLY$9ec41b960766d88f$PIGGLY$, false);
         );
         EXECUTE 'DROP TABLE ' || have;
         EXECUTE 'DROP TABLE ' || want;
-        perform public.piggly_branch($PIGGLY$4913d2bebc1b117d$PIGGLY$);RETURN ok(FALSE, $3) || msg;
+        perform public.piggly_branch($PIGGLY$e75e971bef3d0a18$PIGGLY$);RETURN ok(FALSE, $3) || msg;
     END;
 
     -- What records do we have?
-    IF public.piggly_cond($PIGGLY$352428763032643e$PIGGLY$, (results[1] IS NOT NULL)) THEN
-        perform public.piggly_branch($PIGGLY$34eaeb20c1905568$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$f3752c2b46d7b71d$PIGGLY$, (results[1] IS NOT NULL)) THEN
+        perform public.piggly_branch($PIGGLY$10418e24746d7dc2$PIGGLY$);
         res := FALSE;
         msg := msg || E'\n' || diag(
             '    ' || $5 || E' records:\n        '
@@ -45,5 +45,5 @@ perform public.piggly_cond($PIGGLY$9ec41b960766d88f$PIGGLY$, false);
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$ec7f52480c767be7$PIGGLY$);RETURN ok(res, $3) || msg;
+    perform public.piggly_branch($PIGGLY$83564a05975db3ab$PIGGLY$);RETURN ok(res, $3) || msg;
 END;

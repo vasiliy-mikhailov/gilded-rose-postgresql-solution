@@ -6,10 +6,10 @@ DECLARE
     descr          ALIAS FOR $5;
     avg_time       NUMERIC;
 BEGIN
-  perform public.piggly_branch($PIGGLY$04e5f0c9c4c02f21$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$e938ef6498733e7e$PIGGLY$);
   SELECT avg(a_time) FROM _time_trials(query, iterations, 0.8) t1 INTO avg_time;
-  IF public.piggly_cond($PIGGLY$ade422b75cf1d24f$PIGGLY$, (abs(avg_time - expected_avg) < within)) THEN perform public.piggly_branch($PIGGLY$b668aa2977219490$PIGGLY$);perform public.piggly_branch($PIGGLY$9e543f455e925a08$PIGGLY$);RETURN ok(TRUE, descr); END IF;
-  perform public.piggly_branch($PIGGLY$0ff9246229ac5b7a$PIGGLY$);RETURN ok(FALSE, descr) || E'\n' || diag(' average runtime: ' || avg_time || ' ms'
+  IF public.piggly_cond($PIGGLY$e5b7947931141672$PIGGLY$, (abs(avg_time - expected_avg) < within)) THEN perform public.piggly_branch($PIGGLY$2d472e2759df27d8$PIGGLY$);perform public.piggly_branch($PIGGLY$6261083bb42f2424$PIGGLY$);RETURN ok(TRUE, descr); END IF;
+  perform public.piggly_branch($PIGGLY$47ea9e8ba5548812$PIGGLY$);RETURN ok(FALSE, descr) || E'\n' || diag(' average runtime: ' || avg_time || ' ms'
      || E'\n desired average: ' || expected_avg || ' +/- ' || within || ' ms'
     );
 END;

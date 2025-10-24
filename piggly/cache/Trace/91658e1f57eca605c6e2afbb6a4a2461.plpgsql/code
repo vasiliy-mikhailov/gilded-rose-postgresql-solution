@@ -1,7 +1,7 @@
 DECLARE
     cmd text;
 BEGIN
-    perform public.piggly_branch($PIGGLY$2eb547ad7d11944f$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$4eaed22a2e43b8e9$PIGGLY$);
     SELECT
       CASE pp.polcmd WHEN 'r' THEN 'SELECT'
                      WHEN 'a' THEN 'INSERT'
@@ -17,5 +17,5 @@ BEGIN
        AND pp.polname = $3
       INTO cmd;
 
-    perform public.piggly_branch($PIGGLY$e7502d14a5e5ebcb$PIGGLY$);RETURN is( cmd, upper($4), $5 );
+    perform public.piggly_branch($PIGGLY$47c3cb8fe1a1f586$PIGGLY$);RETURN is( cmd, upper($4), $5 );
 END;

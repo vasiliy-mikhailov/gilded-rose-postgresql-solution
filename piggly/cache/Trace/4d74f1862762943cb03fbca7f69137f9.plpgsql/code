@@ -1,7 +1,7 @@
 DECLARE
     pname text;
 BEGIN
-    perform public.piggly_branch($PIGGLY$8b4ab1515f3b94cd$PIGGLY$);
+    perform public.piggly_branch($PIGGLY$93ffec4bd927d774$PIGGLY$);
     SELECT p.proname
       FROM pg_catalog.pg_trigger t
       JOIN pg_catalog.pg_class ct ON ct.oid = t.tgrelid
@@ -11,5 +11,5 @@ BEGIN
        AND pg_catalog.pg_table_is_visible(ct.oid)
       INTO pname;
 
-    perform public.piggly_branch($PIGGLY$f2637a9bfcc4e523$PIGGLY$);RETURN is( pname, $3::text, $4 );
+    perform public.piggly_branch($PIGGLY$e83be8670b86dd7e$PIGGLY$);RETURN is( pname, $3::text, $4 );
 END;

@@ -4,14 +4,14 @@ DECLARE
   l_delta integer := CASE WHEN p_is_conjured THEN 2 ELSE 1 END;
   l_extra integer := 0;
 BEGIN
-  perform public.piggly_branch($PIGGLY$6405ca409117c0ca$PIGGLY$);
+  perform public.piggly_branch($PIGGLY$9b5a601b01ea0ad3$PIGGLY$);
   l_new_quality := increase_quality(l_new_quality, l_delta);
-  IF public.piggly_cond($PIGGLY$f267d3892138c65a$PIGGLY$, (p_sell_in < 11)) THEN perform public.piggly_branch($PIGGLY$0348a8609d73092d$PIGGLY$);l_extra := l_extra + l_delta; END IF;
-  IF public.piggly_cond($PIGGLY$bf47d7786b6e09ff$PIGGLY$, (p_sell_in < 6)) THEN perform public.piggly_branch($PIGGLY$ae7f934f82d48f85$PIGGLY$);l_extra := l_extra + l_delta; END IF;
+  IF public.piggly_cond($PIGGLY$ef3e433ee01456d6$PIGGLY$, (p_sell_in < 11)) THEN perform public.piggly_branch($PIGGLY$397767b290add079$PIGGLY$);l_extra := l_extra + l_delta; END IF;
+  IF public.piggly_cond($PIGGLY$ab952b76393b50bd$PIGGLY$, (p_sell_in < 6)) THEN perform public.piggly_branch($PIGGLY$9f891d6ece1bc3d5$PIGGLY$);l_extra := l_extra + l_delta; END IF;
   l_new_quality := increase_quality(l_new_quality, l_extra);
-  IF public.piggly_cond($PIGGLY$d45ba725d272ae99$PIGGLY$, (l_new_sell_in < 0)) THEN
-    perform public.piggly_branch($PIGGLY$9d3350f93d5ca4c8$PIGGLY$);
+  IF public.piggly_cond($PIGGLY$f2a1ca2d6b95789d$PIGGLY$, (l_new_sell_in < 0)) THEN
+    perform public.piggly_branch($PIGGLY$c4a8dd7d9ffe64a1$PIGGLY$);
     l_new_quality := 0;
   END IF;
-  perform public.piggly_branch($PIGGLY$b324779ddbd97621$PIGGLY$);RETURN QUERY SELECT l_new_quality, l_new_sell_in;
+  perform public.piggly_branch($PIGGLY$94ad88da12a7daa4$PIGGLY$);RETURN QUERY SELECT l_new_quality, l_new_sell_in;
 END;

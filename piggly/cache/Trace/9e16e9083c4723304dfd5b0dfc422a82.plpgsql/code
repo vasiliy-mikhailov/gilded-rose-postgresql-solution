@@ -2,13 +2,13 @@ DECLARE
     owner NAME := _get_type_owner($1);
 BEGIN
     -- Make sure the type exists.
-    perform public.piggly_branch($PIGGLY$92494bf67ad010e7$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$94c28847051c8e8d$PIGGLY$, (owner IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$94b5f0cda463c284$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$aa6a508ddd99aa40$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$e8c4b8f86494d77d$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$ed5c51e5fb5f93bd$PIGGLY$, (owner IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$1b58d2dc8fdee355$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$12c24bec4a055614$PIGGLY$);RETURN ok(FALSE, $3) || E'\n' || diag(
             E'    Type ' || quote_ident($1) || ' not found'
         );
     END IF;
 
-    perform public.piggly_branch($PIGGLY$d134962e0257b0cf$PIGGLY$);RETURN is(owner, $2, $3);
+    perform public.piggly_branch($PIGGLY$ab500c13ef447005$PIGGLY$);RETURN is(owner, $2, $3);
 END;

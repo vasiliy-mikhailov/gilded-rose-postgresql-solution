@@ -1,10 +1,10 @@
 DECLARE
     missing text[];
 BEGIN
-    perform public.piggly_branch($PIGGLY$e702197e5f0d0844$PIGGLY$);
-    IF public.piggly_cond($PIGGLY$5000f3b36e5dbba6$PIGGLY$, (NOT _has_role($1))) THEN
-        perform public.piggly_branch($PIGGLY$8dec75cf32b8b709$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$aa7180732a378ae3$PIGGLY$);RETURN fail( $3 ) || E'\n' || diag (
+    perform public.piggly_branch($PIGGLY$6870a153343d08a3$PIGGLY$);
+    IF public.piggly_cond($PIGGLY$7bf24191a7b2a089$PIGGLY$, (NOT _has_role($1))) THEN
+        perform public.piggly_branch($PIGGLY$233ac3f6e3d2b962$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$db5b4f80ad9896e6$PIGGLY$);RETURN fail( $3 ) || E'\n' || diag (
             '    Role ' || quote_ident($1) || ' does not exist'
         );
     END IF;
@@ -17,11 +17,11 @@ BEGIN
             OR NOT r.oid = ANY ( _grolist($1) )
          ORDER BY s.i
     ) INTO missing;
-    IF public.piggly_cond($PIGGLY$9fc96c67f6ca4f21$PIGGLY$, (missing[1] IS NULL)) THEN
-        perform public.piggly_branch($PIGGLY$2e7250b9a654389b$PIGGLY$);
-        perform public.piggly_branch($PIGGLY$8f0aedd5a65990f4$PIGGLY$);RETURN ok( true, $3 );
+    IF public.piggly_cond($PIGGLY$5e177c285a151a78$PIGGLY$, (missing[1] IS NULL)) THEN
+        perform public.piggly_branch($PIGGLY$1ffad92f8d1ecbaf$PIGGLY$);
+        perform public.piggly_branch($PIGGLY$3f749ae33a5fa9d9$PIGGLY$);RETURN ok( true, $3 );
     END IF;
-    perform public.piggly_branch($PIGGLY$595f8ed4836e117d$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
+    perform public.piggly_branch($PIGGLY$ec930d95218699c1$PIGGLY$);RETURN ok( false, $3 ) || E'\n' || diag(
         '    Members missing from the ' || quote_ident($1) || E' role:\n        ' ||
         array_to_string( missing, E'\n        ')
     );

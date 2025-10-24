@@ -40,34 +40,34 @@
     <span class="tI">want_type</span> <span class="tD">TEXT</span>;
 <span class="tK">BEGIN</span>
     <span class="tC">-- Get the data type.
-</span>    <span class="c0" id="T2259d2e03f518bb5" title="never evaluated"><span class="tK">IF</span> <span class="b00" id="T67d729c04a8c5cc4" title="never evaluated">$1 IS NULL </span><span class="tK">THEN</span>
-        <span class="c0" id="Tda10e720ec949dc9" title="never evaluated"><span class="tI">have_type</span> <span class="tK">:=</span> _get_col_type($2, $3);
+</span>    <span class="c0" id="Tbb88ee10e31d109a" title="never evaluated"><span class="tK">IF</span> <span class="b00" id="Tbb77e39be1d24cce" title="never evaluated">$1 IS NULL </span><span class="tK">THEN</span>
+        <span class="c0" id="Ta03abb910eaa9765" title="never evaluated"><span class="tI">have_type</span> <span class="tK">:=</span> _get_col_type($2, $3);
     </span><span class="tK">ELSE</span>
-        <span class="c0" id="T9115e78eed7bc2a3" title="never evaluated"><span class="tI">have_type</span> <span class="tK">:=</span> _get_col_type($1, $2, $3);
+        <span class="c0" id="Tb0478cf94209da72" title="never evaluated"><span class="tI">have_type</span> <span class="tK">:=</span> _get_col_type($1, $2, $3);
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
-    <span class="tK">IF</span> <span class="b00" id="T0312246ad14b9bdd" title="never evaluated">have_type IS NULL </span><span class="tK">THEN</span>
-        <span class="c0" id="T6a5ae91924296574" title="never evaluated"><span class="c0" id="T7e8b2b19545e4806" title="never evaluated"><span class="tK">RETURN</span> fail( $5 ) || E<span class="tS">'\n'</span> || diag (
+    <span class="tK">IF</span> <span class="b00" id="T01b5fbc3112347a0" title="never evaluated">have_type IS NULL </span><span class="tK">THEN</span>
+        <span class="c0" id="Tdbdb0232924e4792" title="never evaluated"><span class="c0" id="T35c912534b7e8780" title="never evaluated"><span class="tK">RETURN</span> fail( $5 ) || E<span class="tS">'\n'</span> || diag (
             <span class="tS">'   Column '</span> || COALESCE(quote_ident($1) || <span class="tS">'.'</span>, <span class="tS">''</span>)
             || quote_ident($2) || <span class="tS">'.'</span> || quote_ident($3) || <span class="tS">' does not exist'</span>
         )</span>;
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
     <span class="tI">want_type</span> <span class="tK">:=</span> format_type_string($4);
-    <span class="tK">IF</span> <span class="b00" id="Te25040a3563eae7b" title="never evaluated">want_type IS NULL </span><span class="tK">THEN</span>
-        <span class="c0" id="Te509ac0078cb9e92" title="never evaluated"><span class="c0" id="T2044765f171f8390" title="never evaluated"><span class="tK">RETURN</span> fail( $5 ) || E<span class="tS">'\n'</span> || diag (
+    <span class="tK">IF</span> <span class="b00" id="Tda1a24bef8018013" title="never evaluated">want_type IS NULL </span><span class="tK">THEN</span>
+        <span class="c0" id="T9a283ba8d2432544" title="never evaluated"><span class="c0" id="T993a66bd722b2688" title="never evaluated"><span class="tK">RETURN</span> fail( $5 ) || E<span class="tS">'\n'</span> || diag (
             <span class="tS">'    Type '</span> || $4 || <span class="tS">' does not exist'</span>
         )</span>;
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
-    <span class="tK">IF</span> <span class="b00" id="Tb43084e784275fc9" title="never evaluated">have_type = want_type </span><span class="tK">THEN</span>
+    <span class="tK">IF</span> <span class="b00" id="Tdc35323759f500cd" title="never evaluated">have_type = want_type </span><span class="tK">THEN</span>
         <span class="tC">-- We're good to go.
-</span>        <span class="c0" id="T9ad14214aa0b5315" title="never evaluated"><span class="c0" id="T5736852f5f6b55c3" title="never evaluated"><span class="tK">RETURN</span> ok( true, $5 )</span>;
+</span>        <span class="c0" id="Tfd51e1e308e9a452" title="never evaluated"><span class="c0" id="Tb7c11deaa56f57e3" title="never evaluated"><span class="tK">RETURN</span> ok( true, $5 )</span>;
     </span><span class="tK">END</span> <span class="tK">IF</span>;
 
     <span class="tC">-- Wrong data type. tell 'em what we really got.
-</span>    <span class="c0" id="Td2fbcb2ca2867f5e" title="never evaluated"><span class="tK">RETURN</span> ok( false, $5 ) || E<span class="tS">'\n'</span> || diag(
+</span>    <span class="c0" id="T55a5a848bed894b1" title="never evaluated"><span class="tK">RETURN</span> ok( false, $5 ) || E<span class="tS">'\n'</span> || diag(
            <span class="tS">'        have: '</span> || have_type ||
         E<span class="tS">'\n        want: '</span> || want_type
     )</span>;
-</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#T2259d2e03f518bb5" onMouseOver="highlight('T2259d2e03f518bb5')">never evaluated</a></li><li class="branch"><a href="#T67d729c04a8c5cc4" onMouseOver="highlight('T67d729c04a8c5cc4')">never evaluated</a></li><li class="block"><a href="#Tda10e720ec949dc9" onMouseOver="highlight('Tda10e720ec949dc9')">never evaluated</a></li><li class="block"><a href="#T9115e78eed7bc2a3" onMouseOver="highlight('T9115e78eed7bc2a3')">never evaluated</a></li><li class="branch"><a href="#T0312246ad14b9bdd" onMouseOver="highlight('T0312246ad14b9bdd')">never evaluated</a></li><li class="block"><a href="#T6a5ae91924296574" onMouseOver="highlight('T6a5ae91924296574')">never evaluated</a></li><li class="block"><a href="#T7e8b2b19545e4806" onMouseOver="highlight('T7e8b2b19545e4806')">never evaluated</a></li><li class="branch"><a href="#Te25040a3563eae7b" onMouseOver="highlight('Te25040a3563eae7b')">never evaluated</a></li><li class="block"><a href="#Te509ac0078cb9e92" onMouseOver="highlight('Te509ac0078cb9e92')">never evaluated</a></li><li class="block"><a href="#T2044765f171f8390" onMouseOver="highlight('T2044765f171f8390')">never evaluated</a></li><li class="branch"><a href="#Tb43084e784275fc9" onMouseOver="highlight('Tb43084e784275fc9')">never evaluated</a></li><li class="block"><a href="#T9ad14214aa0b5315" onMouseOver="highlight('T9ad14214aa0b5315')">never evaluated</a></li><li class="block"><a href="#T5736852f5f6b55c3" onMouseOver="highlight('T5736852f5f6b55c3')">never evaluated</a></li><li class="block"><a href="#Td2fbcb2ca2867f5e" onMouseOver="highlight('Td2fbcb2ca2867f5e')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 05, 2025 13:46 UTC</div><a href="index.html" class="return">Return to index</a></body></html>
+</span><span class="tK">END</span>;</td></tr></table></div><div class="toc"><strong>Notes</strong><ol><li class="block"><a href="#Tbb88ee10e31d109a" onMouseOver="highlight('Tbb88ee10e31d109a')">never evaluated</a></li><li class="branch"><a href="#Tbb77e39be1d24cce" onMouseOver="highlight('Tbb77e39be1d24cce')">never evaluated</a></li><li class="block"><a href="#Ta03abb910eaa9765" onMouseOver="highlight('Ta03abb910eaa9765')">never evaluated</a></li><li class="block"><a href="#Tb0478cf94209da72" onMouseOver="highlight('Tb0478cf94209da72')">never evaluated</a></li><li class="branch"><a href="#T01b5fbc3112347a0" onMouseOver="highlight('T01b5fbc3112347a0')">never evaluated</a></li><li class="block"><a href="#Tdbdb0232924e4792" onMouseOver="highlight('Tdbdb0232924e4792')">never evaluated</a></li><li class="block"><a href="#T35c912534b7e8780" onMouseOver="highlight('T35c912534b7e8780')">never evaluated</a></li><li class="branch"><a href="#Tda1a24bef8018013" onMouseOver="highlight('Tda1a24bef8018013')">never evaluated</a></li><li class="block"><a href="#T9a283ba8d2432544" onMouseOver="highlight('T9a283ba8d2432544')">never evaluated</a></li><li class="block"><a href="#T993a66bd722b2688" onMouseOver="highlight('T993a66bd722b2688')">never evaluated</a></li><li class="branch"><a href="#Tdc35323759f500cd" onMouseOver="highlight('Tdc35323759f500cd')">never evaluated</a></li><li class="block"><a href="#Tfd51e1e308e9a452" onMouseOver="highlight('Tfd51e1e308e9a452')">never evaluated</a></li><li class="block"><a href="#Tb7c11deaa56f57e3" onMouseOver="highlight('Tb7c11deaa56f57e3')">never evaluated</a></li><li class="block"><a href="#T55a5a848bed894b1" onMouseOver="highlight('T55a5a848bed894b1')">never evaluated</a></li></ol></div></div><div class="timestamp">Generated by piggly 2.3.1 at October 24, 2025 10:33 UTC</div><a href="index.html" class="return">Return to index</a></body></html>
